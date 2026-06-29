@@ -37,6 +37,18 @@ const addToRemoveQueue = (toastId) => {
   toastTimeouts.set(toastId, timeout)
 }
 
+const queueToastsForRemoval = (state, toastId) => {
+  if (toastId) {
+    addToRemoveQueue(toastId)
+  } else {
+    state.toasts.forEach((toast) => addToRemoveQueue(toast.id))
+  }
+}
+
+const closeToasts = (toasts, toastId) =>
+  toasts.map((t) =>
+    t.id === toastId || toastId === undefined ? { ...t, open: false } : t)
+
 export const reducer = (state, action) => {
   switch (action.type) {
     case "ADD_TOAST":
@@ -53,27 +65,11 @@ export const reducer = (state, action) => {
       };
 
     case "DISMISS_TOAST": {
-      const { toastId } = action
-
-      // ! Side effects ! - This could be extracted into a dismissToast() action,
-      // but I'll keep it here for simplicity
-      if (toastId) {
-        addToRemoveQueue(toastId)
-      } else {
-        state.toasts.forEach((toast) => {
-          addToRemoveQueue(toast.id)
-        })
-      }
-
+      // Side effect: schedule removal after the dismiss animation.
+      queueToastsForRemoval(state, action.toastId)
       return {
         ...state,
-        toasts: state.toasts.map((t) =>
-          t.id === toastId || toastId === undefined
-            ? {
-                ...t,
-                open: false,
-              }
-            : t),
+        toasts: closeToasts(state.toasts, action.toastId),
       };
     }
     case "REMOVE_TOAST":
@@ -143,7 +139,7 @@ function useToast() {
         listeners.splice(index, 1)
       }
     };
-  }, [state])
+  }, [setState])
 
   return {
     ...state,
