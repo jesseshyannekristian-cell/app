@@ -19,6 +19,7 @@ public:
 	AFoundationCharacter();
 
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+	virtual void BeginPlay() override;
 
 	UPROPERTY(VisibleAnywhere, Category = "Player")
 	UCameraComponent* Camera;

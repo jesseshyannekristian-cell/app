@@ -1,5 +1,8 @@
 #include "SCP106.h"
 #include "FoundationCharacter.h"
+#include "Components/StaticMeshComponent.h"
+#include "Engine/StaticMesh.h"
+#include "UObject/ConstructorHelpers.h"
 
 ASCP106::ASCP106()
 {
@@ -10,6 +13,13 @@ ASCP106::ASCP106()
 	MoveSpeed = 150.f;
 	KillDistance = 150.f;
 	Health = 2500.f;
+
+	if (BodyMesh)
+	{
+		static ConstructorHelpers::FObjectFinder<UStaticMesh> Cyl(TEXT("/Engine/BasicShapes/Cylinder.Cylinder"));
+		if (Cyl.Succeeded()) { BodyMesh->SetStaticMesh(Cyl.Object); }
+		BodyMesh->SetRelativeScale3D(FVector(0.95f, 0.95f, 1.7f)); // hunched old man
+	}
 }
 
 void ASCP106::Tick(float DeltaTime)

@@ -53,10 +53,16 @@ Follow-up: add MTF XI-87 (from uploaded dossier) as a faction, make it open-worl
 - NPC/SCP visuals are tinted cube placeholders; replace with real meshes/animations.
 
 ## Backlog / Next
-- P1: Real meshes/animations to replace cube placeholders.
-- P2: Spend owned equipment in live Breach (loadout select before deploy); breach reward should scale with researched gear.
-- P2: NavMesh + behavior trees; audio (ambience, 173 sting, 096 scream); multi-floor + surface.
+- P1: Real custom art — assign imported meshes via the new `MeshOverride` slot on SCP entities (and extend the same pattern to rooms/props); add animations.
+- P2: Audio (ambience, 173 sting, 096 scream); multi-floor + surface.
 - P3: SCP-16829 "Dimension Chemosic" pocket-dimension reward room on dimensional travel.
+
+## Done recently (2026-06)
+- Pre-breach loadout: `OverseerProgression` loadout (4 slots, owned gear) selectable in the Breach tab;
+  applied on `AFoundationCharacter::BeginPlay` (keycard level from keycards, +HP from armor/hazmat).
+- Mesh improvements: distinct engine-primitive silhouettes per SCP (096/106/049 = cylinders, scaled);
+  added `MeshOverride` (`EditAnywhere UStaticMesh*`) on `ASCPEntityBase`, applied in BeginPlay so users
+  can drop in real imported meshes without code changes. (True custom art still needs editor import.)
 
 ## Done recently (2026-06)
 - Archives system (`UArchiveSubsystem` + ARCHIVES hub tab): players author custom SCP reports/dossiers,

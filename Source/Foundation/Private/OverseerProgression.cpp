@@ -88,6 +88,40 @@ int32 UOverseerProgression::GetBreachesSurvived() const { return Data ? Data->Br
 int32 UOverseerProgression::GetBreachesFailed() const { return Data ? Data->BreachesFailed : 0; }
 int32 UOverseerProgression::GetSCPsRecontained() const { return Data ? Data->SCPsRecontained : 0; }
 
+const TArray<FName>& UOverseerProgression::GetLoadout() const
+{
+	static const TArray<FName> Empty;
+	return Data ? Data->Loadout : Empty;
+}
+
+bool UOverseerProgression::IsInLoadout(FName EquipId) const
+{
+	return Data && Data->Loadout.Contains(EquipId);
+}
+
+bool UOverseerProgression::ToggleLoadout(FName EquipId, FString& OutMsg)
+{
+	if (!Data) { OutMsg = TEXT("Save unavailable."); return false; }
+	if (!IsOwned(EquipId)) { OutMsg = TEXT("You must own this equipment first."); return false; }
+
+	if (Data->Loadout.Contains(EquipId))
+	{
+		Data->Loadout.Remove(EquipId);
+		Save();
+		OutMsg = TEXT("Removed from loadout.");
+		return true;
+	}
+	if (Data->Loadout.Num() >= GetLoadoutCapacity())
+	{
+		OutMsg = FString::Printf(TEXT("Loadout full (%d slots)."), GetLoadoutCapacity());
+		return false;
+	}
+	Data->Loadout.Add(EquipId);
+	Save();
+	OutMsg = TEXT("Added to loadout.");
+	return true;
+}
+
 bool UOverseerProgression::TryCompleteResearch(FName ProjectId, FString& OutMsg)
 {
 	if (!Data) { OutMsg = TEXT("Save unavailable."); return false; }

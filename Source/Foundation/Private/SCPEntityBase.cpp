@@ -2,6 +2,7 @@
 #include "FoundationCharacter.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "Engine/StaticMesh.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -30,6 +31,17 @@ ASCPEntityBase::ASCPEntityBase()
 AFoundationCharacter* ASCPEntityBase::GetTargetPlayer() const
 {
 	return Cast<AFoundationCharacter>(UGameplayStatics::GetPlayerPawn(this, 0));
+}
+
+void ASCPEntityBase::BeginPlay()
+{
+	Super::BeginPlay();
+
+	// If a real mesh has been assigned, swap out the engine-primitive placeholder.
+	if (MeshOverride && BodyMesh)
+	{
+		BodyMesh->SetStaticMesh(MeshOverride);
+	}
 }
 
 bool ASCPEntityBase::CanMove(AFoundationCharacter* /*Player*/) const

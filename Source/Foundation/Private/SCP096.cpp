@@ -1,6 +1,9 @@
 #include "SCP096.h"
 #include "FoundationCharacter.h"
 #include "Camera/CameraComponent.h"
+#include "Components/StaticMeshComponent.h"
+#include "Engine/StaticMesh.h"
+#include "UObject/ConstructorHelpers.h"
 
 ASCP096::ASCP096()
 {
@@ -11,6 +14,13 @@ ASCP096::ASCP096()
 	MoveSpeed = 1400.f;
 	KillDistance = 150.f;
 	Health = 1500.f;
+
+	if (BodyMesh)
+	{
+		static ConstructorHelpers::FObjectFinder<UStaticMesh> Cyl(TEXT("/Engine/BasicShapes/Cylinder.Cylinder"));
+		if (Cyl.Succeeded()) { BodyMesh->SetStaticMesh(Cyl.Object); }
+		BodyMesh->SetRelativeScale3D(FVector(0.65f, 0.65f, 2.1f)); // tall, gaunt humanoid
+	}
 }
 
 bool ASCP096::CanMove(AFoundationCharacter* /*Player*/) const

@@ -30,6 +30,7 @@ class FOUNDATION_API ASCPEntityBase : public APawn
 public:
 	ASCPEntityBase();
 
+	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY(VisibleAnywhere, Category = "SCP")
@@ -37,6 +38,10 @@ public:
 
 	UPROPERTY(VisibleAnywhere, Category = "SCP")
 	UStaticMeshComponent* BodyMesh;
+
+	/** Optional real mesh to use instead of the engine-primitive placeholder. Assign in editor/Blueprint. */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SCP|Visual")
+	UStaticMesh* MeshOverride = nullptr;
 
 	UPROPERTY(EditAnywhere, Category = "SCP")
 	float MoveSpeed = 240.f;

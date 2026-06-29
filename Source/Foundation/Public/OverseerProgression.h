@@ -43,6 +43,12 @@ public:
 	int32 GetBreachesFailed() const;
 	int32 GetSCPsRecontained() const;
 
+	// --- Pre-breach loadout ---
+	const TArray<FName>& GetLoadout() const;
+	bool IsInLoadout(FName EquipId) const;
+	int32 GetLoadoutCapacity() const { return 4; }
+	bool ToggleLoadout(FName EquipId, FString& OutMsg);
+
 	// --- Actions (return success + human-readable message) ---
 	bool TryCompleteResearch(FName ProjectId, FString& OutMsg);
 	bool TryPurchase(FName EquipId, FString& OutMsg);

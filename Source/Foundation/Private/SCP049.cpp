@@ -1,4 +1,7 @@
 #include "SCP049.h"
+#include "Components/StaticMeshComponent.h"
+#include "Engine/StaticMesh.h"
+#include "UObject/ConstructorHelpers.h"
 
 ASCP049::ASCP049()
 {
@@ -9,4 +12,11 @@ ASCP049::ASCP049()
 	MoveSpeed = 200.f;
 	KillDistance = 140.f;
 	Health = 900.f;
+
+	if (BodyMesh)
+	{
+		static ConstructorHelpers::FObjectFinder<UStaticMesh> Cyl(TEXT("/Engine/BasicShapes/Cylinder.Cylinder"));
+		if (Cyl.Succeeded()) { BodyMesh->SetStaticMesh(Cyl.Object); }
+		BodyMesh->SetRelativeScale3D(FVector(0.7f, 0.7f, 1.95f)); // robed plague doctor
+	}
 }

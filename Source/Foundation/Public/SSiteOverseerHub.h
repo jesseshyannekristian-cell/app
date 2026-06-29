@@ -69,6 +69,7 @@ private:
 	FReply DoResearch(FName ProjectId);
 	FReply DoPurchase(FName EquipId);
 	FReply DoOperation(FName OpId);
+	FReply DoToggleLoadout(FName EquipId);
 	FReply DoSaveArchive();
 	FReply DoDeleteArchive(int32 Index);
 	FReply DoDeployBreach();
