@@ -16,16 +16,20 @@ import json
 import os
 import subprocess
 import sys
+from io import StringIO
 from typing import Iterator
 
 import pytest
+from rich.console import Console
 
 # Make /app importable
 APP_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 if APP_DIR not in sys.path:
     sys.path.insert(0, APP_DIR)
 
-from game import achievements, art, breach as breach_mod, rng, scenarios  # noqa: E402
+from game import (  # noqa: E402
+    achievements, art, breach as breach_mod, data as gdata, hub, rng, scenarios, ui,
+)
 from game.archives import Archives, ARCHIVE_PATH  # noqa: E402
 from game.state import GameState, SAVE_PATH  # noqa: E402
 
@@ -50,15 +54,27 @@ def _silence_breach_ui(monkeypatch: pytest.MonkeyPatch, menu_choice: str = "a") 
         monkeypatch.setattr(breach_mod.ui, name, lambda *a, **k: None)
     monkeypatch.setattr(breach_mod.ui, "confirm", lambda *a, **k: True)
     monkeypatch.setattr(breach_mod.ui, "menu", lambda *a, **k: menu_choice)
-    from rich.console import Console
     monkeypatch.setattr(breach_mod.ui, "console", Console(quiet=True))
     monkeypatch.setattr(breach_mod, "_render_assessment", lambda *a, **k: None)
+
+
+def _assert_option_well_formed(option) -> None:
+    label, delta, flavor = option
+    assert isinstance(label, str) and label
+    assert isinstance(delta, int)
+    assert isinstance(flavor, str) and flavor
+
+
+def _assert_stage_well_formed(stage) -> None:
+    assert "prompt" in stage and "options" in stage
+    assert len(stage["options"]) == 2
+    for option in stage["options"]:
+        _assert_option_well_formed(option)
 
 
 # ====================== Scenarios data ======================
 class TestScenariosData:
     def test_all_site20_scps_have_scenarios(self) -> None:
-        from game import data as gdata
         for s in gdata.SCPS:
             assert scenarios.has(s["number"]), f'{s["number"]} missing a breach scenario'
 
@@ -70,12 +86,7 @@ class TestScenariosData:
     def test_stage_options_well_formed(self) -> None:
         for num in _KNOWN_SCENARIO_SCPS:
             for st in scenarios.stages(num):
-                assert "prompt" in st and "options" in st
-                assert len(st["options"]) == 2
-                for label, delta, flavor in st["options"]:
-                    assert isinstance(label, str) and label
-                    assert isinstance(delta, int)
-                    assert isinstance(flavor, str) and flavor
+                _assert_stage_well_formed(st)
 
     def test_unknown_custom_scp_has_no_scenario(self) -> None:
         assert not scenarios.has("SCP-9999-CUSTOM")
@@ -320,10 +331,6 @@ class TestIronManBreach:
 
     def test_header_shows_ironman_marker(self) -> None:
         """ui.header prints '☠ IRON-MAN' when state.ironman is True."""
-        from io import StringIO
-        from rich.console import Console
-        from game import ui
-
         s = GameState()
         s.ironman = True
         buf = StringIO()
@@ -428,12 +435,10 @@ class TestSaveOnInterrupt:
 # ====================== Site Status briefing ======================
 class TestSiteStatus:
     def test_next_objective_no_equipment(self) -> None:
-        from game import hub
         s = GameState()
         assert "Store" in hub._next_objective(s)
 
     def test_next_objective_suggests_research(self) -> None:
-        from game import hub
         s = GameState()
         s.owned_equipment = ["flashlight"]
         s.rank_level = 2
@@ -441,8 +446,6 @@ class TestSiteStatus:
         assert "Research" in hub._next_objective(s)
 
     def test_next_objective_breach_when_loadout_ready(self) -> None:
-        from game import hub
-        from game import data as gdata
         s = GameState()
         s.owned_equipment = ["flashlight"]
         s.loadout = ["flashlight"]
@@ -453,13 +456,11 @@ class TestSiteStatus:
         assert "breach" in hub._next_objective(s).lower()
 
     def test_xp_bar_shows_max_at_top_rank(self) -> None:
-        from game import hub
         s = GameState()
         s.rank_level = 5
         assert "MAX RANK" in hub._xp_bar(s)
 
     def test_xp_bar_has_progress_chars(self) -> None:
-        from game import hub
         s = GameState()
         s.xp = 250  # halfway to 500
         bar = hub._xp_bar(s)
@@ -467,10 +468,6 @@ class TestSiteStatus:
 
     def test_briefing_renders_without_clear(self) -> None:
         """site_status(clear=False) prints the briefing + directive, no crash."""
-        from io import StringIO
-        from rich.console import Console
-        from game import ui, hub
-
         s = GameState()
         a = Archives.load()
         buf = StringIO()
