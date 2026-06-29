@@ -59,6 +59,9 @@ Follow-up: add MTF XI-87 (from uploaded dossier) as a faction, make it open-worl
 - P3: SCP-16829 "Dimension Chemosic" pocket-dimension reward room on dimensional travel.
 
 ## Done recently (2026-06)
+- Archives system (`UArchiveSubsystem` + ARCHIVES hub tab): players author custom SCP reports/dossiers,
+  saved to a simple JSON file (`<ProjectSaved>/Archives/Archives.json`) and reloaded on launch —
+  create/view/delete, persists between sessions. (Open-world EncounterManager kept per user request.)
 - SCP-16829 "The TV in Time" (`ASCP16829`): dimensional travel, temporal-loop rewind, carcinogenic exposure.
 - SCP-049 "The Plague Doctor" (`ASCP049`): pursuing contact-kill entity; added to facility spawn roster.
 - Interactive Containment Operations: dispatch now resolves via a success/risk roll (`GetOperationSuccessChance`

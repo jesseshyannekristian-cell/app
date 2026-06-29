@@ -5,7 +5,10 @@
 #include "Brushes/SlateColorBrush.h"
 
 class UOverseerProgression;
+class UArchiveSubsystem;
 class SBox;
+class SEditableTextBox;
+class SMultiLineEditableTextBox;
 
 /**
  * Site Overseer management hub. Tabs:
@@ -16,6 +19,7 @@ class SSiteOverseerHub : public SCompoundWidget
 public:
 	SLATE_BEGIN_ARGS(SSiteOverseerHub) {}
 		SLATE_ARGUMENT(UOverseerProgression*, Progression)
+		SLATE_ARGUMENT(UArchiveSubsystem*, Archive)
 		SLATE_EVENT(FSimpleDelegate, OnDeployBreach)
 		SLATE_EVENT(FSimpleDelegate, OnBackToTitle)
 	SLATE_END_ARGS()
@@ -23,14 +27,19 @@ public:
 	void Construct(const FArguments& InArgs);
 
 private:
-	enum class ETab : uint8 { Research, Store, Operations, Breach, Personnel, Ranks };
+	enum class ETab : uint8 { Research, Store, Operations, Breach, Personnel, Archives, Ranks };
 	ETab CurrentTab = ETab::Research;
 
 	TWeakObjectPtr<UOverseerProgression> Progress;
+	TWeakObjectPtr<UArchiveSubsystem> Archive;
 	FSimpleDelegate OnDeployBreach;
 	FSimpleDelegate OnBackToTitle;
 
 	TSharedPtr<SBox> ContentBox;
+	TSharedPtr<SEditableTextBox> DesignationBox;
+	TSharedPtr<SEditableTextBox> NameBox;
+	TSharedPtr<SEditableTextBox> ClassBox;
+	TSharedPtr<SMultiLineEditableTextBox> BodyBox;
 	FString StatusMsg;
 
 	FSlateColorBrush HubBg = FSlateColorBrush(FLinearColor(0.025f, 0.035f, 0.045f, 0.97f));
@@ -50,6 +59,7 @@ private:
 	TSharedRef<SWidget> BuildOperationsTab();
 	TSharedRef<SWidget> BuildBreachTab();
 	TSharedRef<SWidget> BuildPersonnelTab();
+	TSharedRef<SWidget> BuildArchivesTab();
 	TSharedRef<SWidget> BuildRanksTab();
 
 	// Generic list row: title + subtitle (left), info (right), action button.
@@ -59,6 +69,8 @@ private:
 	FReply DoResearch(FName ProjectId);
 	FReply DoPurchase(FName EquipId);
 	FReply DoOperation(FName OpId);
+	FReply DoSaveArchive();
+	FReply DoDeleteArchive(int32 Index);
 	FReply DoDeployBreach();
 	FReply DoBackToTitle();
 };

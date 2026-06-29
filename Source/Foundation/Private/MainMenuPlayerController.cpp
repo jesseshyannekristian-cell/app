@@ -2,6 +2,7 @@
 #include "SMainMenuWidget.h"
 #include "SSiteOverseerHub.h"
 #include "OverseerProgression.h"
+#include "ArchiveSubsystem.h"
 #include "Engine/Texture2D.h"
 #include "Engine/GameViewportClient.h"
 #include "Engine/GameInstance.h"
@@ -73,9 +74,11 @@ void AMainMenuPlayerController::ShowHub()
 	RemoveAllWidgets();
 
 	UOverseerProgression* Progress = GetGameInstance() ? GetGameInstance()->GetSubsystem<UOverseerProgression>() : nullptr;
+	UArchiveSubsystem* ArchiveSys = GetGameInstance() ? GetGameInstance()->GetSubsystem<UArchiveSubsystem>() : nullptr;
 
 	SAssignNew(HubWidget, SSiteOverseerHub)
 		.Progression(Progress)
+		.Archive(ArchiveSys)
 		.OnDeployBreach(FSimpleDelegate::CreateUObject(this, &AMainMenuPlayerController::OnDeployBreach))
 		.OnBackToTitle(FSimpleDelegate::CreateUObject(this, &AMainMenuPlayerController::OnBackToTitle));
 

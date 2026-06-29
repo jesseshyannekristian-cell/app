@@ -139,6 +139,9 @@ letterboxed backdrop, with real clickable buttons placed over the painted START 
 - **SITE-20 PERSONNEL** — lore dossiers for key staff (GUNZ — O5 Council/"The Technician"; CHEMOSIC —
   Site Supervisor & former MTF XI-87 Commander; Head Researcher) with codename, clearance, affiliation,
   anomalous traits (SCP-16829 exposure) and O5 notes. UI/lore only.
+- **ARCHIVES** — author/file your own SCP reports & dossiers (designation, name, object class, body),
+  saved to a local JSON file (`<ProjectSaved>/Archives/Archives.json`) via `UArchiveSubsystem` so
+  player-created content persists between sessions. Create/view/delete from the tab.
 - **RANKS & REWARDS** — rank ladder (Junior Researcher → O5 Overseer), promotion rewards, and a
   **breach section** (survived / failed / re-contained).
 

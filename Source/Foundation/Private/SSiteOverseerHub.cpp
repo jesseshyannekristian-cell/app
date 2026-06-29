@@ -1,5 +1,6 @@
 #include "SSiteOverseerHub.h"
 #include "OverseerProgression.h"
+#include "ArchiveSubsystem.h"
 #include "FoundationDataLibrary.h"
 #include "Styling/CoreStyle.h"
 #include "Widgets/SOverlay.h"
@@ -12,6 +13,8 @@
 #include "Widgets/Layout/SSeparator.h"
 #include "Widgets/Layout/SScrollBox.h"
 #include "Widgets/Layout/SSpacer.h"
+#include "Widgets/Input/SEditableTextBox.h"
+#include "Widgets/Input/SMultiLineEditableTextBox.h"
 
 #define LOCTEXT_NAMESPACE "OverseerHub"
 
@@ -33,6 +36,7 @@ static FSlateFontInfo HubFont(int32 Size, const TCHAR* Style = TEXT("Regular"))
 void SSiteOverseerHub::Construct(const FArguments& InArgs)
 {
 	Progress = InArgs._Progression;
+	Archive = InArgs._Archive;
 	OnDeployBreach = InArgs._OnDeployBreach;
 	OnBackToTitle = InArgs._OnBackToTitle;
 
@@ -128,6 +132,7 @@ TSharedRef<SWidget> SSiteOverseerHub::BuildTabBar()
 		+ SHorizontalBox::Slot().AutoWidth().Padding(0, 0, 8, 0)[ BuildTabButton(TEXT("CONTAINMENT OPERATIONS"), ETab::Operations) ]
 		+ SHorizontalBox::Slot().AutoWidth().Padding(0, 0, 8, 0)[ BuildTabButton(TEXT("BREACH"), ETab::Breach) ]
 		+ SHorizontalBox::Slot().AutoWidth().Padding(0, 0, 8, 0)[ BuildTabButton(TEXT("SITE-20 PERSONNEL"), ETab::Personnel) ]
+		+ SHorizontalBox::Slot().AutoWidth().Padding(0, 0, 8, 0)[ BuildTabButton(TEXT("ARCHIVES"), ETab::Archives) ]
 		+ SHorizontalBox::Slot().AutoWidth()[ BuildTabButton(TEXT("RANKS & REWARDS"), ETab::Ranks) ];
 }
 
@@ -167,6 +172,7 @@ TSharedRef<SWidget> SSiteOverseerHub::BuildCurrentTabContent()
 	case ETab::Operations: return BuildOperationsTab();
 	case ETab::Breach:     return BuildBreachTab();
 	case ETab::Personnel:  return BuildPersonnelTab();
+	case ETab::Archives:   return BuildArchivesTab();
 	case ETab::Ranks:      return BuildRanksTab();
 	}
 	return SNew(SSpacer);
@@ -426,6 +432,129 @@ TSharedRef<SWidget> SSiteOverseerHub::BuildPersonnelTab()
 		];
 	}
 	return List;
+}
+
+TSharedRef<SWidget> SSiteOverseerHub::BuildArchivesTab()
+{
+	TSharedRef<SScrollBox> List = SNew(SScrollBox);
+
+	List->AddSlot().Padding(0, 0, 0, 10)
+	[
+		SNew(STextBlock).Font(HubFont(13)).ColorAndOpacity(HubColors::Cyan).AutoWrapText(true)
+		.Text(LOCTEXT("ArchObj", "SITE-20 ARCHIVES \u2014 Author and file your own SCP reports & dossiers. Entries are saved to a local JSON archive and persist between sessions."))
+	];
+
+	// --- New entry form ---
+	List->AddSlot().Padding(0, 0, 0, 14)
+	[
+		SNew(SBorder).BorderImage(&RowBg).Padding(FMargin(16, 12))
+		[
+			SNew(SVerticalBox)
+			+ SVerticalBox::Slot().AutoHeight().Padding(0, 0, 0, 6)
+			[ SNew(STextBlock).Font(HubFont(15, TEXT("Bold"))).ColorAndOpacity(HubColors::Gold).Text(LOCTEXT("NewReport", "FILE NEW REPORT")) ]
+			+ SVerticalBox::Slot().AutoHeight().Padding(0, 2)
+			[ SAssignNew(DesignationBox, SEditableTextBox).HintText(LOCTEXT("hDes", "Designation (e.g. SCP-XXXX)")) ]
+			+ SVerticalBox::Slot().AutoHeight().Padding(0, 2)
+			[ SAssignNew(NameBox, SEditableTextBox).HintText(LOCTEXT("hName", "Name / Title")) ]
+			+ SVerticalBox::Slot().AutoHeight().Padding(0, 2)
+			[ SAssignNew(ClassBox, SEditableTextBox).HintText(LOCTEXT("hClass", "Object Class (Safe / Euclid / Keter...)")) ]
+			+ SVerticalBox::Slot().AutoHeight().Padding(0, 2)
+			[
+				SNew(SBox).HeightOverride(110.f)
+				[ SAssignNew(BodyBox, SMultiLineEditableTextBox).HintText(LOCTEXT("hBody", "Description / Special Containment Procedures")) ]
+			]
+			+ SVerticalBox::Slot().AutoHeight().Padding(0, 8, 0, 0).HAlign(HAlign_Left)
+			[
+				SNew(SBox).MinDesiredWidth(220.f)
+				[
+					SNew(SButton).HAlign(HAlign_Center).OnClicked(this, &SSiteOverseerHub::DoSaveArchive)
+					[ SNew(STextBlock).Font(HubFont(13, TEXT("Bold"))).Text(LOCTEXT("SaveArch", "SAVE TO ARCHIVE")) ]
+				]
+			]
+		]
+	];
+
+	// --- Existing entries ---
+	if (Archive.IsValid())
+	{
+		const TArray<FArchiveEntry>& Entries = Archive->GetEntries();
+		if (Entries.Num() == 0)
+		{
+			List->AddSlot().Padding(0, 4)
+			[ SNew(STextBlock).Font(HubFont(12)).ColorAndOpacity(HubColors::Dim).Text(LOCTEXT("NoArch", "No archived reports yet. File your first above.")) ];
+		}
+		for (int32 i = 0; i < Entries.Num(); ++i)
+		{
+			const FArchiveEntry& E = Entries[i];
+			const int32 Idx = i;
+			List->AddSlot().Padding(0, 0, 0, 6)
+			[
+				SNew(SBorder).BorderImage(&RowBg).Padding(FMargin(14, 10))
+				[
+					SNew(SVerticalBox)
+					+ SVerticalBox::Slot().AutoHeight()
+					[
+						SNew(SHorizontalBox)
+						+ SHorizontalBox::Slot().FillWidth(1.f).VAlign(VAlign_Center)
+						[ SNew(STextBlock).Font(HubFont(16, TEXT("Bold"))).ColorAndOpacity(HubColors::Cyan).Text(FText::FromString(FString::Printf(TEXT("%s \u2014 %s"), *E.Designation, *E.Name))) ]
+						+ SHorizontalBox::Slot().AutoWidth().VAlign(VAlign_Center)
+						[
+							SNew(SBox).MinDesiredWidth(110.f)
+							[
+								SNew(SButton).HAlign(HAlign_Center).OnClicked(FOnClicked::CreateSP(this, &SSiteOverseerHub::DoDeleteArchive, Idx))
+								[ SNew(STextBlock).Font(HubFont(11, TEXT("Bold"))).ColorAndOpacity(HubColors::Red).Text(LOCTEXT("Del", "DELETE")) ]
+							]
+						]
+					]
+					+ SVerticalBox::Slot().AutoHeight().Padding(0, 2)
+					[ SNew(STextBlock).Font(HubFont(11, TEXT("Bold"))).ColorAndOpacity(HubColors::Gold).Text(FText::FromString(FString::Printf(TEXT("Object Class: %s   \u2022   Filed: %s   \u2022   By: %s"), *E.ObjectClass, *E.Timestamp, *E.Author))) ]
+					+ SVerticalBox::Slot().AutoHeight().Padding(0, 4, 0, 0)
+					[ SNew(STextBlock).Font(HubFont(12)).ColorAndOpacity(HubColors::Gray).AutoWrapText(true).Text(FText::FromString(E.Body)) ]
+				]
+			];
+		}
+	}
+	return List;
+}
+
+FReply SSiteOverseerHub::DoSaveArchive()
+{
+	if (!Archive.IsValid())
+	{
+		StatusMsg = TEXT("Archive unavailable.");
+		return FReply::Handled();
+	}
+
+	const FString Des = DesignationBox.IsValid() ? DesignationBox->GetText().ToString().TrimStartAndEnd() : FString();
+	if (Des.IsEmpty())
+	{
+		StatusMsg = TEXT("Designation is required to file a report.");
+		RefreshContent();
+		return FReply::Handled();
+	}
+
+	FArchiveEntry E;
+	E.Designation = Des;
+	E.Name = NameBox.IsValid() ? NameBox->GetText().ToString() : FString();
+	E.ObjectClass = ClassBox.IsValid() ? ClassBox->GetText().ToString() : FString();
+	E.Body = BodyBox.IsValid() ? BodyBox->GetText().ToString() : FString();
+	E.Author = Progress.IsValid() ? Progress->GetCurrentRank().Title : FString(TEXT("Overseer"));
+	E.Timestamp = FDateTime::Now().ToString();
+
+	Archive->AddEntry(E);
+	StatusMsg = FString::Printf(TEXT("Archived %s and saved to disk."), *Des);
+	RefreshContent();
+	return FReply::Handled();
+}
+
+FReply SSiteOverseerHub::DoDeleteArchive(int32 Index)
+{
+	if (Archive.IsValid() && Archive->RemoveEntry(Index))
+	{
+		StatusMsg = TEXT("Archive entry deleted.");
+	}
+	RefreshContent();
+	return FReply::Handled();
 }
 
 TSharedRef<SWidget> SSiteOverseerHub::BuildRanksTab()
