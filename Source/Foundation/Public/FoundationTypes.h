@@ -135,3 +135,26 @@ struct FPersonnelData
 	UPROPERTY(BlueprintReadOnly) FString Bio;
 	UPROPERTY(BlueprintReadOnly) FString O5Notes;
 };
+
+/** A player-authored archive record (custom SCP report / dossier). Persisted as JSON. */
+USTRUCT()
+struct FArchiveEntry
+{
+	GENERATED_BODY()
+
+	UPROPERTY() FString Designation;
+	UPROPERTY() FString Name;
+	UPROPERTY() FString ObjectClass;
+	UPROPERTY() FString Body;
+	UPROPERTY() FString Author;
+	UPROPERTY() FString Timestamp;
+};
+
+/** Root container serialised to/from the JSON archive file. */
+USTRUCT()
+struct FArchiveDatabaseData
+{
+	GENERATED_BODY()
+
+	UPROPERTY() TArray<FArchiveEntry> Entries;
+};

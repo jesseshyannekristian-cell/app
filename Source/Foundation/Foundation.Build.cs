@@ -18,7 +18,9 @@ public class Foundation : ModuleRules
 			"Slate",
 			"SlateCore",
 			"UMG",
-			"ImageWrapper"
+			"ImageWrapper",
+			"Json",
+			"JsonUtilities"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] { });
