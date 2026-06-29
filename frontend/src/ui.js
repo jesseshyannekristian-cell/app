@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Pressable, ScrollView, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useIsFocused } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 import { C, F } from './theme';
 import { sfx } from './sound';
@@ -16,6 +17,7 @@ export const TABS = [
 
 export function Screen({ eyebrow, title, onBack, tab, nav, children, testID }) {
   const insets = useSafeAreaInsets();
+  const focused = useIsFocused();
   return (
     <View style={[s.screen, { paddingTop: insets.top }]} testID={testID}>
       <View style={s.header}>
@@ -35,8 +37,8 @@ export function Screen({ eyebrow, title, onBack, tab, nav, children, testID }) {
         {children}
         <View style={{ height: 30 }} />
       </ScrollView>
-      {tab ? <TabBar active={tab} nav={nav} insets={insets} /> : null}
-      <Toast bottom={tab ? 84 + insets.bottom : 24} />
+      {tab && focused ? <TabBar active={tab} nav={nav} insets={insets} /> : null}
+      {focused ? <Toast bottom={tab ? 84 + insets.bottom : 24} /> : null}
     </View>
   );
 }

@@ -1,5 +1,28 @@
 # FOUNDATION — SCP Site Overseer (Terminal Edition)
 
+> ## ⚠️ CURRENT STACK = REACT NATIVE (EXPO) MOBILE APP + FASTAPI (NOT the terminal game)
+> The project pivoted from UE5 → Python CLI → **React Native (Expo Web) mobile app**. The CLI text
+> below is legacy/historical. Active code: `/app/frontend` (Expo) + `/app/backend` (FastAPI). Legacy
+> `/app/game/` CLI can be deleted (P2).
+>
+> ### Mobile app — implemented (2026-06-29)
+> - **Graphic UI overhaul** (replaced the CRT/ASCII terminal skin): dark sci-fi "control-room"
+>   dashboard per user's reference template — card layout, red accent rules, bordered classification
+>   badges, solid-yellow primary CTAs, monospace data + bold sans titles. Design system in
+>   `src/theme.js` + `src/ui.js` (Screen, Card, Btn, Badge, SectionTabs, Meter, Toast).
+> - **5-icon bottom tab bar**: TERMINAL(Home) / ARCHIVE(Archives) / ENCOUNTERS(Operations+Breach) /
+>   ARMORY(Store+Research+Loadout) / DOSSIER(Personnel+Awards+System). Section pills switch siblings.
+>   Web URL deep-links added via React Navigation `linking` (/, /store, /archives, /operations, etc.).
+> - **Resilient loading**: app boots instantly from bundled `src/bootstrapData.json` + `DEFAULT_STATE`;
+>   `src/store.js` background-syncs live config/state with retry + abort-timeout (`src/api.js`); autosave
+>   only after first sync settles (no clobber). Fixes the prior "bootstrap failed / stuck booting"
+>   cold-start issue.
+> - **CC BY-SA 3.0**: `/app/LICENSE` + `/app/CREDITS.md` present; in-app attribution on Home footer.
+> - Verified via testing_agent iteration_6: 30/30 frontend checks passed, no bugs.
+> - **Note**: headless browsers in this env can stall on reading API response BODIES on cold start
+>   (backend returns 200, body buffers) — hence the bundled-config render model. Real browsers load fine.
+
+
 ## Problem statement
 Originally an Unreal Engine 5.5 SCP game. **Pivoted** (user cannot import meshes / use the UE editor)
 to a **standalone Python terminal game** that ports the "Site Overseer" management meta-game and can be
