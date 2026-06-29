@@ -53,12 +53,15 @@ Follow-up: add MTF XI-87 (from uploaded dossier) as a faction, make it open-worl
 - NPC/SCP visuals are tinted cube placeholders; replace with real meshes/animations.
 
 ## Backlog / Next
-- P1: Real meshes/animations + in-breach UMG HUD (sanity bar, keycard, objective marker, prompts).
-- P1: SCP-049 entity; make Containment Operations interactive (success chance) instead of instant.
-- P2: Spend owned equipment in live Breach (loadout select before deploy).
+- P1: Real meshes/animations to replace cube placeholders.
+- P2: Spend owned equipment in live Breach (loadout select before deploy); breach reward should scale with researched gear.
 - P2: NavMesh + behavior trees; audio (ambience, 173 sting, 096 scream); multi-floor + surface.
+- P3: SCP-16829 "Dimension Chemosic" pocket-dimension reward room on dimensional travel.
 
 ## Done recently (2026-06)
-- SCP-16829 "The TV in Time" (`ASCP16829`): dimensional-travel interact, temporal-loop rewind,
-  carcinogenic exposure (ties GUNZ/CHEMOSIC dossiers). Added to Breach roster, Operations (gated by
-  `proc_16829` research) and a containment-procedure research project. Spawned once per facility.
+- SCP-16829 "The TV in Time" (`ASCP16829`): dimensional travel, temporal-loop rewind, carcinogenic exposure.
+- SCP-049 "The Plague Doctor" (`ASCP049`): pursuing contact-kill entity; added to facility spawn roster.
+- Interactive Containment Operations: dispatch now resolves via a success/risk roll (`GetOperationSuccessChance`
+  = 90 - difficulty*8 + rankAbove*10, clamped 25-95). Failure grants partial XP and stays retryable; hub shows % success.
+- In-breach HUD (`AFoundationHUD` + `SFoundationHUDWidget`): health & sanity bars, BLINK indicator,
+  keycard clearance, objective line. Wired via `FoundationGameMode::HUDClass`.

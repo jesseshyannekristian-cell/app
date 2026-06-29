@@ -5,6 +5,7 @@
 #include "SCP096.h"
 #include "SCP106.h"
 #include "SCP682.h"
+#include "SCP049.h"
 #include "SCP16829.h"
 #include "ExitZone.h"
 #include "KeycardPickup.h"
@@ -52,6 +53,7 @@ void AFacilityGenerator::Generate()
 		SCPClasses.Add(ASCP096::StaticClass());
 		SCPClasses.Add(ASCP106::StaticClass());
 		SCPClasses.Add(ASCP682::StaticClass());
+		SCPClasses.Add(ASCP049::StaticClass());
 		SCPClasses.Add(ASCPEntityBase::StaticClass());
 	}
 

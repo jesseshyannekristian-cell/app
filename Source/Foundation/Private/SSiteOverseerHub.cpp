@@ -296,7 +296,11 @@ TSharedRef<SWidget> SSiteOverseerHub::BuildOperationsTab()
 			Req += FString::Printf(TEXT(" \u2022 Needs: %s"), Eq ? *Eq->Name : *O.RequiredEquipment.ToString());
 		}
 		const FString Sub = FString::Printf(TEXT("%s\nDifficulty %d/5  \u2022  %s"), *O.TargetDesignation, O.Difficulty, *Req);
-		const FString Right = FString::Printf(TEXT("+%d cr  +%d RC  +%d XP"), O.RewardCredits, O.RewardResearchCredits, O.RewardXP);
+		FString Right = FString::Printf(TEXT("+%d cr  +%d RC  +%d XP"), O.RewardCredits, O.RewardResearchCredits, O.RewardXP);
+		if (bEnabled && Progress.IsValid())
+		{
+			Right += FString::Printf(TEXT("  |  %d%% success"), Progress->GetOperationSuccessChance(O.Id));
+		}
 
 		FString Btn;
 		FLinearColor Accent = HubColors::Cyan;

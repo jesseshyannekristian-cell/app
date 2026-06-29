@@ -36,6 +36,9 @@ public:
 	bool IsOwned(FName EquipId) const;
 	bool IsOpComplete(FName OpId) const;
 
+	/** Estimated 0-100 success chance for an operation given current rank/difficulty. */
+	int32 GetOperationSuccessChance(FName OpId) const;
+
 	int32 GetBreachesSurvived() const;
 	int32 GetBreachesFailed() const;
 	int32 GetSCPsRecontained() const;

@@ -70,6 +70,20 @@ bool UOverseerProgression::IsOpComplete(FName OpId) const
 	return Data && Data->CompletedOps.Contains(OpId);
 }
 
+int32 UOverseerProgression::GetOperationSuccessChance(FName OpId) const
+{
+	const FContainmentOp* Op = nullptr;
+	for (const FContainmentOp& O : UFoundationDataLibrary::GetOperations())
+	{
+		if (O.Id == OpId) { Op = &O; break; }
+	}
+	if (!Op || !Data) { return 0; }
+
+	const int32 RankAbove = FMath::Max(0, Data->RankLevel - Op->RequiredRank);
+	const int32 Chance = 90 - Op->Difficulty * 8 + RankAbove * 10;
+	return FMath::Clamp(Chance, 25, 95);
+}
+
 int32 UOverseerProgression::GetBreachesSurvived() const { return Data ? Data->BreachesSurvived : 0; }
 int32 UOverseerProgression::GetBreachesFailed() const { return Data ? Data->BreachesFailed : 0; }
 int32 UOverseerProgression::GetSCPsRecontained() const { return Data ? Data->SCPsRecontained : 0; }
@@ -129,10 +143,21 @@ bool UOverseerProgression::TryRunOperation(FName OpId, FString& OutMsg)
 		return false;
 	}
 
+	const int32 Chance = GetOperationSuccessChance(OpId);
+	const int32 Roll = FMath::RandRange(1, 100);
+	if (Roll > Chance)
+	{
+		const int32 PartialXP = Op->RewardXP / 4;
+		AddRewards(0, 0, PartialXP);
+		Save();
+		OutMsg = FString::Printf(TEXT("Operation FAILED (%d%% chance). Team withdrew. +%d XP field experience."), Chance, PartialXP);
+		return false;
+	}
+
 	Data->CompletedOps.Add(OpId);
 	AddRewards(Op->RewardCredits, Op->RewardResearchCredits, Op->RewardXP);
 	Save();
-	OutMsg = FString::Printf(TEXT("Operation success: +%d cr, +%d RC, +%d XP"), Op->RewardCredits, Op->RewardResearchCredits, Op->RewardXP);
+	OutMsg = FString::Printf(TEXT("Operation SUCCESS (%d%% chance): +%d cr, +%d RC, +%d XP"), Chance, Op->RewardCredits, Op->RewardResearchCredits, Op->RewardXP);
 	return true;
 }
 

@@ -3,6 +3,7 @@
 #include "FacilityGenerator.h"
 #include "EncounterManager.h"
 #include "OverseerProgression.h"
+#include "FoundationHUD.h"
 #include "Kismet/GameplayStatics.h"
 #include "Engine/GameInstance.h"
 #include "GameFramework/PlayerController.h"
@@ -25,6 +26,7 @@ AFoundationGameMode::AFoundationGameMode()
 	DefaultPawnClass = AFoundationCharacter::StaticClass();
 	GeneratorClass = AFacilityGenerator::StaticClass();
 	EncounterManagerClass = AEncounterManager::StaticClass();
+	HUDClass = AFoundationHUD::StaticClass();
 }
 
 void AFoundationGameMode::BeginPlay()
