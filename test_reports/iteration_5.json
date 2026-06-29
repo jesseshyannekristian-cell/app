@@ -1,0 +1,34 @@
+{
+  "summary": "Frontend-only verification of the Expo web 'SCP Site Overseer' app on the corrected preview URL https://scp-terminal-3.preview.emergentagent.com in a 430x920 mobile viewport. PRIMARY BUG IS FIXED: Home renders the SITE-20 STATUS BRIEFING + DIRECTIVE — O5 COMMAND + 8-button nav grid; no 'Could not reach Site-20 server / bootstrap failed' panel. Network shows GET /api/game/bootstrap = 200 and GET /api/game/state/{device_id} = 200 (device id from localStorage). All 6 requested flows passed: navigation, store purchase, breach mini-game, custom-SCP creator, new-game/difficulty switch, and cloud persistence across reload.",
+  "backend_issues": { "critical": [], "minor": [] },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "frontend/src/api.js correctly reads EXPO_PUBLIC_BACKEND_URL with a window.location.origin fallback — no hardcoded URLs.",
+    "store.js uses a 600ms debounced PUT to /api/game/state/{device_id}; persistence verified after a hard reload (CR 500→450 retained).",
+    "Home.js short-circuits to the connection error panel on bootstrap failure (good UX), but its error state only checks for `error`; on transient network blips users get a dead-end with no retry button — consider adding a 'RETRY' button on the error panel.",
+    "Breach.js MiniGame uses a 28ms setInterval; if React re-renders during resolve, the interval is cleared correctly on unmount. No memory leak observed.",
+    "Archives.js: classes are hardcoded constants — fine, but classes list is not derived from boot data so a future server-side addition would require a frontend change.",
+    "All interactive elements expose stable data-testid values (kebab-case), which made automation reliable."
+  ],
+  "updated_files": [],
+  "success_rate": { "backend": "n/a (skipped per request, but /api/game/bootstrap and /api/game/state/* observed 200)", "frontend": "100% (6/6 flows)" },
+  "test_credentials": "None — anonymous device id in localStorage (e.g. dev-dhqrmgfd0f).",
+  "seed_data_creation": "No backend seeding. Frontend state was reset via in-app 'NEW GAME / RESET' (diff=Hard) during the test.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Test the LIVE preview URL https://scp-terminal-3.preview.emergentagent.com in mobile viewport 430x920. Do NOT use the old a7375858-... URL. All testids are kebab-case: nav-research/store/operations/loadout/breach/archives/personnel/achievements/newgame, back-btn, buy-flashlight, breach-target-N, deploy-btn, decision-N, lock-btn, archive-name/desc/designation/breachable/file, class-<Class>, archive-toggle-<id>, archive-delete-<id>, diff-<Level>, confirm-newgame. Persistence is debounced ~600ms — wait >=1s before reload. Mini-game requires 3 lock-btn taps to resolve.",
+  "rca of the issue": "Original bug ('Could not reach Site-20 server / bootstrap failed') was caused by an incorrect EXPO_PUBLIC_BACKEND_URL in frontend/.env pointing to a stale preview host. Fix already applied — frontend/.env now sets EXPO_PUBLIC_BACKEND_URL=https://scp-terminal-3.preview.emergentagent.com (matches the working backend). Verified by observing 200 responses for /api/game/bootstrap and /api/game/state/{device_id} on the live URL and the Home rendering the briefing/directive/nav grid instead of the red CONNECTION error panel.",
+  "test_evidence": {
+    "store_purchase": "Before CR=500 RC=200 → buy-flashlight → After CR=450 RC=200 → flashlight shows OWNED.",
+    "archives_custom_scp": "Filed 'The Whispering Lamp' (class Keter, breachable). 'CUSTOM SCP DATABASE (1)' rendered with archive-toggle-1 and archive-delete-1.",
+    "breach_flow": "23 breach targets listed (incl. custom). SCP-173 selected → deploy-btn → 2 scenario decisions (decision-0 each) → lock-btn tapped 3× → result panel rendered (CONTAINMENT FAILED outcome in this run — RNG, no crash).",
+    "newgame_difficulty": "diff-Hard → confirm-newgame → returned Home with CR=500 RC=200 and DIFFICULTY Hard.",
+    "persistence": "After buy + 1.5s wait, hard reload → CR=450 retained (PUT /api/game/state/{device_id} persisted)."
+  }
+}
