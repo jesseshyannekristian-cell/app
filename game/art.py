@@ -1,16 +1,23 @@
-"""ASCII art for anomalies, shown during breach response. Rendered via rich.Text (no markup)."""
+"""ASCII art for anomalies, shown during breach response. Rendered via rich.Text (no markup).
+
+ALL ASCII art below is ORIGINAL, fan-made work created for this project and released under
+CC BY-SA 3.0. None of it is traced from or derived from any photograph or copyrighted
+depiction of any SCP — in particular the SCP-173 art is an abstract, stylised original and is
+NOT based on the "Untitled 2004" sculpture historically associated with SCP-173. See CREDITS.md.
+"""
 
 _ART = {
     "SCP-173": r"""
-       .-=-=-.
-      /  _ _  \
-      | (o)(o) |
-      \   ^    /
-       )_____(
-      /| | | |\
-     / | | | | \
-       |_|_|_|
-      concrete + rebar
+        ______
+       /  __  \
+      |  |##|  |
+      |  |##|  |    SCP-173
+       \ |##| /     (original fan-made
+        \|##|/       ASCII art)
+         |##|
+        _|##|_
+       /______\
+      do not blink
 """,
     "SCP-096": r"""
         _______

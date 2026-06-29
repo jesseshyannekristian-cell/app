@@ -70,4 +70,8 @@ play.py          — convenience launcher
 Source code and SCP-themed content are released under **CC BY-SA 3.0**.
 All SCP names, numbers and lore are the creative work of the **SCP Foundation community**
 (https://scp-wiki.wikidot.com/), likewise under CC BY-SA 3.0. This is a non-official, fan-made work.
-See [`LICENSE`](LICENSE) and [`CREDITS.md`](CREDITS.md).
+
+**ASCII art:** all in-game ASCII art (`game/art.py`), including the SCP-173 depiction, is **original
+fan-made work** created for this project (CC BY-SA 3.0). It is **not** derived from any photograph or
+copyrighted depiction of any SCP — notably **not** the "Untitled 2004" sculpture historically
+associated with SCP-173. See [`LICENSE`](LICENSE) and [`CREDITS.md`](CREDITS.md).
