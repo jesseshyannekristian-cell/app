@@ -4,6 +4,8 @@ import secrets
 
 def roll(low, high):
     """Inclusive integer in [low, high]."""
+    if high < low:
+        raise ValueError(f"roll bounds invalid: low={low} > high={high}")
     return secrets.randbelow(high - low + 1) + low
 
 

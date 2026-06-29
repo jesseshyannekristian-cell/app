@@ -1,4 +1,7 @@
 """Shared Rich UI helpers — Foundation terminal aesthetic (amber/cyan on black)."""
+import os
+import time
+
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
@@ -8,6 +11,9 @@ from rich.prompt import Prompt, Confirm
 from rich import box
 
 console = Console()
+
+# Line-level "typewriter" pacing. Disabled (0s) when SCP_NO_DELAY is set (tests/CI).
+TYPE_DELAY = 0.0 if os.environ.get("SCP_NO_DELAY") else 0.32
 
 AMBER = "bold #ffb000"
 CYAN = "bold #21d4d4"
@@ -53,7 +59,22 @@ def header(state):
         ("   RESEARCH ", DIM), (str(state.research_credits), CYAN),
     )
     bar.add_row(left, right)
-    console.print(Panel(bar, box=box.HEAVY, border_style=AMBER, title="[bold]SITE OVERSEER HUB[/bold]"))
+    title = "[bold]SITE OVERSEER HUB[/bold]"
+    if getattr(state, "ironman", False):
+        title += "  [bold #ff4b4b]☠ IRON-MAN[/bold #ff4b4b]"
+    console.print(Panel(bar, box=box.HEAVY, border_style=AMBER, title=title))
+
+
+def slow_print(text, style=CYAN, prefix="  ◦ ", delay=None):
+    """Print a single log line with optional typewriter-style pacing."""
+    console.print(Text(prefix + text, style=style))
+    d = TYPE_DELAY if delay is None else delay
+    if d:
+        time.sleep(d)
+
+
+def art(text, style=AMBER):
+    console.print(Text(text, style=style))
 
 
 def panel(body, title=None, style=CYAN):

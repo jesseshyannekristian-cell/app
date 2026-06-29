@@ -1,5 +1,5 @@
-"""Text-based containment breach — RNG survival event boosted by pre-breach loadout."""
-from . import data, rng, ui
+"""Text-based containment breach — branching mini-scenarios + RNG survival, with Iron-man support."""
+from . import art, data, rng, scenarios, ui
 
 # Loadout items that meaningfully improve breach survival, with flavour.
 LOADOUT_BONUS = {
@@ -73,12 +73,33 @@ def _next_log_line(state):
 
 
 def _simulate(state):
+    """Generic breach log for anomalies without a scripted scenario."""
     for _ in range(rng.roll(3, 5)):
-        ui.console.print(ui.Text(f"  ◦ {_next_log_line(state)}", style=ui.DIM))
+        ui.slow_print(_next_log_line(state))
+
+
+def _branching(state, number, chance):
+    """Run the scripted decision stages; return the adjusted survival chance."""
+    keys = "abcd"
+    for stage in scenarios.stages(number):
+        ui.panel(stage["prompt"], title="DECISION", style=ui.AMBER)
+        opts = [(keys[i], label) for i, (label, _, _) in enumerate(stage["options"])]
+        choice = ui.menu("Your call, Overseer", opts + [("x", "Improvise (50/50)")])
+        if choice == "x":
+            delta, flavor = (8, "You improvise. It works — barely.") if rng.chance(50) \
+                else (-12, "You improvise. It does not go to plan.")
+        else:
+            _, delta, flavor = stage["options"][keys.index(choice)]
+        chance = max(5, min(95, chance + delta))
+        ui.slow_print(flavor, style=(ui.GREEN if delta >= 0 else ui.RED))
+        ui.info(f"Survival chance now {chance}%")
+    return chance
 
 
 def _resolve(state, number, chance):
-    if rng.roll(1, 100) <= chance:
+    """Resolve the final roll; record result. Return True if survived."""
+    survived = rng.roll(1, 100) <= chance
+    if survived:
         ui.panel(
             f"Recontainment successful. {number} is back behind its door.\n"
             "Hazard pay and research data logged.",
@@ -94,15 +115,17 @@ def _resolve(state, number, chance):
         state.record_breach_result(False)
     ui.info(f"Record — Survived: {state.breaches_survived}  Failed: {state.breaches_failed}  "
             f"Re-contained: {state.scps_recontained}")
+    return survived
 
 
 def run_breach(state, target):
-    """target: dict with at least 'number'/'designation', 'name', 'threat'."""
+    """Run a breach. Returns True (survived), False (failed), or None (aborted / iron-man wipe)."""
     number = target.get("number") or target.get("designation")
     name = target.get("name", "")
     threat = target.get("threat", 3)
 
     ui.clear()
+    ui.art(art.for_scp(number))
     ui.panel(
         f'[bold]{number} — {name}[/bold]\n\n{_SCP_FLAVOR.get(number, "The anomaly is loose in the corridors.")}',
         title="⚠ CONTAINMENT BREACH ⚠", style="bold #ff4b4b",
@@ -113,9 +136,23 @@ def run_breach(state, target):
 
     if not ui.confirm("\nDeploy into the breach?"):
         ui.info("Deployment aborted. The cell holds — for now.")
-        return
+        return None
 
     ui.console.print()
-    _simulate(state)
+    if scenarios.has(number):
+        chance = _branching(state, number, chance)
+    else:
+        _simulate(state)
     ui.console.print()
-    _resolve(state, number, chance)
+
+    survived = _resolve(state, number, chance)
+
+    if not survived and getattr(state, "ironman", False):
+        ui.panel(
+            "IRON-MAN PROTOCOL: a containment failure ends your career. "
+            "Your save has been wiped. The Foundation endures without you.",
+            title="☠ PERMADEATH", style="bold #ff4b4b",
+        )
+        state.new_game(ironman=True)
+        return None
+    return survived

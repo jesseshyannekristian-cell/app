@@ -1,6 +1,11 @@
 """Site Overseer Hub menus."""
-from . import data, ui, breach
+from . import data, ui, breach, achievements
 from .archives import Archives
+
+
+def _notify(state, archives=None, ctx=None):
+    for a in achievements.check(state, archives, ctx):
+        ui.good(f'ACHIEVEMENT UNLOCKED — {a["name"]}: {a["desc"]}')
 
 
 def _pick_index(prompt, count):
@@ -78,6 +83,7 @@ def research_division(state):
         ui.panel(f'{p["objective"]}\n\n[italic]{p["description"]}[/italic]', title=p["name"])
         if ui.confirm(f'Commit {p["cost"]} Research Credits?'):
             ui.result(*state.try_complete_research(p["id"]))
+            _notify(state)
         ui.pause()
 
 
@@ -131,6 +137,7 @@ def operations(state):
         ui.panel(_op_detail_body(o), title=o["name"])
         if ui.confirm(f'Dispatch team? ({state.operation_success_chance(o["id"])}% success)'):
             ui.result(*state.try_run_operation(o["id"]))
+            _notify(state)
         ui.pause()
 
 
@@ -158,6 +165,7 @@ def loadout(state):
         if idx is None:
             return
         ui.result(*state.toggle_loadout(owned[idx]["id"]))
+        _notify(state)
         ui.pause()
 
 
@@ -182,7 +190,10 @@ def breach_menu(state, archives):
     idx = _pick_index("Respond to which breach", len(targets))
     if idx is None:
         return
-    breach.run_breach(state, targets[idx])
+    had_loadout = bool(state.loadout)
+    survived = breach.run_breach(state, targets[idx])
+    if survived is not None:
+        _notify(state, archives, ctx={"breach_win_no_loadout": survived and not had_loadout})
     ui.pause()
 
 
@@ -248,6 +259,49 @@ def ranks(state):
     ui.pause()
 
 
+# ---------------- Achievements ----------------
+def achievements_menu(state):
+    ui.clear()
+    ui.header(state)
+    t = ui.Table(box=ui.box.SIMPLE_HEAD, expand=True)
+    t.add_column("", width=3)
+    t.add_column("Achievement")
+    t.add_column("Requirement")
+    for a in achievements.ACHIEVEMENTS:
+        done = a["id"] in state.unlocked_achievements
+        mark = "[#5dff5d]★[/#5dff5d]" if done else "[#7a7a7a]☆[/#7a7a7a]"
+        name = f'[#5dff5d]{a["name"]}[/#5dff5d]' if done else f'[#7a7a7a]{a["name"]}[/#7a7a7a]'
+        t.add_row(mark, name, a["desc"])
+    unlocked = len(state.unlocked_achievements)
+    ui.console.print(ui.Panel(t, title=f"ACHIEVEMENTS  ({unlocked}/{len(achievements.ACHIEVEMENTS)})",
+                              border_style=ui.CYAN, box=ui.box.ROUNDED))
+    ui.pause()
+
+
+# ---------------- New Game / Reset ----------------
+def new_game_menu(state, archives):
+    ui.clear()
+    ui.header(state)
+    ui.panel(
+        "Start a NEW GAME. This wipes your progression (rank, currencies, research, equipment, "
+        "breach record and achievements).\n\n"
+        "[bold]Iron-man mode[/bold]: a single failed breach permanently wipes your save.",
+        title="NEW GAME / RESET", style=ui.RED,
+    )
+    if not ui.confirm("Wipe progression and start a new game?"):
+        ui.info("Cancelled. Your career continues.")
+        ui.pause()
+        return
+    ironman = ui.confirm("Enable Iron-man mode (permadeath)?")
+    wipe_archives = ui.confirm("Also delete all custom SCPs from the Archives?")
+    state.new_game(ironman=ironman)
+    if wipe_archives:
+        archives.custom_scps = []
+        archives.save()
+    ui.good(f'New game started{" — IRON-MAN ENABLED" if ironman else ""}.')
+    ui.pause()
+
+
 # ---------------- Archives ----------------
 _CLASSES = ["Safe", "Euclid", "Keter", "Thaumiel", "Apollyon", "Neutralized"]
 
@@ -283,6 +337,7 @@ def archives_menu(state, archives):
         if choice == "b":
             return
         _ARCHIVE_ACTIONS[choice](archives)
+        _notify(state, archives)
 
 
 
