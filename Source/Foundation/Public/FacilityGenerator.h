@@ -64,6 +64,10 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Generation|Spawning")
 	int32 TerminalCount = 5;
 
+	/** Guaranteed signature anomaly placed once per facility: SCP-16829 "The TV in Time". */
+	UPROPERTY(EditAnywhere, Category = "Generation|Spawning")
+	TSubclassOf<ASCPEntityBase> SignatureAnomalyClass;
+
 	UPROPERTY()
 	TArray<ARoomBase*> PlacedRooms;
 

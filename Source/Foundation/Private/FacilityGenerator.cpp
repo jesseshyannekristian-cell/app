@@ -5,6 +5,7 @@
 #include "SCP096.h"
 #include "SCP106.h"
 #include "SCP682.h"
+#include "SCP16829.h"
 #include "ExitZone.h"
 #include "KeycardPickup.h"
 #include "ContainmentTerminal.h"
@@ -19,6 +20,7 @@ AFacilityGenerator::AFacilityGenerator()
 	ExitZoneClass = AExitZone::StaticClass();
 	KeycardClass = AKeycardPickup::StaticClass();
 	TerminalClass = AContainmentTerminal::StaticClass();
+	SignatureAnomalyClass = ASCP16829::StaticClass();
 }
 
 FVector AFacilityGenerator::GetStartLocation() const
@@ -304,5 +306,12 @@ void AFacilityGenerator::PopulateFacility()
 
 		ARoomBase* R = PlacedRooms[Rng.RandRange(PlacedRooms.Num() / 2, PlacedRooms.Num() - 1)];
 		GetWorld()->SpawnActor<ASCPEntityBase>(Cls, R->GetActorLocation() + FVector(0, 0, 100.f), FRotator::ZeroRotator);
+	}
+
+	// Guaranteed signature anomaly: SCP-16829 "The TV in Time".
+	if (SignatureAnomalyClass && PlacedRooms.Num() > 3)
+	{
+		ARoomBase* R = PlacedRooms[Rng.RandRange(PlacedRooms.Num() / 2, PlacedRooms.Num() - 1)];
+		GetWorld()->SpawnActor<ASCPEntityBase>(SignatureAnomalyClass, R->GetActorLocation() + FVector(0, 0, 100.f), FRotator::ZeroRotator);
 	}
 }

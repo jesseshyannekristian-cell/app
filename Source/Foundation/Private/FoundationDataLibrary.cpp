@@ -45,6 +45,7 @@ const TArray<FSCPData>& UFoundationDataLibrary::GetSCPs()
 		Add(TEXT("SCP-008"), TEXT("Zombie Plague"), ESCPClass::Euclid, 4, TEXT("Biohazard vault under multi-stage airlock; absolute pathogen isolation enforced."));
 		Add(TEXT("SCP-914"), TEXT("The Clockworks"), ESCPClass::Safe, 1, TEXT("Sealed chamber; only approved inputs processed via Rough/Fine/Very Fine settings."));
 		Add(TEXT("SCP-055"), TEXT("[unknown]"), ESCPClass::Keter, 3, TEXT("Antimemetic anomaly; containment documented only via indirect, self-keeping records."));
+		Add(TEXT("SCP-16829"), TEXT("The TV in Time"), ESCPClass::Euclid, 4, TEXT("Anchored in a Scranton Reality Anchor field with temporal-loop stabilisation; the screen must not be viewed by unsupervised personnel (Dimension Chemosic egress / carcinogenic exposure risk)."));
 	}
 	return Data;
 }
@@ -141,6 +142,7 @@ const TArray<FResearchProject>& UFoundationDataLibrary::GetResearchProjects()
 		AddProc(TEXT("proc_096"), TEXT("Procedure: SCP-096 Visual Blackout"), TEXT("Implement site-wide image scrubbing to prevent face exposure."), 2, 400, TEXT("Prevents SCP-096 trigger events."));
 		AddProc(TEXT("proc_682"), TEXT("Procedure: SCP-682 Acid Submersion"), TEXT("Optimise hydrochloric submersion and adaptation monitoring."), 5, 900, TEXT("Slows SCP-682 adaptation during containment."));
 		AddProc(TEXT("proc_035"), TEXT("Procedure: SCP-035 Secretion Drainage"), TEXT("Automate corrosive secretion drainage and no-contact handling."), 4, 650, TEXT("Stabilises SCP-035 containment."));
+		AddProc(TEXT("proc_16829"), TEXT("Procedure: SCP-16829 Temporal Loop Stabilization"), TEXT("Develop reality-anchored stabilisation preventing dimensional egress and temporal looping (Dimension Chemosic)."), 5, 900, TEXT("Stabilises SCP-16829 and shields personnel from temporal/carcinogenic exposure."));
 	}
 	return Data;
 }
@@ -188,6 +190,7 @@ const TArray<FContainmentOp>& UFoundationDataLibrary::GetOperations()
 			else if (S.Number == TEXT("SCP-096")) O.RequiredResearch = FName(TEXT("proc_096"));
 			else if (S.Number == TEXT("SCP-682")) O.RequiredResearch = FName(TEXT("proc_682"));
 			else if (S.Number == TEXT("SCP-035")) O.RequiredResearch = FName(TEXT("proc_035"));
+			else if (S.Number == TEXT("SCP-16829")) O.RequiredResearch = FName(TEXT("proc_16829"));
 
 			// High-threat anomalies require specialised researched equipment.
 			if (S.ThreatLevel >= 5) O.RequiredEquipment = FName(TEXT("micro_hid"));

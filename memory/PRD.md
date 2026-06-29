@@ -54,7 +54,11 @@ Follow-up: add MTF XI-87 (from uploaded dossier) as a faction, make it open-worl
 
 ## Backlog / Next
 - P1: Real meshes/animations + in-breach UMG HUD (sanity bar, keycard, objective marker, prompts).
-- P1: SCP-16829 "The TV in Time" (XI-87's mandate) temporal-loop mechanic; SCP-049 entity.
-- P1: Make Containment Operations interactive (mini-resolution / success chance) instead of instant.
+- P1: SCP-049 entity; make Containment Operations interactive (success chance) instead of instant.
 - P2: Spend owned equipment in live Breach (loadout select before deploy).
 - P2: NavMesh + behavior trees; audio (ambience, 173 sting, 096 scream); multi-floor + surface.
+
+## Done recently (2026-06)
+- SCP-16829 "The TV in Time" (`ASCP16829`): dimensional-travel interact, temporal-loop rewind,
+  carcinogenic exposure (ties GUNZ/CHEMOSIC dossiers). Added to Breach roster, Operations (gated by
+  `proc_16829` research) and a containment-procedure research project. Spawned once per facility.

@@ -65,6 +65,10 @@ The default GameMode is already wired in `Config/DefaultEngine.ini`
 - **SCP-096** — passive until you view its face, then enrages and sprints (inverse of 173).
 - **SCP-106** — slow but periodically phases/teleports behind you.
 - **SCP-682** — extremely durable, relentlessly aggressive (Keter).
+- **SCP-16829 "The TV in Time"** (`ASCP16829`) — stationary anomalous television (Dimension Chemosic).
+  Interact (E) for dimensional travel to a random room; lingering in its field triggers a temporal
+  rewind (time loop); prolonged exposure drains sanity and is carcinogenic. Spawned once per facility
+  by the generator (`SignatureAnomalyClass`).
 - Every SCP carries **containment metadata**: `ContainmentClass` (Safe/Euclid/Keter/Thaumiel), a `ContainmentProcedure` description, and a required keycard level.
 - **`AContainmentTerminal`** (interact with `E`): re-contains the nearest breached SCP if your keycard clearance is high enough — the core "way to contain them" loop.
 
