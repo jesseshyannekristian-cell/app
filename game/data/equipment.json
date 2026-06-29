@@ -1,0 +1,17 @@
+[
+  {"id": "flashlight", "name": "Reinforced Flashlight", "dept": "Field", "required_rank": 0, "cost": 50, "requires_research": false, "description": "Standard-issue illumination. Available from day one."},
+  {"id": "keycard_l1", "name": "Level 1 Keycard", "dept": "Field", "required_rank": 0, "cost": 75, "requires_research": false, "description": "Opens low-clearance containment doors."},
+  {"id": "kevlar_vest", "name": "Tactical Kevlar Vest", "dept": "Field", "required_rank": 1, "cost": 200, "requires_research": true, "description": "Reduces ballistic damage from hostile factions."},
+  {"id": "epsilon_rifle", "name": "Epsilon-11 Rifle", "dept": "Field", "required_rank": 2, "cost": 450, "requires_research": true, "description": "MTF standard rifle effective against rogue operatives."},
+  {"id": "scranton_anchor", "name": "Scranton Reality Anchor", "dept": "Field", "required_rank": 3, "cost": 1200, "requires_research": true, "description": "Stabilises local reality; suppresses reality-bending anomalies."},
+  {"id": "micro_hid", "name": "Micro-H.I.D. Emitter", "dept": "Field", "required_rank": 4, "cost": 2000, "requires_research": true, "description": "High-intensity discharge weapon; lethal to durable Keter-class entities."},
+  {"id": "hazmat_suit", "name": "Hazmat Containment Suit", "dept": "Field", "required_rank": 1, "cost": 300, "requires_research": true, "description": "Protects against corrosive secretions and airborne hazards."},
+  {"id": "thermal_optics", "name": "Thermal/IR Optics", "dept": "Field", "required_rank": 2, "cost": 380, "requires_research": true, "description": "Reveals SCP-966 and other invisible thermal-signature entities."},
+  {"id": "femur_breaker", "name": "Femur-Bone Recall Lure", "dept": "Field", "required_rank": 3, "cost": 900, "requires_research": true, "description": "Recall device used to re-contain SCP-106."},
+  {"id": "memetic_kit", "name": "Memetic Analysis Kit", "dept": "Research", "required_rank": 1, "cost": 350, "requires_research": true, "description": "Lab kit for studying cognitohazards safely."},
+  {"id": "anomaly_scanner", "name": "Anomalous Signature Scanner", "dept": "Research", "required_rank": 2, "cost": 600, "requires_research": true, "description": "Detects Hume fluctuations and classifies anomalies."},
+  {"id": "kant_counter", "name": "Kant Counter", "dept": "Research", "required_rank": 3, "cost": 850, "requires_research": true, "description": "Measures local reality strength (Humes) for breach prediction."},
+  {"id": "memetic_inoculant", "name": "Memetic Inoculant Serum", "dept": "Research", "required_rank": 3, "cost": 1100, "requires_research": true, "description": "Grants temporary resistance to memetic/cognitohazardous effects."},
+  {"id": "cryo_unit", "name": "Cryogenic Containment Unit", "dept": "Research", "required_rank": 4, "cost": 1500, "requires_research": true, "description": "Sub-zero habitat module required to contain SCP-939."},
+  {"id": "faraday_rig", "name": "Faraday Isolation Rig", "dept": "Research", "required_rank": 2, "cost": 500, "requires_research": true, "description": "Electromagnetically isolates digital anomalies (SCP-079/1471)."}
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "file_no": "S20-PERS-05-GUNZ",
+    "codename": "GUNZ",
+    "real_name": "(CLASSIFIED)",
+    "position": "Member of the O5 Council",
+    "clearance": "Level 5 / OMEGA BLACK",
+    "status": "Active",
+    "nationality": "Canadian (former JTF-2 Technical Specialist)",
+    "affiliation": "Technological Development Department",
+    "aliases": "Gunz, O5, The Technician, Semizuse",
+    "anomalous_trait": "Bright blue glowing eyes resulting from repeated SCP-16829 exposure.",
+    "bio": "During a breach event originating in Sector-[REDACTED], O5-0 Gunz coordinated real-time containment protocols, ordered the evacuation of non-essential personnel, and personally supervised the sealing of affected corridors. Post-incident analysis confirms his rapid decision-making and technical expertise directly reduced potential casualties.",
+    "o5_notes": "\"Gunz is suspected to use SCP-16829 for traveling between sites. Some personnel follow orders. Some hold the line when orders fail.\" — Site-20 Security Evaluation Board"
+  },
+  {
+    "file_no": "S20-PERS-00420-CHEMOSIC",
+    "codename": "CHEMOSIC",
+    "real_name": "(REDACTED)",
+    "position": "Site Supervisor — Site-20",
+    "clearance": "Level 5 / O5 Council Access",
+    "status": "Active — Limited Field Deployment",
+    "nationality": "Canadian (former JTF-2 Assaulter / Sniper / Team Leader)",
+    "affiliation": "Former Commander, MTF XI-87 \"Binge Watchers\"",
+    "aliases": "Chemosic",
+    "anomalous_trait": "In remission from cancer attributed to repeated exposure to SCP-16829 (\"Dimension Chemosic\"). Under ongoing Site-20 medical monitoring.",
+    "bio": "Led 60+ successful operations involving high-risk SCPs, including multiple incursions into SCP-16829. Expert in information warfare, psychological operations and memetic-hazard countermeasures. Medically retired from field command and promoted to Site Supervisor: oversees all Site-20 operations, personnel and containment protocols.",
+    "o5_notes": "\"Chemosic is one of the few individuals we trust implicitly with both the protection of the Foundation and its darkest secrets. His experience, judgment and loyalty are unmatched. Site-20 is in capable hands.\" — O5-[REDACTED]"
+  },
+  {
+    "file_no": "S20-PERS-RD-LEAD",
+    "codename": "HEAD RESEARCHER",
+    "real_name": "(REDACTED)",
+    "position": "Head Researcher — Site-20 Research Division",
+    "clearance": "Level 4",
+    "status": "Active",
+    "nationality": "(REDACTED)",
+    "affiliation": "Site-20 Research Division",
+    "aliases": "—",
+    "anomalous_trait": "None on record.",
+    "bio": "Directs Site-20's anomaly research portfolio, including active study files on SCP-173, SCP-096, SCP-049 and SCP-682. Authorises research projects and containment-procedure development that feed the Research Division and Containment Operations.",
+    "o5_notes": "\"Approves the science that keeps the cells closed. Pragmatic, meticulous, and unflinching under breach conditions.\" — Site-20 Records"
+  }
+]

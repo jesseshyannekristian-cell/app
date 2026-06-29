@@ -1,0 +1,8 @@
+[
+  {"level": 0, "title": "Junior Researcher", "xp_required": 0, "credit_reward": 0, "research_credit_reward": 0},
+  {"level": 1, "title": "Researcher", "xp_required": 500, "credit_reward": 300, "research_credit_reward": 150},
+  {"level": 2, "title": "Senior Researcher", "xp_required": 1500, "credit_reward": 600, "research_credit_reward": 300},
+  {"level": 3, "title": "Site Supervisor", "xp_required": 3500, "credit_reward": 1000, "research_credit_reward": 500},
+  {"level": 4, "title": "Site Director", "xp_required": 7000, "credit_reward": 1800, "research_credit_reward": 900},
+  {"level": 5, "title": "O5 Overseer (OMEGA BLACK)", "xp_required": 12000, "credit_reward": 3000, "research_credit_reward": 1500}
+]
