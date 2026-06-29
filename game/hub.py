@@ -14,6 +14,48 @@ def _pick_index(prompt, count):
     return None
 
 
+# ---- status-cell helpers (keep render loops flat) ----
+def _research_status(state, p):
+    if state.is_researched(p["id"]):
+        return "[#5dff5d]DONE[/#5dff5d]"
+    if state.rank_level < p["required_rank"]:
+        return "[#ff4b4b]RANK LOCK[/#ff4b4b]"
+    if state.research_credits < p["cost"]:
+        return "[#ffb000]NEED RC[/#ffb000]"
+    return "[#21d4d4]AVAILABLE[/#21d4d4]"
+
+
+def _store_status(state, e):
+    if state.is_owned(e["id"]):
+        return "[#5dff5d]OWNED[/#5dff5d]"
+    if e["requires_research"] and not state.is_equipment_researched(e["id"]):
+        return "[#ffb000]RESEARCH REQ'D[/#ffb000]"
+    if state.rank_level < e["required_rank"]:
+        return "[#ff4b4b]RANK LOCK[/#ff4b4b]"
+    return "[#21d4d4]BUY[/#21d4d4]"
+
+
+def _op_status(state, o):
+    if state.is_op_complete(o["id"]):
+        return "[#5dff5d]DONE[/#5dff5d]"
+    if state.rank_level < o["required_rank"]:
+        return "[#ff4b4b]LOCK[/#ff4b4b]"
+    return "[#21d4d4]READY[/#21d4d4]"
+
+
+def _op_detail_body(o):
+    reqs = []
+    if o["required_research"]:
+        reqs.append(f'Procedure: {o["required_research"]}')
+    if o["required_equipment"]:
+        req = data.find_equipment(o["required_equipment"])
+        reqs.append(f'Equipment: {req["name"] if req else o["required_equipment"]}')
+    body = f'[bold]{o["target"]}[/bold]\n\n{o["description"]}'
+    if reqs:
+        body += "\n\n[italic]Requires:[/italic] " + ", ".join(reqs)
+    return body
+
+
 # ---------------- Research Division ----------------
 def research_division(state):
     while True:
@@ -26,15 +68,7 @@ def research_division(state):
         t.add_column("Cost", justify="right", width=7)
         t.add_column("Status", justify="center", width=12)
         for i, p in enumerate(data.RESEARCH, 1):
-            if state.is_researched(p["id"]):
-                status = "[#5dff5d]DONE[/#5dff5d]"
-            elif state.rank_level < p["required_rank"]:
-                status = "[#ff4b4b]RANK LOCK[/#ff4b4b]"
-            elif state.research_credits < p["cost"]:
-                status = "[#ffb000]NEED RC[/#ffb000]"
-            else:
-                status = "[#21d4d4]AVAILABLE[/#21d4d4]"
-            t.add_row(str(i), p["name"], str(p["required_rank"]), str(p["cost"]), status)
+            t.add_row(str(i), p["name"], str(p["required_rank"]), str(p["cost"]), _research_status(state, p))
         ui.console.print(ui.Panel(t, title="RESEARCH DIVISION", border_style=ui.CYAN, box=ui.box.ROUNDED))
         ui.info("Spend Research Credits to complete projects. Each unlocks store gear or a containment procedure.")
         idx = _pick_index("Research which project", len(data.RESEARCH))
@@ -60,15 +94,7 @@ def store(state):
         t.add_column("Cost", justify="right", width=7)
         t.add_column("Status", justify="center", width=14)
         for i, e in enumerate(data.EQUIPMENT, 1):
-            if state.is_owned(e["id"]):
-                status = "[#5dff5d]OWNED[/#5dff5d]"
-            elif e["requires_research"] and not state.is_equipment_researched(e["id"]):
-                status = "[#ffb000]RESEARCH REQ'D[/#ffb000]"
-            elif state.rank_level < e["required_rank"]:
-                status = "[#ff4b4b]RANK LOCK[/#ff4b4b]"
-            else:
-                status = "[#21d4d4]BUY[/#21d4d4]"
-            t.add_row(str(i), e["name"], e["dept"], str(e["required_rank"]), str(e["cost"]), status)
+            t.add_row(str(i), e["name"], e["dept"], str(e["required_rank"]), str(e["cost"]), _store_status(state, e))
         ui.console.print(ui.Panel(t, title="REQUISITION STORE", border_style=ui.CYAN, box=ui.box.ROUNDED))
         idx = _pick_index("Purchase which item", len(data.EQUIPMENT))
         if idx is None:
@@ -95,29 +121,14 @@ def operations(state):
         for i, o in enumerate(data.OPERATIONS, 1):
             chance = state.operation_success_chance(o["id"])
             reward = f'{o["reward_credits"]}/{o["reward_research"]}/{o["reward_xp"]}'
-            if state.is_op_complete(o["id"]):
-                status = "[#5dff5d]DONE[/#5dff5d]"
-            elif state.rank_level < o["required_rank"]:
-                status = "[#ff4b4b]LOCK[/#ff4b4b]"
-            else:
-                status = "[#21d4d4]READY[/#21d4d4]"
-            t.add_row(str(i), o["name"], str(o["required_rank"]), f"{chance}%", reward, status)
+            t.add_row(str(i), o["name"], str(o["required_rank"]), f"{chance}%", reward, _op_status(state, o))
         ui.console.print(ui.Panel(t, title="CONTAINMENT OPERATIONS", border_style=ui.CYAN, box=ui.box.ROUNDED))
         ui.info("Dispatch a team. Success is an RNG roll improved by rank; failure still grants field XP.")
         idx = _pick_index("Dispatch which operation", len(data.OPERATIONS))
         if idx is None:
             return
         o = data.OPERATIONS[idx]
-        reqs = []
-        if o["required_research"]:
-            reqs.append(f'Procedure: {o["required_research"]}')
-        if o["required_equipment"]:
-            req = data.find_equipment(o["required_equipment"])
-            reqs.append(f'Equipment: {req["name"] if req else o["required_equipment"]}')
-        body = f'[bold]{o["target"]}[/bold]\n\n{o["description"]}'
-        if reqs:
-            body += "\n\n[italic]Requires:[/italic] " + ", ".join(reqs)
-        ui.panel(body, title=o["name"])
+        ui.panel(_op_detail_body(o), title=o["name"])
         if ui.confirm(f'Dispatch team? ({state.operation_success_chance(o["id"])}% success)'):
             ui.result(*state.try_run_operation(o["id"]))
         ui.pause()
@@ -241,23 +252,27 @@ def ranks(state):
 _CLASSES = ["Safe", "Euclid", "Keter", "Thaumiel", "Apollyon", "Neutralized"]
 
 
+def _render_archive_table(archives):
+    if not archives.custom_scps:
+        ui.panel("No custom SCPs filed yet.", title="ARCHIVES — CUSTOM SCP DATABASE")
+        return
+    t = ui.Table(box=ui.box.SIMPLE_HEAD, expand=True)
+    t.add_column("#", style=ui.AMBER, width=4)
+    t.add_column("Designation", width=14)
+    t.add_column("Name")
+    t.add_column("Class", width=12)
+    t.add_column("Breachable", justify="center", width=11)
+    for i, s in enumerate(archives.custom_scps, 1):
+        br = "[#5dff5d]YES[/#5dff5d]" if s.get("is_breachable") else "[#7a7a7a]no[/#7a7a7a]"
+        t.add_row(str(i), s["designation"], s["name"], s["class"], br)
+    ui.console.print(ui.Panel(t, title="ARCHIVES — CUSTOM SCP DATABASE", border_style=ui.CYAN, box=ui.box.ROUNDED))
+
+
 def archives_menu(state, archives):
     while True:
         ui.clear()
         ui.header(state)
-        if archives.custom_scps:
-            t = ui.Table(box=ui.box.SIMPLE_HEAD, expand=True)
-            t.add_column("#", style=ui.AMBER, width=4)
-            t.add_column("Designation", width=14)
-            t.add_column("Name")
-            t.add_column("Class", width=12)
-            t.add_column("Breachable", justify="center", width=11)
-            for i, s in enumerate(archives.custom_scps, 1):
-                br = "[#5dff5d]YES[/#5dff5d]" if s.get("is_breachable") else "[#7a7a7a]no[/#7a7a7a]"
-                t.add_row(str(i), s["designation"], s["name"], s["class"], br)
-            ui.console.print(ui.Panel(t, title="ARCHIVES — CUSTOM SCP DATABASE", border_style=ui.CYAN, box=ui.box.ROUNDED))
-        else:
-            ui.panel("No custom SCPs filed yet.", title="ARCHIVES — CUSTOM SCP DATABASE")
+        _render_archive_table(archives)
         choice = ui.menu("ARCHIVE ACTIONS", [
             ("n", "File a new SCP"),
             ("v", "View an SCP report"),
@@ -267,14 +282,8 @@ def archives_menu(state, archives):
         ])
         if choice == "b":
             return
-        if choice == "n":
-            _archive_create(archives)
-        elif choice == "v":
-            _archive_view(archives)
-        elif choice == "e":
-            _archive_edit(archives)
-        elif choice == "d":
-            _archive_delete(archives)
+        _ARCHIVE_ACTIONS[choice](archives)
+
 
 
 def _archive_create(archives):
@@ -337,3 +346,12 @@ def _archive_delete(archives):
         archives.delete(s["id"])
         ui.good("Entry deleted.")
     ui.pause()
+
+
+
+_ARCHIVE_ACTIONS = {
+    "n": _archive_create,
+    "v": _archive_view,
+    "e": _archive_edit,
+    "d": _archive_delete,
+}

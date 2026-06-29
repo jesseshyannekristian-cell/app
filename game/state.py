@@ -1,9 +1,8 @@
 """Player progression + save/load — ported from OverseerProgression.cpp."""
 import json
 import os
-import random
 
-from . import data
+from . import data, rng
 
 SAVE_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "saves")
 SAVE_PATH = os.path.join(SAVE_DIR, "save_data.json")
@@ -153,7 +152,7 @@ class GameState:
             return False, f'Requires equipment: {req["name"] if req else op["required_equipment"]}'
 
         chance = self.operation_success_chance(op_id)
-        roll = random.randint(1, 100)
+        roll = rng.roll(1, 100)
         if roll > chance:
             partial = op["reward_xp"] // 4
             self.add_rewards(0, 0, partial)
