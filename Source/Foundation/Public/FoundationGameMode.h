@@ -5,7 +5,6 @@
 #include "FoundationGameMode.generated.h"
 
 class AFacilityGenerator;
-class AEncounterManager;
 
 UCLASS()
 class FOUNDATION_API AFoundationGameMode : public AGameModeBase
@@ -20,9 +19,6 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Facility")
 	TSubclassOf<AFacilityGenerator> GeneratorClass;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Facility")
-	TSubclassOf<AEncounterManager> EncounterManagerClass;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Facility")
 	int32 RestartDelay = 3;
@@ -41,9 +37,6 @@ protected:
 
 	UPROPERTY()
 	AFacilityGenerator* Generator;
-
-	UPROPERTY()
-	AEncounterManager* EncounterMgr;
 
 	void RestartLevel();
 };
