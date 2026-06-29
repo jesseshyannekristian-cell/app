@@ -107,3 +107,54 @@ Source/Foundation/
 ```
 
 **Status:** Code complete and self-consistent. Compile inside UE 5.5 to play — the build/editor step cannot be performed in this environment.
+
+---
+
+## 8. License & Attribution
+
+This project's **source code** and the **SCP-themed content** it references are released under the
+**Creative Commons Attribution-ShareAlike 3.0 Unported License (CC BY-SA 3.0)**.
+
+> You are free to **share** (copy and redistribute) and **adapt** (remix, transform, build upon) this
+> material for any purpose, even commercially, under the following terms:
+> - **Attribution** — You must give appropriate credit, provide a link to the license, and indicate if
+>   changes were made.
+> - **ShareAlike** — If you remix, transform, or build upon the material, you must distribute your
+>   contributions under the same license as the original.
+>
+> Full license text: https://creativecommons.org/licenses/by-sa/3.0/
+
+### SCP Foundation content
+All SCP names, numbers, descriptions, and lore (e.g. SCP-173, SCP-096, SCP-106, SCP-682, MTF XI-87,
+Chaos Insurgency, UIU, Dr. Wondertainment) are the creative work of the **SCP Foundation community**
+and are likewise licensed under **CC BY-SA 3.0**.
+
+- SCP Foundation Wiki: https://scp-wiki.wikidot.com/
+- Licensing guide: https://scp-wiki.wikidot.com/licensing-guide
+
+This game is a non-official, fan-made work. It is not affiliated with or endorsed by the SCP Foundation
+or any of its authors. Per the ShareAlike requirement, any derivative of this project must remain under
+CC BY-SA 3.0.
+
+> **Note:** Unreal Engine itself is governed by the separate **Epic Games / Unreal Engine EULA**, which
+> applies to the engine and is independent of the CC BY-SA 3.0 license covering this project's content.
+
+### Applicable legal notices
+| Component | License / Terms | Reference |
+|---|---|---|
+| This project's source code & content | CC BY-SA 3.0 | https://creativecommons.org/licenses/by-sa/3.0/ |
+| SCP Foundation lore, names & numbers | CC BY-SA 3.0 | https://scp-wiki.wikidot.com/licensing-guide |
+| Unreal Engine (engine, headers, runtime) | Unreal Engine EULA | https://www.unrealengine.com/eula |
+| Engine BasicShapes mesh (`Cube.Cube`) used for geometry | Unreal Engine EULA (Epic-provided content) | https://www.unrealengine.com/eula |
+
+### Trademarks
+"SCP Foundation", "Unreal", and "Unreal Engine" are trademarks or registered trademarks of their
+respective owners. Use here is nominative/descriptive only and does not imply affiliation or endorsement.
+
+### Disclaimer of warranty
+This software is provided **"as is"**, without warranty of any kind, express or implied. To the maximum
+extent permitted by law, the authors are not liable for any claim, damages, or other liability arising
+from the use of this software.
+
+See [`LICENSE`](LICENSE) for the full CC BY-SA 3.0 text and [`CREDITS.md`](CREDITS.md) for full
+attribution.
