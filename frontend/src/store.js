@@ -13,20 +13,21 @@ export function GameProvider({ children }) {
   const id = useRef(deviceId());
   const saveTimer = useRef(null);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const b = await getBootstrap();
-        setBoot(b);
-        const s = await getState(id.current);
-        const clean = { ...DEFAULT_STATE, ...s };
-        delete clean.device_id; delete clean.new;
-        setState(clean);
-      } catch (e) {
-        setError(String(e));
-      }
-    })();
-  }, []);
+  const load = async () => {
+    try {
+      setError(null);
+      const b = await getBootstrap();
+      setBoot(b);
+      const s = await getState(id.current);
+      const clean = { ...DEFAULT_STATE, ...s };
+      delete clean.device_id; delete clean.new;
+      setState(clean);
+    } catch (e) {
+      setError(String(e));
+    }
+  };
+
+  useEffect(() => { load(); }, []);
 
   // Debounced cloud save whenever state changes.
   useEffect(() => {
