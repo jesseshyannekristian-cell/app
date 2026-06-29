@@ -1,28 +1,41 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { Screen, Panel } from '../ui';
+import { Feather } from '@expo/vector-icons';
+import { Screen, Card, Badge, SectionTabs, Meter } from '../ui';
 import { C, F } from '../theme';
 import { useGame } from '../store';
 
+const DOSSIER_TABS = [
+  { label: 'Personnel', route: 'Personnel' },
+  { label: 'Awards', route: 'Achievements' },
+  { label: 'System', route: 'NewGame' },
+];
+
 export default function Achievements({ navigation }) {
   const { boot, state } = useGame();
+  const got = state.unlocked_achievements.length;
+  const total = boot.achievements.length;
   return (
-    <Screen title="ACHIEVEMENTS" onBack={() => navigation.goBack()} testID="achievements-screen">
-      <Panel title={`UNLOCKED ${state.unlocked_achievements.length}/${boot.achievements.length}`} accent={C.green}>
-        <Text style={F.small}>Earn these by progressing through Site-20 operations and breaches.</Text>
-      </Panel>
+    <Screen eyebrow="// COMMENDATIONS" title="Awards" tab="dossier" nav={navigation} testID="achievements-screen">
+      <SectionTabs items={DOSSIER_TABS} active="Achievements" nav={navigation} />
+      <Card title="Commendations Earned" accent={C.green}>
+        <Meter frac={total ? got / total : 0} color={C.green} label="Progress" value={`${got} / ${total}`} />
+      </Card>
       {boot.achievements.map((a) => {
-        const got = state.unlocked_achievements.includes(a.id);
+        const unlocked = state.unlocked_achievements.includes(a.id);
         return (
-          <Panel key={a.id} accent={got ? C.green : C.border}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Text style={{ color: got ? C.green : C.dim, fontSize: 18, marginRight: 10 }}>{got ? '★' : '☆'}</Text>
+          <Card key={a.id} testID={`ach-${a.id}`}>
+            <View style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
+              <Feather name={unlocked ? 'award' : 'lock'} size={20} color={unlocked ? C.green : C.faint} style={{ marginRight: 12, marginTop: 2 }} />
               <View style={{ flex: 1 }}>
-                <Text style={[F.body, { color: got ? C.green : C.dim }]}>{a.name}</Text>
-                <Text style={F.small}>{a.desc}</Text>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                  <Text style={[F.cardTitle, { color: unlocked ? C.text : C.dim, flex: 1, marginRight: 10 }]}>{a.name}</Text>
+                  <Badge text={unlocked ? 'Unlocked' : 'Locked'} color={unlocked ? C.green : C.faint} />
+                </View>
+                <Text style={[F.small, { marginTop: 4 }]}>{a.desc}</Text>
               </View>
             </View>
-          </Panel>
+          </Card>
         );
       })}
     </Screen>

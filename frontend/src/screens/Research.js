@@ -1,9 +1,15 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { Screen, Panel, Btn, Tag } from '../ui';
+import { Screen, Card, Btn, Badge, SectionTabs } from '../ui';
 import { C, F } from '../theme';
 import { useGame } from '../store';
 import { tryResearch, checkAchievements } from '../logic';
+
+const ARMORY_TABS = [
+  { label: 'Store', route: 'Store' },
+  { label: 'Research', route: 'Research' },
+  { label: 'Loadout', route: 'Loadout' },
+];
 
 export default function Research({ navigation }) {
   const { boot, state, setState, apply } = useGame();
@@ -16,25 +22,26 @@ export default function Research({ navigation }) {
     }
   };
   const status = (p) => {
-    if (state.completed_research.includes(p.id)) return <Tag text="DONE" color={C.green} />;
-    if (state.rank_level < p.required_rank) return <Tag text={`RANK ${p.required_rank}`} color={C.red} />;
-    if (state.research_credits < p.cost) return <Tag text="NEED RC" color={C.amber} />;
-    return <Tag text="AVAILABLE" color={C.cyan} />;
+    if (state.completed_research.includes(p.id)) return <Badge text="Authorised" color={C.green} />;
+    if (state.rank_level < p.required_rank) return <Badge text={`Rank ${p.required_rank}`} color={C.red} />;
+    if (state.research_credits < p.cost) return <Badge text="Need RC" color={C.amber} />;
+    return <Badge text="Available" color={C.cyan} />;
   };
   const canDo = (p) => !state.completed_research.includes(p.id) && state.rank_level >= p.required_rank && state.research_credits >= p.cost;
 
   return (
-    <Screen title="RESEARCH DIVISION" onBack={() => navigation.goBack()} testID="research-screen">
+    <Screen eyebrow="// R&D DIVISION" title="Research" tab="armory" nav={navigation} testID="research-screen">
+      <SectionTabs items={ARMORY_TABS} active="Research" nav={navigation} />
       {boot.research.map((p) => (
-        <Panel key={p.id} title={`${p.cost} RC · RANK ${p.required_rank}`} accent={C.border}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 4 }}>
-            <Text style={[F.body, { color: C.amber, flex: 1 }]}>{p.name}</Text>
+        <Card key={p.id} testID={`research-card-${p.id}`}>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 4 }}>
+            <Text style={[F.cardTitle, { flex: 1, marginRight: 10 }]}>{p.name}</Text>
             {status(p)}
           </View>
-          <Text style={F.small}>{p.objective}</Text>
-          <View style={{ height: 8 }} />
-          <Btn testID={`research-${p.id}`} label={`AUTHORISE · ${p.cost} RC`} disabled={!canDo(p)} onPress={() => doResearch(p.id)} />
-        </Panel>
+          <Text style={[F.label, { color: C.amber, marginBottom: 6 }]}>{p.cost} RC · RANK {p.required_rank}</Text>
+          <Text style={[F.small, { marginBottom: 8 }]}>{p.objective}</Text>
+          <Btn testID={`research-${p.id}`} label={`Authorise · ${p.cost} RC`} disabled={!canDo(p)} onPress={() => doResearch(p.id)} />
+        </Card>
       ))}
     </Screen>
   );

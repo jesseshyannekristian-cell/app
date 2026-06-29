@@ -24,11 +24,29 @@ const navTheme = {
   colors: { ...DarkTheme.colors, background: C.bg, card: C.bg, text: C.text, primary: C.amber, border: C.border },
 };
 
+const linking = {
+  prefixes: [],
+  config: {
+    screens: {
+      Home: '',
+      Research: 'research',
+      Store: 'store',
+      Operations: 'operations',
+      Loadout: 'loadout',
+      Breach: 'breach',
+      Archives: 'archives',
+      Achievements: 'achievements',
+      Personnel: 'personnel',
+      NewGame: 'new-game',
+    },
+  },
+};
+
 export default function App() {
   return (
     <SafeAreaProvider>
       <GameProvider>
-        <NavigationContainer theme={navTheme}>
+        <NavigationContainer theme={navTheme} linking={linking}>
           <Stack.Navigator screenOptions={{ headerShown: false, contentStyle: { backgroundColor: C.bg } }}>
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="Research" component={Research} />
