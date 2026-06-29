@@ -110,7 +110,51 @@ Source/Foundation/
 
 ---
 
-## 8. License & Attribution
+## 8. Title screen & Site Overseer meta-game (NEW)
+
+The game now boots into a **title screen** ("SCP SITE OVERSEER") built entirely in C++/Slate.
+The provided artwork (`Content/UI/TitleScreen.png`) is loaded at runtime and shown as a
+letterboxed backdrop, with real clickable buttons placed over the painted START GAME / OPTIONS / CREDITS.
+
+- **Boot flow:** `MainMenuGameMode` is the default GameMode → `MainMenuPlayerController` shows the
+  title (`SMainMenuWidget`).
+- **START GAME** → opens the **Site Overseer Hub** (`SSiteOverseerHub`).
+- **OPTIONS / CREDITS** → in-menu panels (Credits shows full CC BY-SA 3.0 attribution). Options has Quit.
+- The **BREACH** tab re-opens the map with `?Game=FoundationGameMode` to launch the existing FPS gameplay.
+  On death/escape the player returns to the hub; rewards are recorded.
+
+### Site Overseer Hub — tabs
+- **RESEARCH DIVISION** — research objectives + projects. Spend **Research Credits** to complete a
+  project; each unlocks either a level-locked store item or a **containment procedure**.
+- **STORE** — purchase equipment with **Credits**. Level-locked items show `RESEARCH REQ'D` until
+  their project is complete (and rank met).
+- **CONTAINMENT OPERATIONS** — menu-driven ops to contain every SCP and neutralise every rogue
+  MTF / GOI threat. Gated by rank, required equipment, and (for key SCPs) a researched procedure.
+  Dispatch grants Credits / Research Credits / XP.
+- **BREACH** — lists all breachable SCPs and shows the live-breach record; DEPLOY launches the FPS level.
+- **RANKS & REWARDS** — rank ladder (Junior Researcher → O5 Overseer), promotion rewards, and a
+  **breach section** (survived / failed / re-contained).
+
+### Economy & persistence
+- Two currencies: **Credits** (gear) and **Research Credits** (research only).
+- `UOverseerProgression` (GameInstanceSubsystem) persists everything to a `UOverseerSaveGame`
+  ("OverseerSave" slot): currencies, XP/rank, completed research, owned equipment, completed ops,
+  breach record. Rank-ups grant bonus currency automatically.
+
+### Data
+All rosters live in `UFoundationDataLibrary` (code-defined, easy to extend):
+SCP roster (173/096/106/682/049/035/939/966/999/053/079/087/457/1048/1471/2521/3008/4666/008/914/055),
+rogue MTF / GOI threats (Chaos Insurgency, defected Nine-Tailed Fox, Serpent's Hand, rogue Alpha-1,
+GOC, MC&D, defected Tau-5, sleeper agents), field & research equipment, ranks, and auto-generated
+operations + per-item equipment research projects.
+
+> **Packaging note:** `Content/UI/TitleScreen.png` is loaded from disk at runtime (works in editor/PIE).
+> For a packaged build, either import it as a Texture2D asset or add `Content/UI` under
+> *Project Settings → Packaging → Additional Non-Asset Directories to Package*.
+
+---
+
+## 9. License & Attribution
 
 This project's **source code** and the **SCP-themed content** it references are released under the
 **Creative Commons Attribution-ShareAlike 3.0 Unported License (CC BY-SA 3.0)**.

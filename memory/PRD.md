@@ -20,14 +20,38 @@ Follow-up: add MTF XI-87 (from uploaded dossier) as a faction, make it open-worl
 - Random encounters / open-world spawner (AEncounterManager): patrols, breaches, civilians; seeds MTF squad.
 - Objective loop: keycards → exit zone (clearance-gated) → escape; death/escape regenerates facility.
 
+## Implemented (Site Overseer meta-game — 2026-06, NEW)
+- **Title screen** ("SCP SITE OVERSEER") in C++/Slate: provided art (`Content/UI/TitleScreen.png`)
+  loaded at runtime as letterboxed backdrop, real buttons over painted START/OPTIONS/CREDITS.
+  Options + Credits panels (Credits shows CC BY-SA 3.0 attribution). `MainMenuGameMode` is now the
+  default GameMode; `MainMenuPlayerController` drives title → hub → breach flow.
+- **Site Overseer Hub** (`SSiteOverseerHub`) with 5 tabs: Research Division, Store,
+  Containment Operations, Breach, Ranks & Rewards.
+- **Two-currency economy**: Credits (gear) + Research Credits (research only). Persisted via
+  `UOverseerProgression` (GameInstanceSubsystem) → `UOverseerSaveGame` ("OverseerSave").
+- **Research → Store gating**: every level-locked item has an auto-generated research project; item
+  stays LOCKED in store until researched (+ rank). Containment-procedure research projects added.
+- **Containment Operations** (menu-driven, separate from Breach): ops auto-generated for ALL SCPs and
+  ALL rogue MTF/GOI threats; gated by rank/equipment/procedure; reward Credits/RC/XP.
+- **Ranks & Rewards**: 6-rank ladder (Junior Researcher → O5 Overseer OMEGA BLACK) with promotion
+  rewards + auto rank-up; includes a Breach record section. Breach survival/failure feeds rewards.
+- **Data layer** `UFoundationDataLibrary`: ~21 SCPs, 8 rogue MTF/GOI, field+research equipment, ranks.
+
+## Files (meta-game)
+- Public/Private: `FoundationTypes.h`, `FoundationDataLibrary.*`, `OverseerSaveGame.h`,
+  `OverseerProgression.*`, `SMainMenuWidget.*`, `SSiteOverseerHub.*`,
+  `MainMenuPlayerController.*`, `MainMenuGameMode.*`. Build.cs adds Slate/SlateCore/UMG.
+
 ## Known limitations
 - Not compiled (no UE editor in env). Must build in UE 5.5.
+- Title PNG loaded from disk at runtime (editor/PIE OK); for packaged builds import as Texture2D
+  or add `Content/UI` to packaging non-asset dirs.
 - AI movement is direct-steering (no NavMesh dependency) — fine for flat facility floors.
 - NPC/SCP visuals are tinted cube placeholders; replace with real meshes/animations.
 
 ## Backlog / Next
-- P1: Real meshes/animations + UMG HUD (sanity bar, keycard level, objective marker, prompts).
-- P1: SCP-16829 "The TV in Time" (XI-87's mandate) with temporal-loop mechanic; SCP-049.
-- P2: NavMesh + behavior trees for smarter faction AI and cover.
-- P2: Save/seed sharing, difficulty scaling, audio (ambience, 173 sting, 096 scream).
-- P2: Multi-floor facility + surface exterior for true open world.
+- P1: Real meshes/animations + in-breach UMG HUD (sanity bar, keycard, objective marker, prompts).
+- P1: SCP-16829 "The TV in Time" (XI-87's mandate) temporal-loop mechanic; SCP-049 entity.
+- P1: Make Containment Operations interactive (mini-resolution / success chance) instead of instant.
+- P2: Spend owned equipment in live Breach (loadout select before deploy).
+- P2: NavMesh + behavior trees; audio (ambience, 173 sting, 096 scream); multi-floor + surface.

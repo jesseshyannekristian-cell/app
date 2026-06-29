@@ -14,7 +14,11 @@ public class Foundation : ModuleRules
 			"InputCore",
 			"NavigationSystem",
 			"AIModule",
-			"EnhancedInput"
+			"EnhancedInput",
+			"Slate",
+			"SlateCore",
+			"UMG",
+			"ImageWrapper"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] { });

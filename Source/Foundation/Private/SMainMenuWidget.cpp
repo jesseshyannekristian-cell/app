@@ -69,7 +69,7 @@ void SMainMenuWidget::Construct(const FArguments& InArgs)
 		+ SOverlay::Slot()
 		[
 			SNew(SBox)
-			.Visibility(this, &SMainMenuWidget::GetPanelVisibility, EPanel::Options)
+			.Visibility_Lambda([this]() { return GetPanelVisibility(EPanel::Options); })
 			[
 				BuildOptionsPanel()
 			]
@@ -79,7 +79,7 @@ void SMainMenuWidget::Construct(const FArguments& InArgs)
 		+ SOverlay::Slot()
 		[
 			SNew(SBox)
-			.Visibility(this, &SMainMenuWidget::GetPanelVisibility, EPanel::Credits)
+			.Visibility_Lambda([this]() { return GetPanelVisibility(EPanel::Credits); })
 			[
 				BuildCreditsPanel()
 			]
@@ -136,17 +136,77 @@ TSharedRef<SWidget> SMainMenuWidget::BuildButtonsOverlay()
 
 TSharedRef<SWidget> SMainMenuWidget::BuildOptionsPanel()
 {
+	static FSlateColorBrush PanelBg(FLinearColor(0.02f, 0.03f, 0.04f, 0.94f));
 	const FSlateColor TitleColor(FLinearColor(0.30f, 0.72f, 1.f));
 	const FSlateColor BodyColor(FLinearColor(0.80f, 0.85f, 0.90f));
 
-	return SNew(SImage)
-		.Image(&DimBrush)
-		+ SNew(SOverlay);
+	return SNew(SOverlay)
+		+ SOverlay::Slot()[ SNew(SImage).Image(&PanelBg) ]
+		+ SOverlay::Slot()
+		.HAlign(HAlign_Center).VAlign(VAlign_Center)
+		[
+			SNew(SVerticalBox)
+			+ SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center).Padding(0, 0, 0, 24)
+			[ SNew(STextBlock).Font(FCoreStyle::GetDefaultFontStyle("Bold", 40)).ColorAndOpacity(TitleColor).Text(LOCTEXT("Options", "OPTIONS")) ]
+			+ SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center).Padding(0, 0, 0, 28)
+			[
+				SNew(STextBlock).Font(FCoreStyle::GetDefaultFontStyle("Regular", 16)).ColorAndOpacity(BodyColor).Justification(ETextJustify::Center)
+				.Text(LOCTEXT("OptionsBody", "Display, audio and control settings are configured in-engine via\nProject Settings and the Settings menu. Press ESC in-game to pause."))
+			]
+			+ SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center).Padding(0, 0, 0, 12)
+			[
+				SNew(SBox).MinDesiredWidth(280.f)
+				[ SNew(SButton).HAlign(HAlign_Center).OnClicked(this, &SMainMenuWidget::HandleQuit)
+					[ SNew(STextBlock).Font(FCoreStyle::GetDefaultFontStyle("Bold", 18)).Text(LOCTEXT("Quit", "QUIT GAME")) ] ]
+			]
+			+ SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
+			[
+				SNew(SBox).MinDesiredWidth(280.f)
+				[ SNew(SButton).HAlign(HAlign_Center).OnClicked(this, &SMainMenuWidget::HandleBack)
+					[ SNew(STextBlock).Font(FCoreStyle::GetDefaultFontStyle("Bold", 18)).Text(LOCTEXT("BackBtn", "BACK")) ] ]
+			]
+		];
 }
 
 TSharedRef<SWidget> SMainMenuWidget::BuildCreditsPanel()
 {
-	return SNew(SImage).Image(&DimBrush);
+	static FSlateColorBrush PanelBg(FLinearColor(0.02f, 0.03f, 0.04f, 0.94f));
+	const FSlateColor TitleColor(FLinearColor(0.30f, 0.72f, 1.f));
+	const FSlateColor BodyColor(FLinearColor(0.80f, 0.85f, 0.90f));
+
+	const FText CreditsText = LOCTEXT("CreditsBody",
+		"SCP SITE OVERSEER\n\n"
+		"A non-official, fan-made game built in Unreal Engine 5.5.\n\n"
+		"SCP FOUNDATION CONTENT\n"
+		"All SCP names, numbers, lore and Groups of Interest are the creative work of the\n"
+		"SCP Foundation community, licensed under Creative Commons Attribution-ShareAlike 3.0\n"
+		"(CC BY-SA 3.0). https://scp-wiki.wikidot.com/  \u2022  https://creativecommons.org/licenses/by-sa/3.0/\n\n"
+		"This project's source code and content are likewise released under CC BY-SA 3.0.\n\n"
+		"ENGINE\n"
+		"Unreal\u00AE Engine \u00A9 Epic Games, Inc. \u2014 governed by the Unreal Engine EULA.\n\n"
+		"Not affiliated with or endorsed by the SCP Foundation or Epic Games.");
+
+	return SNew(SOverlay)
+		+ SOverlay::Slot()[ SNew(SImage).Image(&PanelBg) ]
+		+ SOverlay::Slot()
+		.HAlign(HAlign_Center).VAlign(VAlign_Center).Padding(60.f)
+		[
+			SNew(SVerticalBox)
+			+ SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center).Padding(0, 0, 0, 20)
+			[ SNew(STextBlock).Font(FCoreStyle::GetDefaultFontStyle("Bold", 40)).ColorAndOpacity(TitleColor).Text(LOCTEXT("Credits", "CREDITS")) ]
+			+ SVerticalBox::Slot().FillHeight(1.f).Padding(0, 0, 0, 20)
+			[
+				SNew(SScrollBox)
+				+ SScrollBox::Slot()
+				[ SNew(STextBlock).Font(FCoreStyle::GetDefaultFontStyle("Regular", 15)).ColorAndOpacity(BodyColor).Justification(ETextJustify::Center).AutoWrapText(true).Text(CreditsText) ]
+			]
+			+ SVerticalBox::Slot().AutoHeight().HAlign(HAlign_Center)
+			[
+				SNew(SBox).MinDesiredWidth(280.f)
+				[ SNew(SButton).HAlign(HAlign_Center).OnClicked(this, &SMainMenuWidget::HandleBack)
+					[ SNew(STextBlock).Font(FCoreStyle::GetDefaultFontStyle("Bold", 18)).Text(LOCTEXT("BackBtn2", "BACK")) ] ]
+			]
+		];
 }
 
 EVisibility SMainMenuWidget::GetPanelVisibility(EPanel Panel) const

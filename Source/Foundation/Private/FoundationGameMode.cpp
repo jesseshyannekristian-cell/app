@@ -2,9 +2,23 @@
 #include "FoundationCharacter.h"
 #include "FacilityGenerator.h"
 #include "EncounterManager.h"
+#include "OverseerProgression.h"
 #include "Kismet/GameplayStatics.h"
+#include "Engine/GameInstance.h"
 #include "GameFramework/PlayerController.h"
 #include "TimerManager.h"
+
+static UOverseerProgression* GetProgression(const UObject* WorldContext)
+{
+	if (const AGameModeBase* GM = Cast<AGameModeBase>(WorldContext))
+	{
+		if (UGameInstance* GI = GM->GetGameInstance())
+		{
+			return GI->GetSubsystem<UOverseerProgression>();
+		}
+	}
+	return nullptr;
+}
 
 AFoundationGameMode::AFoundationGameMode()
 {
@@ -48,11 +62,21 @@ AActor* AFoundationGameMode::ChoosePlayerStart_Implementation(AController* Playe
 	return nullptr;
 }
 
+void AFoundationGameMode::NotifyRecontained()
+{
+	SCPsRecontainedThisRun++;
+}
+
 void AFoundationGameMode::HandlePlayerDeath()
 {
+	if (UOverseerProgression* Prog = GetProgression(this))
+	{
+		Prog->RecordBreachResult(false, 0);
+	}
+
 	if (GEngine)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("TERMINATED. Restarting..."));
+		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("TERMINATED. Returning to Site Overseer..."));
 	}
 
 	FTimerHandle Handle;
@@ -61,6 +85,11 @@ void AFoundationGameMode::HandlePlayerDeath()
 
 void AFoundationGameMode::HandlePlayerEscaped()
 {
+	if (UOverseerProgression* Prog = GetProgression(this))
+	{
+		Prog->RecordBreachResult(true, SCPsRecontainedThisRun);
+	}
+
 	if (GEngine)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("CONTAINMENT BREACH SURVIVED. You escaped!"));
@@ -72,6 +101,7 @@ void AFoundationGameMode::HandlePlayerEscaped()
 
 void AFoundationGameMode::RestartLevel()
 {
+	// Return to the Site Overseer hub (default GameMode) after a breach ends.
 	const FName Current(*UGameplayStatics::GetCurrentLevelName(this, true));
 	UGameplayStatics::OpenLevel(this, Current);
 }

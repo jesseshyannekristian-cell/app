@@ -1,8 +1,10 @@
 #include "ContainmentTerminal.h"
 #include "FoundationCharacter.h"
+#include "FoundationGameMode.h"
 #include "SCPEntityBase.h"
 #include "Components/StaticMeshComponent.h"
 #include "UObject/ConstructorHelpers.h"
+#include "Kismet/GameplayStatics.h"
 #include "EngineUtils.h"
 
 AContainmentTerminal::AContainmentTerminal()
@@ -62,6 +64,11 @@ void AContainmentTerminal::Interact_Implementation(AFoundationCharacter* Interac
 	}
 
 	Nearest->Recontain();
+
+	if (AFoundationGameMode* GM = Cast<AFoundationGameMode>(UGameplayStatics::GetGameMode(this)))
+	{
+		GM->NotifyRecontained();
+	}
 }
 
 FString AContainmentTerminal::GetInteractPrompt_Implementation() const

@@ -33,7 +33,12 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Facility")
 	void HandlePlayerEscaped();
 
+	/** Called by containment terminals when an SCP is successfully re-contained during a breach. */
+	void NotifyRecontained();
+
 protected:
+	int32 SCPsRecontainedThisRun = 0;
+
 	UPROPERTY()
 	AFacilityGenerator* Generator;
 
