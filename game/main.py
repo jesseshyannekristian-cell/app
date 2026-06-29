@@ -13,10 +13,10 @@ def main():
     archives = Archives.load()
 
     ui.title_banner()
-    ui.info("  Loading Site-20 overseer terminal...")
-    ui.pause()
+    hub.site_status(state, archives, clear=False)
 
     actions = {
+        "0": lambda: hub.site_status(state, archives),
         "1": lambda: hub.research_division(state),
         "2": lambda: hub.store(state),
         "3": lambda: hub.operations(state),
@@ -43,6 +43,7 @@ def main():
                 ("7", "Ranks & Rewards"),
                 ("8", "Archives (custom SCPs)"),
                 ("9", "Achievements"),
+                ("0", "Site Status Briefing"),
                 ("n", "New Game / Reset"),
                 ("q", "Save & Quit"),
             ])

@@ -278,6 +278,58 @@ def achievements_menu(state):
     ui.pause()
 
 
+# ---------------- Site Status Briefing ----------------
+def _xp_bar(state, width=24):
+    if not state.has_next_rank():
+        return "█" * width + f"  {state.xp} XP · MAX RANK"
+    cur, nxt = state.current_rank(), state.next_rank()
+    lo, hi = cur["xp_required"], nxt["xp_required"]
+    frac = max(0.0, min(1.0, (state.xp - lo) / (hi - lo))) if hi > lo else 1.0
+    filled = int(frac * width)
+    return "█" * filled + "░" * (width - filled) + f"  {state.xp}/{hi} XP"
+
+
+def _next_objective(state):
+    if not state.owned_equipment:
+        return "Visit the Requisition Store and buy your first piece of equipment."
+    avail_res = [p for p in data.RESEARCH if not state.is_researched(p["id"])
+                 and state.rank_level >= p["required_rank"] and state.research_credits >= p["cost"]]
+    if avail_res:
+        return f'Research is ready to authorise: {avail_res[0]["name"]}.'
+    avail_op = [o for o in data.OPERATIONS if not state.is_op_complete(o["id"])
+                and state.rank_level >= o["required_rank"]]
+    if state.has_next_rank() and avail_op:
+        return f'Dispatch containment operations to earn XP toward {state.next_rank()["title"]}.'
+    if not state.loadout:
+        return "Equip a pre-breach loadout, then respond to a live breach."
+    return "Respond to a breach to contain a live anomaly and bank hazard pay."
+
+
+def site_status(state, archives, clear=True):
+    if clear:
+        ui.clear()
+        ui.header(state)
+    rank = state.current_rank()
+    iron = "  ·  [#ff4b4b]☠ IRON-MAN[/#ff4b4b]" if getattr(state, "ironman", False) else ""
+    ach = len(state.unlocked_achievements)
+    body = (
+        f'[bold #ffb000]Welcome back, {rank["title"]}.[/bold #ffb000]\n\n'
+        f'[#7a7a7a]Rank / Clearance:[/#7a7a7a]  {rank["title"]} (Level {rank["level"]})\n'
+        f'[#7a7a7a]XP Progress:[/#7a7a7a]      {_xp_bar(state)}\n'
+        f'[#7a7a7a]Difficulty:[/#7a7a7a]       {getattr(state, "difficulty", "Normal")}{iron}\n\n'
+        f'[#7a7a7a]Operations contained:[/#7a7a7a]   {len(state.completed_ops)}/{len(data.OPERATIONS)}\n'
+        f'[#7a7a7a]Breaches survived/failed:[/#7a7a7a] {state.breaches_survived} / {state.breaches_failed}\n'
+        f'[#7a7a7a]SCPs re-contained:[/#7a7a7a]      {state.scps_recontained}\n'
+        f'[#7a7a7a]Custom SCPs filed:[/#7a7a7a]      {len(archives.custom_scps)}\n'
+        f'[#7a7a7a]Research completed:[/#7a7a7a]     {len(state.completed_research)}\n'
+        f'[#7a7a7a]Achievements unlocked:[/#7a7a7a]  {ach}/{len(achievements.ACHIEVEMENTS)}'
+    )
+    ui.panel(body, title="◆ SITE-20 STATUS BRIEFING ◆", style=ui.AMBER)
+    ui.panel(f'[bold]Recommended next action:[/bold]\n{_next_objective(state)}',
+             title="DIRECTIVE — O5 COMMAND", style=ui.CYAN)
+    ui.pause()
+
+
 # ---------------- New Game / Reset ----------------
 _DIFFICULTIES = [
     ("e", "Easy", "+15% breach survival — for a relaxed playthrough."),

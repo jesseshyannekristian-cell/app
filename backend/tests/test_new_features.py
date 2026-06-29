@@ -425,6 +425,79 @@ class TestSaveOnInterrupt:
         assert "unlocked_achievements" in d
 
 
+# ====================== Site Status briefing ======================
+class TestSiteStatus:
+    def test_next_objective_no_equipment(self) -> None:
+        from game import hub
+        s = GameState()
+        assert "Store" in hub._next_objective(s)
+
+    def test_next_objective_suggests_research(self) -> None:
+        from game import hub
+        s = GameState()
+        s.owned_equipment = ["flashlight"]
+        s.rank_level = 2
+        s.research_credits = 9999
+        assert "Research" in hub._next_objective(s)
+
+    def test_next_objective_breach_when_loadout_ready(self) -> None:
+        from game import hub
+        from game import data as gdata
+        s = GameState()
+        s.owned_equipment = ["flashlight"]
+        s.loadout = ["flashlight"]
+        s.rank_level = 5
+        s.research_credits = 0
+        s.completed_research = [p["id"] for p in gdata.RESEARCH]
+        s.completed_ops = [o["id"] for o in gdata.OPERATIONS]
+        assert "breach" in hub._next_objective(s).lower()
+
+    def test_xp_bar_shows_max_at_top_rank(self) -> None:
+        from game import hub
+        s = GameState()
+        s.rank_level = 5
+        assert "MAX RANK" in hub._xp_bar(s)
+
+    def test_xp_bar_has_progress_chars(self) -> None:
+        from game import hub
+        s = GameState()
+        s.xp = 250  # halfway to 500
+        bar = hub._xp_bar(s)
+        assert "█" in bar and "░" in bar and "250/500" in bar
+
+    def test_briefing_renders_without_clear(self) -> None:
+        """site_status(clear=False) prints the briefing + directive, no crash."""
+        from io import StringIO
+        from rich.console import Console
+        from game import ui, hub
+
+        s = GameState()
+        a = Archives.load()
+        buf = StringIO()
+        original = ui.console
+        ui.console = Console(file=buf, force_terminal=False, width=160)
+        ui.pause = lambda *a_, **k_: None  # skip input
+        try:
+            hub.site_status(s, a, clear=False)
+        finally:
+            ui.console = original
+        out = buf.getvalue()
+        assert "STATUS BRIEFING" in out
+        assert "DIRECTIVE" in out
+
+    def test_launch_shows_briefing(self) -> None:
+        env = {**os.environ, "TERM": "xterm", "COLUMNS": "120", "LINES": "50",
+               "PYTHONIOENCODING": "utf-8", "SCP_NO_DELAY": "1"}
+        r = subprocess.run(
+            [sys.executable, "-m", "game.main"],
+            input="\nq\n", cwd=APP_DIR, env=env,
+            capture_output=True, text=True, timeout=15,
+        )
+        assert r.returncode == 0, r.stderr
+        assert "STATUS BRIEFING" in r.stdout
+        assert "Recommended next action" in r.stdout
+
+
 # ====================== CLI: branching breach end-to-end ======================
 class TestCliBranchingBreach:
     """Drive main.py via stdin: open Breach menu → SCP-173 → deploy y → a/a."""
