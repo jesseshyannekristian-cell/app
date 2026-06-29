@@ -1,5 +1,10 @@
 """Text-based containment breach — branching mini-scenarios + RNG survival, with Iron-man support."""
+import string
+
 from . import art, data, rng, scenarios, ui
+
+# Survival-chance modifier applied per difficulty tier.
+DIFFICULTY_MOD = {"Easy": 15, "Normal": 0, "Hard": -15}
 
 # Loadout items that meaningfully improve breach survival, with flavour.
 LOADOUT_BONUS = {
@@ -33,7 +38,7 @@ _SCP_FLAVOR = {
 
 
 def _assess(state, threat):
-    """Return (chance, base, rank_bonus, loadout_bonus, bonus_lines)."""
+    """Return (chance, base, rank_bonus, loadout_bonus, diff_mod, bonus_lines)."""
     loadout_bonus = 0
     bonus_lines = []
     for item in state.loadout:
@@ -45,17 +50,19 @@ def _assess(state, threat):
         bonus_lines.append(f'+{b[0]}%  {equip["name"] if equip else item}')
     base = 60 - threat * 8
     rank_bonus = state.rank_level * 5
-    chance = max(10, min(95, base + rank_bonus + loadout_bonus))
-    return chance, base, rank_bonus, loadout_bonus, bonus_lines
+    diff_mod = DIFFICULTY_MOD.get(getattr(state, "difficulty", "Normal"), 0)
+    chance = max(10, min(95, base + rank_bonus + loadout_bonus + diff_mod))
+    return chance, base, rank_bonus, loadout_bonus, diff_mod, bonus_lines
 
 
-def _render_assessment(base, rank_bonus, loadout_bonus, chance, bonus_lines, has_loadout):
+def _render_assessment(state, base, rank_bonus, loadout_bonus, diff_mod, chance, bonus_lines, has_loadout):
     t = ui.Table(box=ui.box.SIMPLE, show_header=False)
     t.add_column(style=ui.DIM)
     t.add_column(justify="right", style=ui.CYAN)
     t.add_row("Base survival (threat lvl)", f"{base}%")
     t.add_row("Rank modifier", f"+{rank_bonus}%")
     t.add_row("Loadout modifier", f"+{loadout_bonus}%")
+    t.add_row(f'Difficulty ({getattr(state, "difficulty", "Normal")})', f"{diff_mod:+d}%")
     t.add_row("[bold]SURVIVAL CHANCE[/bold]", f"[bold]{chance}%[/bold]")
     ui.console.print(ui.Panel(t, title="PRE-BREACH ASSESSMENT", border_style=ui.AMBER, box=ui.box.ROUNDED))
     if has_loadout:
@@ -80,16 +87,20 @@ def _simulate(state):
 
 def _branching(state, number, chance):
     """Run the scripted decision stages; return the adjusted survival chance."""
-    keys = "abcd"
+    opt_keys = [c for c in string.ascii_lowercase if c != "x"]
     for stage in scenarios.stages(number):
+        options = stage["options"]
+        if len(options) > len(opt_keys):
+            raise ValueError(f"scenario {number} stage has too many options ({len(options)})")
+        keys = opt_keys[:len(options)]
         ui.panel(stage["prompt"], title="DECISION", style=ui.AMBER)
-        opts = [(keys[i], label) for i, (label, _, _) in enumerate(stage["options"])]
+        opts = [(keys[i], label) for i, (label, _, _) in enumerate(options)]
         choice = ui.menu("Your call, Overseer", opts + [("x", "Improvise (50/50)")])
         if choice == "x":
             delta, flavor = (8, "You improvise. It works — barely.") if rng.chance(50) \
                 else (-12, "You improvise. It does not go to plan.")
         else:
-            _, delta, flavor = stage["options"][keys.index(choice)]
+            _, delta, flavor = options[keys.index(choice)]
         chance = max(5, min(95, chance + delta))
         ui.slow_print(flavor, style=(ui.GREEN if delta >= 0 else ui.RED))
         ui.info(f"Survival chance now {chance}%")
@@ -131,8 +142,8 @@ def run_breach(state, target):
         title="⚠ CONTAINMENT BREACH ⚠", style="bold #ff4b4b",
     )
 
-    chance, base, rank_bonus, loadout_bonus, bonus_lines = _assess(state, threat)
-    _render_assessment(base, rank_bonus, loadout_bonus, chance, bonus_lines, bool(bonus_lines))
+    chance, base, rank_bonus, loadout_bonus, diff_mod, bonus_lines = _assess(state, threat)
+    _render_assessment(state, base, rank_bonus, loadout_bonus, diff_mod, chance, bonus_lines, bool(bonus_lines))
 
     if not ui.confirm("\nDeploy into the breach?"):
         ui.info("Deployment aborted. The cell holds — for now.")
@@ -153,6 +164,6 @@ def run_breach(state, target):
             "Your save has been wiped. The Foundation endures without you.",
             title="☠ PERMADEATH", style="bold #ff4b4b",
         )
-        state.new_game(ironman=True)
+        state.new_game(ironman=True, difficulty=getattr(state, "difficulty", "Normal"))
         return None
     return survived

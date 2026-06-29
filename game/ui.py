@@ -60,6 +60,8 @@ def header(state):
     )
     bar.add_row(left, right)
     title = "[bold]SITE OVERSEER HUB[/bold]"
+    diff = getattr(state, "difficulty", "Normal")
+    title += f"  [#7a7a7a]· {diff}[/#7a7a7a]"
     if getattr(state, "ironman", False):
         title += "  [bold #ff4b4b]☠ IRON-MAN[/bold #ff4b4b]"
     console.print(Panel(bar, box=box.HEAVY, border_style=AMBER, title=title))

@@ -244,9 +244,9 @@ class TestBreach:
     def test_assess_clamps_and_formula(self):
         s = GameState()
         # threat 1, rank 0, no loadout → 60-8+0 = 52, clamped
-        chance, base, rb, lb, lines = breach_mod._assess(s, 1)
+        chance, base, rb, lb, dm, lines = breach_mod._assess(s, 1)
         assert base == 52
-        assert rb == 0 and lb == 0
+        assert rb == 0 and lb == 0 and dm == 0
         assert chance == 52
         assert lines == []
 
@@ -254,9 +254,9 @@ class TestBreach:
         s = GameState()
         # Force loadout — bypass purchase chain
         s.loadout = ["kevlar_vest", "flashlight"]  # 8% + 4% = 12%
-        chance, base, rb, lb, _lines = breach_mod._assess(s, 3)
+        chance, base, rb, lb, dm, _lines = breach_mod._assess(s, 3)
         assert lb == 12
-        assert chance == max(10, min(95, base + rb + lb))
+        assert chance == max(10, min(95, base + rb + lb + dm))
 
     def test_assess_clamp_low_and_high(self):
         s = GameState()

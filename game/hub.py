@@ -279,26 +279,51 @@ def achievements_menu(state):
 
 
 # ---------------- New Game / Reset ----------------
+_DIFFICULTIES = [
+    ("e", "Easy", "+15% breach survival — for a relaxed playthrough."),
+    ("n", "Normal", "Balanced — the standard Site-20 experience."),
+    ("h", "Hard", "-15% breach survival — for seasoned Overseers."),
+]
+
+
 def new_game_menu(state, archives):
     ui.clear()
     ui.header(state)
     ui.panel(
         "Start a NEW GAME. This wipes your progression (rank, currencies, research, equipment, "
         "breach record and achievements).\n\n"
-        "[bold]Iron-man mode[/bold]: a single failed breach permanently wipes your save.",
+        "Choose a difficulty tier, then confirm the summary below.",
         title="NEW GAME / RESET", style=ui.RED,
     )
-    if not ui.confirm("Wipe progression and start a new game?"):
+    # Gather all choices first, then a single final confirmation.
+    t = ui.Table(box=ui.box.SIMPLE, show_header=False, padding=(0, 2))
+    t.add_column(style=ui.AMBER)
+    t.add_column()
+    for key, name, desc in _DIFFICULTIES:
+        t.add_row(name, desc)
+    ui.console.print(ui.Panel(t, title="DIFFICULTY TIERS", border_style=ui.CYAN, box=ui.box.ROUNDED))
+    dkey = ui.menu("Select difficulty", [(k, n) for k, n, _ in _DIFFICULTIES])
+    difficulty = next(n for k, n, _ in _DIFFICULTIES if k == dkey)
+    ironman = ui.confirm("Enable Iron-man mode (a failed breach permanently wipes your save)?")
+    wipe_archives = ui.confirm("Also delete all custom SCPs from the Archives?")
+
+    plan = (
+        f'[#7a7a7a]Difficulty:[/#7a7a7a] {difficulty}\n'
+        f'[#7a7a7a]Iron-man:[/#7a7a7a] {"ON — permadeath" if ironman else "off"}\n'
+        f'[#7a7a7a]Archives:[/#7a7a7a] '
+        f'{f"DELETE all {len(archives.custom_scps)} custom SCP(s)" if wipe_archives else "keep"}\n\n'
+        '[bold #ff4b4b]This will erase your current progression and cannot be undone.[/bold #ff4b4b]'
+    )
+    ui.panel(plan, title="CONFIRM NEW GAME", style=ui.AMBER)
+    if not ui.confirm("Proceed with these settings?"):
         ui.info("Cancelled. Your career continues.")
         ui.pause()
         return
-    ironman = ui.confirm("Enable Iron-man mode (permadeath)?")
-    wipe_archives = ui.confirm("Also delete all custom SCPs from the Archives?")
-    state.new_game(ironman=ironman)
+    state.new_game(ironman=ironman, difficulty=difficulty)
     if wipe_archives:
         archives.custom_scps = []
         archives.save()
-    ui.good(f'New game started{" — IRON-MAN ENABLED" if ironman else ""}.')
+    ui.good(f'New game started — {difficulty}{" · IRON-MAN" if ironman else ""}.')
     ui.pause()
 
 

@@ -26,12 +26,14 @@ class GameState:
         self.breaches_failed = 0
         self.scps_recontained = 0
         self.ironman = False
+        self.difficulty = "Normal"
         self.unlocked_achievements = []
 
-    def new_game(self, ironman=False):
+    def new_game(self, ironman=False, difficulty="Normal"):
         """Reset progression in place (used by New Game and Iron-man permadeath)."""
         self.__init__()
         self.ironman = ironman
+        self.difficulty = difficulty
         self.save()
 
     # ---------- persistence ----------

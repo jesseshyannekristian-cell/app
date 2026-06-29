@@ -39,9 +39,10 @@ def _clean_saves():
 
 # ====================== Scenarios data ======================
 class TestScenariosData:
-    def test_six_scenarios_defined(self):
-        expected = {"SCP-173", "SCP-096", "SCP-106", "SCP-682", "SCP-049", "SCP-16829"}
-        assert set(scenarios.SCENARIOS.keys()) == expected
+    def test_all_site20_scps_have_scenarios(self):
+        from game import data as gdata
+        for s in gdata.SCPS:
+            assert scenarios.has(s["number"]) is True, f'{s["number"]} missing a breach scenario'
 
     def test_has_and_stages(self):
         for num in ("SCP-173", "SCP-096", "SCP-106", "SCP-682", "SCP-049", "SCP-16829"):
@@ -56,9 +57,9 @@ class TestScenariosData:
                     assert isinstance(delta, int)
                     assert isinstance(flavor, str) and flavor
 
-    def test_no_scenario_for_999(self):
-        assert scenarios.has("SCP-999") is False
-        assert scenarios.stages("SCP-999") == []
+    def test_unknown_custom_scp_has_no_scenario(self):
+        assert scenarios.has("SCP-9999-CUSTOM") is False
+        assert scenarios.stages("SCP-9999-CUSTOM") == []
 
 
 # ====================== ASCII art ======================
@@ -430,3 +431,67 @@ class TestCliBranchingBreach:
         assert "Survival chance now" in r.stdout
         # Resolved one way or the other
         assert ("BREACH CONTAINED" in r.stdout) or ("CONTAINMENT FAILED" in r.stdout)
+
+
+
+# ====================== Difficulty tiers ======================
+class TestDifficulty:
+    def test_modifier_table(self):
+        assert breach_mod.DIFFICULTY_MOD == {"Easy": 15, "Normal": 0, "Hard": -15}
+
+    def test_assess_applies_difficulty(self):
+        for diff, expected_mod in (("Easy", 15), ("Normal", 0), ("Hard", -15)):
+            s = GameState()
+            s.difficulty = diff
+            chance, base, rb, lb, dm, _lines = breach_mod._assess(s, 3)
+            assert dm == expected_mod
+            assert chance == max(10, min(95, base + rb + lb + dm))
+
+    def test_easy_is_higher_than_hard(self):
+        easy = GameState(); easy.difficulty = "Easy"
+        hard = GameState(); hard.difficulty = "Hard"
+        assert breach_mod._assess(easy, 3)[0] > breach_mod._assess(hard, 3)[0]
+
+    def test_new_game_sets_difficulty_and_persists(self):
+        s = GameState()
+        s.new_game(ironman=True, difficulty="Hard")
+        assert s.difficulty == "Hard" and s.ironman is True
+        reloaded = GameState.load()
+        assert reloaded.difficulty == "Hard" and reloaded.ironman is True
+
+    def test_default_difficulty_is_normal(self):
+        assert GameState().difficulty == "Normal"
+
+    def test_ironman_wipe_preserves_difficulty(self, monkeypatch):
+        import game.ui as ui
+        monkeypatch.setattr(ui, "confirm", lambda *a, **k: True)
+        monkeypatch.setattr(ui, "pause", lambda *a, **k: None)
+        monkeypatch.setattr(ui, "panel", lambda *a, **k: None)
+        monkeypatch.setattr(ui, "info", lambda *a, **k: None)
+        monkeypatch.setattr(ui, "slow_print", lambda *a, **k: None)
+        monkeypatch.setattr(ui, "menu", lambda *a, **k: "a")  # always pick first option
+        monkeypatch.setattr(breach_mod.rng, "roll", lambda lo, hi: 100)  # force fail
+        s = GameState()
+        s.new_game(ironman=True, difficulty="Hard")
+        res = breach_mod.run_breach(s, {"number": "SCP-173", "name": "x", "threat": 3})
+        assert res is None
+        assert s.difficulty == "Hard" and s.ironman is True
+        assert s.credits == 500 and s.xp == 0 and s.rank_level == 0
+
+
+# ====================== Branching key future-proofing ======================
+class TestBranchingKeys:
+    def test_branching_handles_three_options(self, monkeypatch):
+        import game.ui as ui
+        monkeypatch.setattr(scenarios, "stages", lambda num: [
+            {"prompt": "p", "options": [
+                ("opt a", 5, "fa"), ("opt b", -5, "fb"), ("opt c", 10, "fc")]}
+        ])
+        monkeypatch.setattr(scenarios, "has", lambda num: True)
+        monkeypatch.setattr(ui, "panel", lambda *a, **k: None)
+        monkeypatch.setattr(ui, "info", lambda *a, **k: None)
+        monkeypatch.setattr(ui, "slow_print", lambda *a, **k: None)
+        monkeypatch.setattr(ui, "menu", lambda *a, **k: "c")  # pick the 3rd option
+        s = GameState()
+        out = breach_mod._branching(s, "SCP-TEST", 50)
+        assert out == 60  # +10 from option c

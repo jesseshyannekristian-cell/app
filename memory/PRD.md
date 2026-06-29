@@ -31,6 +31,12 @@ fully run and tested inside the container.
 ## Verified
 - Engine logic test (research gating, purchase gating, op RNG, rank-up, breach rewards, archive CRUD) — PASS.
 - Scripted UI runs (main hub, ranks, personnel, breach deploy, quit/save) — PASS.
+- Feature batch (branching scenarios, art, achievements, Iron-man, save-on-interrupt, rng bounds) — PASS.
+- Content+difficulty batch: all 22 Site-20 SCPs have branching scenarios; Easy/Normal/Hard tiers
+  (+15/0/-15% breach survival) shown in header + assessment, persisted, preserved on Iron-man wipe;
+  `_branching` future-proofed for >2 options; New Game has a single summary confirm before wipe.
+- Test suites: `backend/tests/test_foundation_scp.py` + `test_new_features.py` = **68 passing**
+  (run with `SCP_NO_DELAY=1 python -m pytest backend/tests/ -q`).
 
 ## Backlog / Next (P1/P2)
 - P1: Per-SCP custom breach scenarios (branching choices, not just a single roll).
