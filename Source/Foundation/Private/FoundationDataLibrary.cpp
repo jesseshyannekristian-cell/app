@@ -215,6 +215,63 @@ const TArray<FContainmentOp>& UFoundationDataLibrary::GetOperations()
 	return Data;
 }
 
+const TArray<FPersonnelData>& UFoundationDataLibrary::GetPersonnel()
+{
+	static TArray<FPersonnelData> Data;
+	if (Data.Num() == 0)
+	{
+		{
+			FPersonnelData P;
+			P.FileNo = TEXT("S20-PERS-05-GUNZ");
+			P.Codename = TEXT("GUNZ");
+			P.RealName = TEXT("(CLASSIFIED)");
+			P.Position = TEXT("Member of the O5 Council");
+			P.Clearance = TEXT("Level 5 / OMEGA BLACK");
+			P.Status = TEXT("Active");
+			P.Nationality = TEXT("Canadian (former JTF-2 Technical Specialist)");
+			P.Affiliation = TEXT("Technological Development Department");
+			P.Aliases = TEXT("Gunz, O5, The Technician, Semizuse");
+			P.AnomalousTrait = TEXT("Bright blue glowing eyes resulting from repeated SCP-16829 exposure.");
+			P.Bio = TEXT("During a breach event originating in Sector-[REDACTED], O5-0 Gunz coordinated real-time containment protocols, ordered the evacuation of non-essential personnel, and personally supervised the sealing of affected corridors. Post-incident analysis confirms his rapid decision-making and technical expertise directly reduced potential casualties.");
+			P.O5Notes = TEXT("\"Gunz is suspected to use SCP-16829 for traveling between sites. Some personnel follow orders. Some hold the line when orders fail.\" — Site-20 Security Evaluation Board");
+			Data.Add(P);
+		}
+		{
+			FPersonnelData P;
+			P.FileNo = TEXT("S20-PERS-00420-CHEMOSIC");
+			P.Codename = TEXT("CHEMOSIC");
+			P.RealName = TEXT("(REDACTED)");
+			P.Position = TEXT("Site Supervisor — Site-20");
+			P.Clearance = TEXT("Level 5 / O5 Council Access");
+			P.Status = TEXT("Active — Limited Field Deployment");
+			P.Nationality = TEXT("Canadian (former JTF-2 Assaulter / Sniper / Team Leader)");
+			P.Affiliation = TEXT("Former Commander, MTF XI-87 \"Binge Watchers\"");
+			P.Aliases = TEXT("Chemosic");
+			P.AnomalousTrait = TEXT("In remission from cancer attributed to repeated exposure to SCP-16829 (\"Dimension Chemosic\"). Under ongoing Site-20 medical monitoring.");
+			P.Bio = TEXT("Led 60+ successful operations involving high-risk SCPs, including multiple incursions into SCP-16829. Expert in information warfare, psychological operations and memetic-hazard countermeasures. Medically retired from field command and promoted to Site Supervisor: oversees all Site-20 operations, personnel and containment protocols.");
+			P.O5Notes = TEXT("\"Chemosic is one of the few individuals we trust implicitly with both the protection of the Foundation and its darkest secrets. His experience, judgment and loyalty are unmatched. Site-20 is in capable hands.\" — O5-[REDACTED]");
+			Data.Add(P);
+		}
+		{
+			FPersonnelData P;
+			P.FileNo = TEXT("S20-PERS-RD-LEAD");
+			P.Codename = TEXT("HEAD RESEARCHER");
+			P.RealName = TEXT("(REDACTED)");
+			P.Position = TEXT("Head Researcher — Site-20 Research Division");
+			P.Clearance = TEXT("Level 4");
+			P.Status = TEXT("Active");
+			P.Nationality = TEXT("(REDACTED)");
+			P.Affiliation = TEXT("Site-20 Research Division");
+			P.Aliases = TEXT("—");
+			P.AnomalousTrait = TEXT("None on record.");
+			P.Bio = TEXT("Directs Site-20's anomaly research portfolio, including active study files on SCP-173, SCP-096, SCP-049 and SCP-682. Authorises research projects and containment-procedure development that feed the Research Division and Containment Operations.");
+			P.O5Notes = TEXT("\"Approves the science that keeps the cells closed. Pragmatic, meticulous, and unflinching under breach conditions.\" — Site-20 Records");
+			Data.Add(P);
+		}
+	}
+	return Data;
+}
+
 const FEquipmentData* UFoundationDataLibrary::FindEquipment(FName Id)
 {
 	for (const FEquipmentData& E : GetEquipment()) { if (E.Id == Id) return &E; }

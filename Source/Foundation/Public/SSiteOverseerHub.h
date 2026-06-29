@@ -23,7 +23,7 @@ public:
 	void Construct(const FArguments& InArgs);
 
 private:
-	enum class ETab : uint8 { Research, Store, Operations, Breach, Ranks };
+	enum class ETab : uint8 { Research, Store, Operations, Breach, Personnel, Ranks };
 	ETab CurrentTab = ETab::Research;
 
 	TWeakObjectPtr<UOverseerProgression> Progress;
@@ -49,6 +49,7 @@ private:
 	TSharedRef<SWidget> BuildStoreTab();
 	TSharedRef<SWidget> BuildOperationsTab();
 	TSharedRef<SWidget> BuildBreachTab();
+	TSharedRef<SWidget> BuildPersonnelTab();
 	TSharedRef<SWidget> BuildRanksTab();
 
 	// Generic list row: title + subtitle (left), info (right), action button.

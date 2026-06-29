@@ -115,3 +115,23 @@ struct FContainmentOp
 	UPROPERTY(BlueprintReadOnly) int32 RewardResearchCredits = 0;
 	UPROPERTY(BlueprintReadOnly) int32 RewardXP = 0;
 };
+
+/** A named Site-20 staff dossier (lore/UI only — no gameplay effect). */
+USTRUCT(BlueprintType)
+struct FPersonnelData
+{
+	GENERATED_BODY()
+
+	UPROPERTY(BlueprintReadOnly) FString FileNo;
+	UPROPERTY(BlueprintReadOnly) FString Codename;
+	UPROPERTY(BlueprintReadOnly) FString RealName;
+	UPROPERTY(BlueprintReadOnly) FString Position;
+	UPROPERTY(BlueprintReadOnly) FString Clearance;
+	UPROPERTY(BlueprintReadOnly) FString Status;
+	UPROPERTY(BlueprintReadOnly) FString Nationality;
+	UPROPERTY(BlueprintReadOnly) FString Affiliation;
+	UPROPERTY(BlueprintReadOnly) FString Aliases;
+	UPROPERTY(BlueprintReadOnly) FString AnomalousTrait;
+	UPROPERTY(BlueprintReadOnly) FString Bio;
+	UPROPERTY(BlueprintReadOnly) FString O5Notes;
+};

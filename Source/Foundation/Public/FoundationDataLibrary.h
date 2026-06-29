@@ -23,6 +23,7 @@ public:
 	static const TArray<FResearchProject>& GetResearchProjects();
 	static const TArray<FRankData>& GetRanks();
 	static const TArray<FContainmentOp>& GetOperations();
+	static const TArray<FPersonnelData>& GetPersonnel();
 
 	static const FEquipmentData* FindEquipment(FName Id);
 	static const FResearchProject* FindResearch(FName Id);

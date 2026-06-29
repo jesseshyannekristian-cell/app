@@ -25,8 +25,11 @@ Follow-up: add MTF XI-87 (from uploaded dossier) as a faction, make it open-worl
   loaded at runtime as letterboxed backdrop, real buttons over painted START/OPTIONS/CREDITS.
   Options + Credits panels (Credits shows CC BY-SA 3.0 attribution). `MainMenuGameMode` is now the
   default GameMode; `MainMenuPlayerController` drives title → hub → breach flow.
-- **Site Overseer Hub** (`SSiteOverseerHub`) with 5 tabs: Research Division, Store,
-  Containment Operations, Breach, Ranks & Rewards.
+- **Site Overseer Hub** (`SSiteOverseerHub`) with 6 tabs: Research Division, Store,
+  Containment Operations, Breach, Site-20 Personnel, Ranks & Rewards.
+- **Site-20 Personnel dossiers** (lore/UI only): GUNZ (O5 Council), CHEMOSIC (Site Supervisor /
+  ex-MTF XI-87 Commander), Head Researcher — `FPersonnelData` in `UFoundationDataLibrary`.
+- **Repo cleaned to game-only**: removed unused React `frontend/` + FastAPI `backend/` template folders.
 - **Two-currency economy**: Credits (gear) + Research Credits (research only). Persisted via
   `UOverseerProgression` (GameInstanceSubsystem) → `UOverseerSaveGame` ("OverseerSave").
 - **Research → Store gating**: every level-locked item has an auto-generated research project; item

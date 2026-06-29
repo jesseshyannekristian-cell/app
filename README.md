@@ -132,6 +132,9 @@ letterboxed backdrop, with real clickable buttons placed over the painted START 
   MTF / GOI threat. Gated by rank, required equipment, and (for key SCPs) a researched procedure.
   Dispatch grants Credits / Research Credits / XP.
 - **BREACH** — lists all breachable SCPs and shows the live-breach record; DEPLOY launches the FPS level.
+- **SITE-20 PERSONNEL** — lore dossiers for key staff (GUNZ — O5 Council/"The Technician"; CHEMOSIC —
+  Site Supervisor & former MTF XI-87 Commander; Head Researcher) with codename, clearance, affiliation,
+  anomalous traits (SCP-16829 exposure) and O5 notes. UI/lore only.
 - **RANKS & REWARDS** — rank ladder (Junior Researcher → O5 Overseer), promotion rewards, and a
   **breach section** (survived / failed / re-contained).
 

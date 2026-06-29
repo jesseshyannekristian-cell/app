@@ -127,6 +127,7 @@ TSharedRef<SWidget> SSiteOverseerHub::BuildTabBar()
 		+ SHorizontalBox::Slot().AutoWidth().Padding(0, 0, 8, 0)[ BuildTabButton(TEXT("STORE"), ETab::Store) ]
 		+ SHorizontalBox::Slot().AutoWidth().Padding(0, 0, 8, 0)[ BuildTabButton(TEXT("CONTAINMENT OPERATIONS"), ETab::Operations) ]
 		+ SHorizontalBox::Slot().AutoWidth().Padding(0, 0, 8, 0)[ BuildTabButton(TEXT("BREACH"), ETab::Breach) ]
+		+ SHorizontalBox::Slot().AutoWidth().Padding(0, 0, 8, 0)[ BuildTabButton(TEXT("SITE-20 PERSONNEL"), ETab::Personnel) ]
 		+ SHorizontalBox::Slot().AutoWidth()[ BuildTabButton(TEXT("RANKS & REWARDS"), ETab::Ranks) ];
 }
 
@@ -165,6 +166,7 @@ TSharedRef<SWidget> SSiteOverseerHub::BuildCurrentTabContent()
 	case ETab::Store:      return BuildStoreTab();
 	case ETab::Operations: return BuildOperationsTab();
 	case ETab::Breach:     return BuildBreachTab();
+	case ETab::Personnel:  return BuildPersonnelTab();
 	case ETab::Ranks:      return BuildRanksTab();
 	}
 	return SNew(SSpacer);
@@ -363,6 +365,59 @@ TSharedRef<SWidget> SSiteOverseerHub::BuildBreachTab()
 				[ SNew(STextBlock).Font(HubFont(15, TEXT("Bold"))).ColorAndOpacity(Accent).Text(FText::FromString(FString::Printf(TEXT("%s \u2014 %s"), *S.Number, *S.Name))) ]
 				+ SVerticalBox::Slot().AutoHeight()
 				[ SNew(STextBlock).Font(HubFont(11)).ColorAndOpacity(HubColors::Gray).AutoWrapText(true).Text(FText::FromString(Sub)) ]
+			]
+		];
+	}
+	return List;
+}
+
+TSharedRef<SWidget> SSiteOverseerHub::BuildPersonnelTab()
+{
+	TSharedRef<SScrollBox> List = SNew(SScrollBox);
+
+	List->AddSlot().Padding(0, 0, 0, 10)
+	[
+		SNew(STextBlock).Font(HubFont(13)).ColorAndOpacity(HubColors::Cyan).AutoWrapText(true)
+		.Text(LOCTEXT("PersObj", "SITE-20 PERSONNEL DOSSIERS \u2014 Level 5 / O5 Eyes Only. Key staff overseeing Foundation Site-20."))
+	];
+
+	auto Line = [](const FString& Label, const FString& Value, const FLinearColor& ValueColor) -> TSharedRef<SWidget>
+	{
+		return SNew(SHorizontalBox)
+			+ SHorizontalBox::Slot().AutoWidth().VAlign(VAlign_Top)
+			[ SNew(SBox).MinDesiredWidth(150.f)[ SNew(STextBlock).Font(HubFont(11, TEXT("Bold"))).ColorAndOpacity(HubColors::Dim).Text(FText::FromString(Label)) ] ]
+			+ SHorizontalBox::Slot().FillWidth(1.f)
+			[ SNew(STextBlock).Font(HubFont(12)).ColorAndOpacity(ValueColor).AutoWrapText(true).Text(FText::FromString(Value)) ];
+	};
+
+	for (const FPersonnelData& P : UFoundationDataLibrary::GetPersonnel())
+	{
+		List->AddSlot().Padding(0, 0, 0, 10)
+		[
+			SNew(SBorder).BorderImage(&RowBg).Padding(FMargin(16, 12))
+			[
+				SNew(SVerticalBox)
+				// Header: codename + file no
+				+ SVerticalBox::Slot().AutoHeight()
+				[
+					SNew(SHorizontalBox)
+					+ SHorizontalBox::Slot().FillWidth(1.f).VAlign(VAlign_Center)
+					[ SNew(STextBlock).Font(HubFont(22, TEXT("Bold"))).ColorAndOpacity(HubColors::Cyan).Text(FText::FromString(P.Codename)) ]
+					+ SHorizontalBox::Slot().AutoWidth().VAlign(VAlign_Center)
+					[ SNew(STextBlock).Font(HubFont(11)).ColorAndOpacity(HubColors::Dim).Text(FText::FromString(P.FileNo)) ]
+				]
+				+ SVerticalBox::Slot().AutoHeight().Padding(0, 2, 0, 8)
+				[ SNew(STextBlock).Font(HubFont(13, TEXT("Bold"))).ColorAndOpacity(HubColors::Gold).Text(FText::FromString(P.Position)) ]
+
+				+ SVerticalBox::Slot().AutoHeight().Padding(0, 1)[ Line(TEXT("REAL NAME"), P.RealName, HubColors::Gray) ]
+				+ SVerticalBox::Slot().AutoHeight().Padding(0, 1)[ Line(TEXT("CLEARANCE"), P.Clearance, HubColors::Gold) ]
+				+ SVerticalBox::Slot().AutoHeight().Padding(0, 1)[ Line(TEXT("STATUS"), P.Status, HubColors::Green) ]
+				+ SVerticalBox::Slot().AutoHeight().Padding(0, 1)[ Line(TEXT("NATIONALITY"), P.Nationality, HubColors::Gray) ]
+				+ SVerticalBox::Slot().AutoHeight().Padding(0, 1)[ Line(TEXT("AFFILIATION"), P.Affiliation, HubColors::Gray) ]
+				+ SVerticalBox::Slot().AutoHeight().Padding(0, 1)[ Line(TEXT("ALIASES"), P.Aliases, HubColors::Gray) ]
+				+ SVerticalBox::Slot().AutoHeight().Padding(0, 1)[ Line(TEXT("ANOMALOUS TRAIT"), P.AnomalousTrait, HubColors::Red) ]
+				+ SVerticalBox::Slot().AutoHeight().Padding(0, 8, 0, 1)[ Line(TEXT("SERVICE SUMMARY"), P.Bio, HubColors::Gray) ]
+				+ SVerticalBox::Slot().AutoHeight().Padding(0, 6, 0, 1)[ Line(TEXT("O5 NOTES"), P.O5Notes, HubColors::Cyan) ]
 			]
 		];
 	}
