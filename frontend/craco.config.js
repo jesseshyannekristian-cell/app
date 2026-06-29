@@ -11,6 +11,13 @@ const config = {
   enableHealthCheck: process.env.ENABLE_HEALTH_CHECK === "true",
 };
 
+function resolveServerConfig(https) {
+  if (typeof https === "object") {
+    return { type: "https", options: https };
+  }
+  return https ? "https" : "http";
+}
+
 function makeDevServerV5Compatible(devServerConfig) {
   const {
     https,
@@ -21,12 +28,7 @@ function makeDevServerV5Compatible(devServerConfig) {
     ...compatibleConfig
   } = devServerConfig;
 
-  compatibleConfig.server =
-    typeof https === "object"
-      ? { type: "https", options: https }
-      : https
-        ? "https"
-        : "http";
+  compatibleConfig.server = resolveServerConfig(https);
   compatibleConfig.headers = {
     ...compatibleConfig.headers,
     "Cross-Origin-Resource-Policy": "same-origin",
@@ -134,13 +136,13 @@ if (isDevServer) {
     const { withVisualEdits } = require("@emergentbase/visual-edits/craco");
     webpackConfig = withVisualEdits(webpackConfig);
   } catch (err) {
-    if (err.code === 'MODULE_NOT_FOUND' && err.message.includes('@emergentbase/visual-edits/craco')) {
-      console.warn(
-        "[visual-edits] @emergentbase/visual-edits not installed — visual editing disabled."
-      );
-    } else {
+    const isMissingVisualEdits =
+      err.code === 'MODULE_NOT_FOUND' &&
+      err.message.includes('@emergentbase/visual-edits/craco');
+    if (!isMissingVisualEdits) {
       throw err;
     }
+    // Visual editing is optional — silently disabled when the package isn't installed.
   }
 }
 

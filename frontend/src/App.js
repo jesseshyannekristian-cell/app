@@ -10,10 +10,9 @@ const API = `${BACKEND_URL}/api`;
 const Home = () => {
   const helloWorldApi = useCallback(async () => {
     try {
-      const response = await axios.get(`${API}/`);
-      console.log(response.data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
+      await axios.get(`${API}/`);
+    } catch {
+      // Request failed; intentionally ignored in this template.
     }
   }, []);
 
