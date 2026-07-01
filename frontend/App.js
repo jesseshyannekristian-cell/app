@@ -49,7 +49,7 @@ export default function App() {
     <SafeAreaProvider>
       <GameProvider>
         <NavigationContainer theme={navTheme} linking={linking}>
-          <Stack.Navigator screenOptions={{ headerShown: false, contentStyle: { backgroundColor: C.bg } }} initialRouteName="Start">
+          <Stack.Navigator screenOptions={{ headerShown: false, contentStyle: { backgroundColor: C.bg } }} initialRouteName="Home">
             <Stack.Screen name="Start" component={Start} />
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="Research" component={Research} />
