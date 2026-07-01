@@ -113,7 +113,7 @@ export function SectionTabs({ items, active, nav }) {
 
 export function Card({ title, accent = C.border, children, style, testID, onPress }) {
   const inner = (
-    <View style={[s.card, style]}>
+    <View style={[s.card, style, { borderWidth: 2, borderColor: accent === C.border ? C.border : accent }]}>
       {title ? <Text style={[F.label, { color: accent === C.border ? C.dim : accent, marginBottom: 8 }]}>{title.toUpperCase()}</Text> : null}
       {children}
     </View>
@@ -207,7 +207,7 @@ function Toast({ bottom = 24 }) {
 const s = StyleSheet.create({
   screen: { flex: 1, backgroundColor: C.bg },
   header: { paddingHorizontal: 18, paddingTop: 14, paddingBottom: 10 },
-  rule: { height: 2, backgroundColor: C.red, marginHorizontal: 0, opacity: 0.9 },
+  rule: { height: 2, backgroundColor: C.red, marginHorizontal: 0, opacity: 1 },
   currency: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 14, paddingVertical: 8, backgroundColor: C.bg2 },
   chip: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10, paddingVertical: 5, borderRadius: 6, backgroundColor: C.panel, borderWidth: 1, borderColor: C.border },
   body: { padding: 16, paddingBottom: 110 },
@@ -215,7 +215,7 @@ const s = StyleSheet.create({
   sectionTabs: { flexDirection: 'row', marginBottom: 16 },
   sectionPill: { flex: 1, borderWidth: 1, borderRadius: 6, paddingHorizontal: 6, paddingVertical: 10, marginRight: 8, justifyContent: 'center' },
 
-  card: { borderWidth: 1, borderColor: C.border, borderRadius: 10, padding: 16, marginBottom: 12, backgroundColor: C.card },
+  card: { borderWidth: 2, borderColor: C.border, borderRadius: 8, padding: 16, marginBottom: 12, backgroundColor: C.card },
   btn: { borderRadius: 8, paddingVertical: 14, paddingHorizontal: 16, marginBottom: 10, alignItems: 'center' },
   badge: { borderWidth: 1, borderRadius: 4, paddingHorizontal: 8, paddingVertical: 3, alignSelf: 'flex-start' },
   row: { flexDirection: 'row', alignItems: 'center', paddingVertical: 4 },
@@ -224,7 +224,7 @@ const s = StyleSheet.create({
   meterFill: { height: '100%', borderRadius: 4 },
 
   tabbar: { position: 'absolute', left: 0, right: 0, bottom: 0, backgroundColor: C.bg2 },
-  tabRule: { height: 2, backgroundColor: C.red, opacity: 0.9 },
+  tabRule: { height: 2, backgroundColor: C.red, opacity: 1 },
   tab: { flex: 1, alignItems: 'center', paddingTop: 10, paddingBottom: 4 },
   tabLabel: { fontFamily: F.label.fontFamily, fontSize: 9, fontWeight: '700', letterSpacing: 0.5, marginTop: 4 },
 

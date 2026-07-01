@@ -2,25 +2,25 @@ import { Platform } from 'react-native';
 
 // SCP "Control Room" graphic theme — dark sci-fi dashboard.
 export const C = {
-  bg: '#08080C',
-  bg2: '#0E0E14',
-  panel: '#13131B',
-  panelHi: '#1B1B26',
-  card: '#13131B',
-  border: '#24242F',
-  borderHi: '#33333F',
+  bg: '#0A0A0E',
+  bg2: '#0F0F15',
+  panel: '#14141D',
+  panelHi: '#1C1C28',
+  card: '#14141D',
+  border: '#2A2A38',
+  borderHi: '#38383E',
 
-  red: '#FF3B47',
-  redDim: '#5e1d22',
-  amber: '#F5B301',
-  amberDim: '#6e5410',
-  green: '#3DFF85',
-  greenDim: '#1c5e36',
-  cyan: '#2DD4D4',
+  red: '#FF2D3D',      // Brighter, more vibrant red
+  redDim: '#4D1820',
+  amber: '#FFD700',    // Pure gold
+  amberDim: '#7A6B00',
+  green: '#00FF7F',    // Bright spring green
+  greenDim: '#1a5e3f',
+  cyan: '#00D9FF',     // Brighter cyan
 
-  text: '#F1F1F4',
-  dim: '#8A8A96',
-  faint: '#56565F',
+  text: '#FFFFFF',     // Pure white for better contrast
+  dim: '#A0A0B0',
+  faint: '#606070',
 };
 
 export const MONO = Platform.select({ ios: 'Courier New', android: 'monospace', default: 'monospace' });
