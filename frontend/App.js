@@ -6,6 +6,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { GameProvider } from './src/store';
 import { C } from './src/theme';
 
+import Start from './src/screens/Start';
 import Home from './src/screens/Home';
 import Research from './src/screens/Research';
 import Store from './src/screens/Store';
@@ -28,6 +29,7 @@ const linking = {
   prefixes: [],
   config: {
     screens: {
+      Start: 'start',
       Home: '',
       Research: 'research',
       Store: 'store',
@@ -47,7 +49,8 @@ export default function App() {
     <SafeAreaProvider>
       <GameProvider>
         <NavigationContainer theme={navTheme} linking={linking}>
-          <Stack.Navigator screenOptions={{ headerShown: false, contentStyle: { backgroundColor: C.bg } }}>
+          <Stack.Navigator screenOptions={{ headerShown: false, contentStyle: { backgroundColor: C.bg } }} initialRouteName="Start">
+            <Stack.Screen name="Start" component={Start} />
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="Research" component={Research} />
             <Stack.Screen name="Store" component={Store} />

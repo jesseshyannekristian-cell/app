@@ -12,7 +12,16 @@
     },
     "web": { "bundler": "metro" },
     "assetBundlePatterns": ["**/*"],
-    "ios": { "supportsTablet": true },
-    "android": {}
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.jesseshyannekristian.scpoverseer"
+    },
+    "android": {
+      "package": "com.jesseshyannekristian.scpoverseer",
+      "versionCode": 1,
+      "permissions": []
+    },
+    "owner": "jesseshyannekristian",
+    "description": "SCP Foundation Site-20 Containment Management Game"
   }
 }
