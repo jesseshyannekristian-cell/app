@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCP Site Overseer</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            margin: 0;
+            height: 100vh;
+            background: url('https://github.com/jesseshyannekristian-cell/app/raw/main/attachments/ChatGPT%20Image%20Jul%202,%202026,%2001_28_13%20AM.png') center/cover no-repeat;
+            position: relative;
+            font-family: 'Press Start 2P', system-ui;
+            color: #ff4444;
+            overflow: hidden;
+        }
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.75);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        h1 { font-size: 4.5rem; text-shadow: 0 0 20px #ff0000; margin-bottom: 10px; }
+        button {
+            margin-top: 50px;
+            padding: 25px 70px;
+            font-size: 2.2rem;
+            background: rgba(0,20,40,0.9);
+            color: #00ffff;
+            border: 4px solid #00ffff;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        button:hover { background: #001122; transform: scale(1.05); }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <h1>SCP SITE OVERSEER</h1>
+        <p style="font-size:1.4rem; margin:20px 0;">CLEARANCE LEVEL: 5</p>
+        <button onclick="startGame()">START GAME</button>
+    </div>
+
+    <script>
+        function startGame() {
+            alert("🚨 BREACH INITIATED\n\nTo play the full game:\n\n1. Clone the repo\n2. Run: python play.py\n\nYour progress saves automatically.");
+        }
+    </script>
+</body>
+</html>
