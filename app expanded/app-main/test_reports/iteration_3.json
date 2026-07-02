@@ -1,0 +1,38 @@
+{
+  "summary": "Iteration 3 — validated the new feature batch for FOUNDATION SCP Site Overseer: per-SCP branching breach scenarios (6 SCPs × 2 stages w/ a/b/x), per-anomaly ASCII art, 8-achievement system with persistence, Iron-man mode + New Game wipe, save-on-interrupt (EOF/KeyboardInterrupt), and rng.roll bounds validation. Extended the existing pytest suite with a new file (/app/backend/tests/test_new_features.py, 32 tests) covering engine-level monkeypatched flows + two end-to-end CLI subprocess drives. Combined suite: 61/61 PASS in ~0.5s. No regressions in the prior 29 tests. No tracebacks; save_data.json + archives.json round-trip correctly under all new code paths.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_foundation_scp.py",
+    "/app/backend/tests/test_new_features.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "game/breach.py _branching: keys = 'abcd' is hard-coded — any stage with >4 options would IndexError silently when remapped from menu choice. Fine for current 2-option stages, but guard with len(options) <= len(keys) assertion or derive keys = list(string.ascii_lowercase)[:len(options)] for future-proofing.",
+    "game/state.GameState.new_game uses self.__init__() which works for the current flat-field __init__ but would silently miss future fields if anyone added them via class-level defaults instead. Consider an explicit reset(ironman) method that lists fields, or replace __dict__ via GameState() copy.",
+    "game/achievements.check writes state.save() only when something newly unlocks — fine, but the 'untouchable' path requires the caller to pass ctx={'breach_win_no_loadout': True} which is currently only done from hub.breach_menu. Direct callers of run_breach (e.g. tests, future scripts) bypass this — consider moving the ctx assembly into breach.run_breach itself and emit the unlock from there for a single source of truth.",
+    "game/breach.run_breach: when the iron-man wipe happens, achievements such as first_blood that were ALREADY unlocked are also wiped along with the rest of the save (expected by spec), but the failed breach itself still counted toward state.breaches_failed BEFORE new_game() ran — the wipe correctly resets breaches_failed=0, so no observable issue, just noting the order of operations.",
+    "game/main.py: the interrupt handler now saves on Ctrl-C/EOF — good. However, if state.save() itself raises (e.g. disk full), the handler will propagate and lose the friendly message. Wrap saves in try/except to log a quiet warning if you want belt-and-suspenders.",
+    "game/scenarios.py: option labels are presentation strings (long sentences). ui.menu renders these as label rows but the key column shows 'a'/'b' — UX-wise that works. Just noting that very long labels could overflow narrow terminals; rich.Table will wrap, so OK.",
+    "game/art.py: r-strings preserve raw backslash content (none used today). For consistency consider removing the leading r prefix or alternatively switch to triple-double quotes; cosmetic only.",
+    "game/hub.py new_game_menu does not show the player a final confirmation that BOTH iron-man and archive-wipe flags will apply before invoking new_game — the two confirms happen sequentially but the actual wipe trigger is the FIRST confirm. A summary 'About to: wipe save, enable iron-man, delete N archives — confirm?' would reduce accidental wipes."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_new_features.py (new — 32 tests across 8 classes)"
+  ],
+  "success_rate": {"backend": "100% (61/61)", "frontend": "N/A (terminal CLI app)"},
+  "test_credentials": "None — no auth in this app.",
+  "seed_data_creation": "Each test wipes /app/saves/{save_data.json,archives.json} via autouse fixture (both setup and teardown). Test archive entries use TEST_ prefix.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Pure-Python CLI game under /app/game (NOT a web app). Run tests: `cd /app && SCP_NO_DELAY=1 python -m pytest backend/tests/ -v`. Two test files now exist: test_foundation_scp.py (29 regression) and test_new_features.py (32 new-feature). To drive the CLI in subprocess always set SCP_NO_DELAY=1 to skip ui.slow_print() pacing (otherwise breach logs take seconds each). Stdin flow: first '\\n' dismisses the title-banner pause, then number-keyed menus, [y/n] confirms, 'b' to back out of list screens. In a branching breach the per-stage keys are a/b/x (x = Improvise 50/50 via rng.chance). For deterministic breach outcomes monkeypatch breach_mod.rng.roll (note _simulate uses rng.roll(3,5), so for forcing a FAIL prefer a scenario SCP which uses _branching). Iron-man wipe path: run_breach returns None; state.new_game(ironman=True) is called from inside breach.run_breach so the save file is fully reset to credits 500, rank 0, xp 0, with ironman flag preserved as True.",
+  "rca of the issue": "No bugs found. All new features behave per the spec: scenarios dict has 6 SCPs × 2 stages each with (label, delta, flavor) tuples; _branching clamps cumulative chance to 5..95; art.for_scp returns the right block per SCP and the generic '?SCP?' block for unknown; achievements.check unlocks + persists newly-earned IDs without double-counting; state.new_game resets every field in place and persists; breach.run_breach triggers iron-man wipe ONLY on failed outcomes and ONLY when state.ironman is True; main.py wraps the hub loop in try/except KeyboardInterrupt/EOFError and saves both state and archives; rng.roll raises ValueError when high < low and accepts equal bounds."
+}

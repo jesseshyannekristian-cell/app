@@ -1,0 +1,32 @@
+{
+  "summary": "Regression smoke test of the Emergent React+FastAPI template after lint fixes (return type hints in server.py, useCallback in App.js, toast reducer refactor). Backend 3/3 endpoints pass; Frontend home page loads (HTTP 200), renders without errors, helloWorldApi logs 'Hello World' to console, no toast/runtime errors.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_template_smoke.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "server.py reducer of 'REMOVE_TOAST' branch returns implicitly nothing only for an exhaustive switch with no default; non-issue because all known action types are handled, but adding a `default: return state` would be safer.",
+    "App.js uses BrowserRouter with a single '/' route that nests an index '/' route to the same Home — harmless duplication, could be simplified to just `<Route path='/' element={<Home />} />`.",
+    "Backend POST /api/status persists timestamp as ISO string but get_status_checks() converts it back to datetime; response_model serialization works but mixed storage type is fragile if a record was inserted with a real datetime by another writer. Consider standardizing to one format."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_template_smoke.py (new)"
+  ],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "test_credentials": "None required",
+  "seed_data_creation": "Test created one StatusCheck row with client_name='TEST_qa-test' (left in DB; acceptable for template smoke test).",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Template-only regression. Backend tests at /app/backend/tests/test_template_smoke.py cover GET /api/, POST /api/status, GET /api/status (verifies created record is returned and no _id leak). Frontend smoke verified via Playwright: HTTP 200, console logs 'Hello World', no page errors, no toast runtime errors. Use REACT_APP_BACKEND_URL from /app/frontend/.env. The primary product is a UE5 C++ game which cannot be tested in this container — do NOT attempt.",
+  "rca of the issue": "No issues found."
+}
