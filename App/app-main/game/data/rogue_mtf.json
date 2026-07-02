@@ -1,0 +1,10 @@
+[
+  {"name": "Chaos Insurgency Cell 'Black Queen'", "origin": "Chaos Insurgency", "threat": 4, "notes": "Defected Foundation splinter; steals anomalies for weaponisation."},
+  {"name": "Defected MTF Nine-Tailed Fox Squad", "origin": "Rogue MTF Epsilon-11", "threat": 5, "notes": "Elite operatives gone dark with breach-grade equipment."},
+  {"name": "Serpent's Hand Coven", "origin": "Serpent's Hand", "threat": 3, "notes": "Anomaly-sympathetic insurgents using the Library to infiltrate."},
+  {"name": "Rogue MTF Alpha-1 'Red Right Hand'", "origin": "Rogue O5 Guard", "threat": 5, "notes": "Compromised O5 protection detail; highest clearance threat."},
+  {"name": "GOC Strike Team (Hostile)", "origin": "Global Occult Coalition", "threat": 4, "notes": "Destruction-doctrine rivals seeking to neutralise contained assets."},
+  {"name": "Marshall, Carter & Dark Operatives", "origin": "MC&D", "threat": 3, "notes": "Anomalous black-market agents extracting items for auction."},
+  {"name": "Defected MTF Tau-5 'Samsara'", "origin": "Rogue Cyborg MTF", "threat": 4, "notes": "Augmented unit malfunctioning after anomalous exposure."},
+  {"name": "Insurgency Sleeper Agent", "origin": "Chaos Insurgency", "threat": 2, "notes": "Embedded site staff leaking containment schematics."}
+]
