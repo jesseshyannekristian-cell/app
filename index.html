@@ -4,16 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SCP Site Overseer</title>
-    <style>
-        body { background:#000; color:#f00; font-family: monospace; text-align:center; padding:50px; height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; }
-        h1 { font-size:4rem; margin:20px; text-shadow: 0 0 20px #ff0; }
-        button { padding:30px 80px; font-size:2rem; background:#300; color:#0ff; border:5px solid #0ff; cursor:pointer; margin-top:40px; }
-        button:hover { background:#500; }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>SCP SITE OVERSEER</h1>
-    <p>CLEARANCE LEVEL: 5 - ACCESS GRANTED</p>
-    <button onclick="alert('Game Started! You are now Omega Black.')">START GAME</button>
+    <div class="background"></div>
+    
+    <div class="container">
+        <h1 class="title">SCP Site</h1>
+        <h2 class="title">Overseer</h2>
+        
+        <div class="agent">
+            <div class="eyes">◉ ◉</div>
+        </div>
+
+        <div class="menu">
+            <button onclick="startGame()" class="btn" id="startBtn">
+                <span class="icon">⚙︎</span>
+                START GAME
+                <span class="arrow">→</span>
+            </button>
+        </div>
+
+        <div class="status">
+            CLEARANCE LEVEL: 5<br>
+            <span style="color:#00ff88;">Access Granted • USER: OMEGA BLACK</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
