@@ -84,13 +84,13 @@ export function tryToggleLoadout(boot, s, equipId, capacity = 4) {
 
 export function tryRecruit(boot, s, opId) {
   const op = find(boot.squad_roster, 'id', opId);
-  if (!op) return { ok: false, msg: 'Unknown operative.' };
-  if (s.squad.includes(opId)) return { ok: false, msg: 'Already recruited.' };
-  if (s.casualties.includes(opId)) return { ok: false, msg: `${op.codename} is KIA and cannot be re-recruited.` };
+  if (!op) return { ok: false, msg: 'Unknown unit.' };
+  if (s.squad.includes(opId)) return { ok: false, msg: 'Already on standby.' };
+  if (s.casualties.includes(opId)) return { ok: false, msg: `${op.codename} has been decommissioned and cannot be re-requisitioned.` };
   if (s.rank_level < op.required_rank) return { ok: false, msg: `Requires rank ${op.required_rank}.` };
   if (s.credits < op.recruit_cost) return { ok: false, msg: 'Not enough Credits.' };
   const n = { ...s, credits: s.credits - op.recruit_cost, squad: [...s.squad, opId] };
-  return { ok: true, msg: `Recruited: ${op.codename}`, state: n };
+  return { ok: true, msg: `Requisitioned: ${op.codename}`, state: n };
 }
 
 export function squadCapacity(boot) {
@@ -98,17 +98,17 @@ export function squadCapacity(boot) {
 }
 
 export function tryAssignSquad(boot, s, opId) {
-  if (!s.squad.includes(opId)) return { ok: false, msg: 'This operative is not on your roster.' };
+  if (!s.squad.includes(opId)) return { ok: false, msg: 'This unit is not on standby.' };
   if (s.assigned_squad.includes(opId)) {
     return { ok: true, msg: 'Stood down.', state: { ...s, assigned_squad: s.assigned_squad.filter((x) => x !== opId) } };
   }
   const cap = squadCapacity(boot);
-  if (s.assigned_squad.length >= cap) return { ok: false, msg: `Squad team full (${cap} slots).` };
-  return { ok: true, msg: 'Assigned to next breach.', state: { ...s, assigned_squad: [...s.assigned_squad, opId] } };
+  if (s.assigned_squad.length >= cap) return { ok: false, msg: `Deployment slots full (${cap}).` };
+  return { ok: true, msg: 'Deployed to next breach.', state: { ...s, assigned_squad: [...s.assigned_squad, opId] } };
 }
 
-// Resolves squad casualties after a breach. Called once, after the outcome is known.
-// Assigned operatives on a failed breach each face independent KIA risk; on a
+// Resolves MTF casualties after a breach. Called once, after the outcome is known.
+// Deployed units on a failed breach each face independent casualty risk; on a
 // survived breach nobody is lost. Iron-man wipes already reset the whole state
 // elsewhere, so this only runs for a normal failure/survival.
 export function resolveCasualties(boot, s, survived) {
