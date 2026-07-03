@@ -2235,64 +2235,73 @@
   },
   "squad_roster": [
     {
-      "id": "op_breacher",
-      "codename": "BREACHER-7",
-      "role": "Tactical Assaulter",
-      "bio": "Point-of-entry specialist; first through the door on every response.",
-      "recruit_cost": 600,
-      "required_rank": 1,
-      "breach_bonus": 8,
+      "id": "mtf_xi87",
+      "codename": "MTF XI-87 \"Binge Watchers\"",
+      "role": "Rapid Containment Response",
+      "bio": "Chemosic's former command. Generalist unit, fast to mobilize, reliable in a straight fight.",
+      "recruit_cost": 1000,
+      "required_rank": 2,
+      "breach_bonus": 14,
+      "kia_risk": 0.16
+    },
+    {
+      "id": "mtf_epsilon11",
+      "codename": "MTF Epsilon-11 \"Nine-Tailed Fox\"",
+      "role": "Site Defense & Recontainment",
+      "bio": "Elite site-security force built for exactly this: a live breach inside the walls.",
+      "recruit_cost": 1300,
+      "required_rank": 3,
+      "breach_bonus": 16,
+      "kia_risk": 0.15
+    },
+    {
+      "id": "mtf_eta10",
+      "codename": "MTF Eta-10 \"See No Evil\"",
+      "role": "Cognitohazard & Visual Anomaly Response",
+      "bio": "Trained to operate blind, deaf, or both. Specialists against anomalies that kill through perception.",
+      "recruit_cost": 1450,
+      "required_rank": 4,
+      "breach_bonus": 17,
+      "kia_risk": 0.17
+    },
+    {
+      "id": "mtf_tau5",
+      "codename": "MTF Tau-5 \"Samsara\"",
+      "role": "Reality Anchoring & Dimensional Recovery",
+      "bio": "Handles anomalies that bend space, time, or causality. No unit has a stranger casualty report.",
+      "recruit_cost": 1650,
+      "required_rank": 5,
+      "breach_bonus": 18,
+      "kia_risk": 0.19
+    },
+    {
+      "id": "mtf_omega7",
+      "codename": "MTF Omega-7 \"Pandora's Box\"",
+      "role": "Extreme-Force Keter Response",
+      "bio": "Deployed only when everything else has failed. Casualties are expected, not exceptional.",
+      "recruit_cost": 1900,
+      "required_rank": 6,
+      "breach_bonus": 20,
       "kia_risk": 0.22
     },
     {
-      "id": "op_medic",
-      "codename": "DOC WREN",
-      "role": "Field Medic",
-      "bio": "Keeps the team standing long enough to finish the job.",
-      "recruit_cost": 700,
-      "required_rank": 2,
-      "breach_bonus": 10,
-      "kia_risk": 0.18
-    },
-    {
-      "id": "op_tech",
-      "codename": "SPLICE",
-      "role": "Anomaly Technician",
-      "bio": "Reads containment telemetry in real time, calls the safe windows.",
-      "recruit_cost": 800,
-      "required_rank": 3,
-      "breach_bonus": 10,
-      "kia_risk": 0.2
-    },
-    {
-      "id": "op_sniper",
-      "codename": "LONGSHOT",
-      "role": "Overwatch",
-      "bio": "Covers the corridor from range; buys the team time to fall back.",
-      "recruit_cost": 900,
-      "required_rank": 4,
-      "breach_bonus": 12,
-      "kia_risk": 0.2
-    },
-    {
-      "id": "op_handler",
-      "codename": "WARDEN",
-      "role": "Anomaly Handler",
-      "bio": "Trained in behavioral redirection for humanoid-class SCPs.",
-      "recruit_cost": 1100,
-      "required_rank": 5,
-      "breach_bonus": 14,
-      "kia_risk": 0.24
-    },
-    {
-      "id": "op_veteran",
-      "codename": "OLD GUARD",
-      "role": "MTF Veteran",
-      "bio": "Survived more breaches than anyone still on active roster.",
-      "recruit_cost": 1400,
-      "required_rank": 7,
-      "breach_bonus": 16,
-      "kia_risk": 0.15
+      "id": "mtf_alpha1",
+      "codename": "MTF Alpha-1 \"Red Right Hand\"",
+      "role": "O5 Command Authority",
+      "bio": "The Council's own. Requisitioning them means the situation has O5 attention.",
+      "recruit_cost": 2400,
+      "required_rank": 8,
+      "breach_bonus": 22,
+      "kia_risk": 0.14
     }
   ]
 }
+
+   
+   
+    
+  
+ 
+       
+    
+  
