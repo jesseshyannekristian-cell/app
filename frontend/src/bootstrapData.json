@@ -1,0 +1,2177 @@
+{
+  "scps": [
+    {
+      "number": "SCP-173",
+      "name": "The Sculpture",
+      "class": "Euclid",
+      "threat": 3,
+      "breachable": true,
+      "procedure": "Kept in a locked container; personnel must maintain unbroken line of sight and never blink simultaneously."
+    },
+    {
+      "number": "SCP-096",
+      "name": "The Shy Guy",
+      "class": "Euclid",
+      "threat": 4,
+      "breachable": true,
+      "procedure": "Contained in a sealed cell with no viewing apparatus; no images of its face may exist on-site."
+    },
+    {
+      "number": "SCP-106",
+      "name": "The Old Man",
+      "class": "Keter",
+      "threat": 4,
+      "breachable": true,
+      "procedure": "Contained within a sealed lead-lined cell; recall protocols use a femur-bone lure and EM fields."
+    },
+    {
+      "number": "SCP-682",
+      "name": "Hard-to-Destroy Reptile",
+      "class": "Keter",
+      "threat": 5,
+      "breachable": true,
+      "procedure": "Submerged in hydrochloric acid; if it adapts, neutralisation by all available means is authorised."
+    },
+    {
+      "number": "SCP-049",
+      "name": "The Plague Doctor",
+      "class": "Euclid",
+      "threat": 3,
+      "breachable": true,
+      "procedure": "Standard humanoid cell; physical contact prohibited due to lethal 'cure' procedure."
+    },
+    {
+      "number": "SCP-035",
+      "name": "Possessive Mask",
+      "class": "Keter",
+      "threat": 4,
+      "breachable": true,
+      "procedure": "Sealed airtight container; corrosive secretions drained continuously, no skin contact."
+    },
+    {
+      "number": "SCP-939",
+      "name": "With Many Voices",
+      "class": "Keter",
+      "threat": 4,
+      "breachable": true,
+      "procedure": "Cold-environment habitat (<-26C reduces activity); fed live prey, handled in pairs only."
+    },
+    {
+      "number": "SCP-966",
+      "name": "Sleep Killer",
+      "class": "Keter",
+      "threat": 3,
+      "breachable": true,
+      "procedure": "Contained in a climate-controlled enclosure; personnel use thermal/IR optics to observe."
+    },
+    {
+      "number": "SCP-999",
+      "name": "The Tickle Monster",
+      "class": "Safe",
+      "threat": 1,
+      "breachable": true,
+      "procedure": "Open habitat; freely roams designated wing, beneficial morale effects, no restraint needed."
+    },
+    {
+      "number": "SCP-053",
+      "name": "Young Girl",
+      "class": "Euclid",
+      "threat": 2,
+      "breachable": true,
+      "procedure": "Comfortable furnished room; only D-class over 60 may interact, no living thing within 10m."
+    },
+    {
+      "number": "SCP-079",
+      "name": "Old AI",
+      "class": "Euclid",
+      "threat": 2,
+      "breachable": true,
+      "procedure": "Power supply isolated; no network connection, no external storage may be attached."
+    },
+    {
+      "number": "SCP-087",
+      "name": "The Stairwell",
+      "class": "Euclid",
+      "threat": 3,
+      "breachable": true,
+      "procedure": "Access door welded shut; exploration suspended, no light source exceeds limits inside."
+    },
+    {
+      "number": "SCP-457",
+      "name": "Burning Man",
+      "class": "Euclid",
+      "threat": 3,
+      "breachable": true,
+      "procedure": "Fire-suppression vault; deprived of oxygen and combustible material to limit size."
+    },
+    {
+      "number": "SCP-1048",
+      "name": "Builder Bear",
+      "class": "Keter",
+      "threat": 3,
+      "breachable": true,
+      "procedure": "Steel cell under 24h surveillance; constructs hostile copies, all materials removed."
+    },
+    {
+      "number": "SCP-1471",
+      "name": "MalO ver1.0.0",
+      "class": "Euclid",
+      "threat": 2,
+      "breachable": true,
+      "procedure": "App isolated on a Faraday-caged device; affected personnel monitored for apparitions."
+    },
+    {
+      "number": "SCP-2521",
+      "name": "...Taken by Shadow People",
+      "class": "Euclid",
+      "threat": 3,
+      "breachable": true,
+      "procedure": "All documentation pictographic only; never named or described in spoken/written word."
+    },
+    {
+      "number": "SCP-3008",
+      "name": "Infinite IKEA",
+      "class": "Euclid",
+      "threat": 3,
+      "breachable": true,
+      "procedure": "Storefront entrance sealed and guarded; no personnel enter the retail interior."
+    },
+    {
+      "number": "SCP-4666",
+      "name": "The Yule Man",
+      "class": "Keter",
+      "threat": 4,
+      "breachable": true,
+      "procedure": "Largely uncontained; tracked via abduction patterns, mobile task forces intercept."
+    },
+    {
+      "number": "SCP-008",
+      "name": "Zombie Plague",
+      "class": "Euclid",
+      "threat": 4,
+      "breachable": true,
+      "procedure": "Biohazard vault under multi-stage airlock; absolute pathogen isolation enforced."
+    },
+    {
+      "number": "SCP-914",
+      "name": "The Clockworks",
+      "class": "Safe",
+      "threat": 1,
+      "breachable": true,
+      "procedure": "Sealed chamber; only approved inputs processed via Rough/Fine/Very Fine settings."
+    },
+    {
+      "number": "SCP-055",
+      "name": "[unknown]",
+      "class": "Keter",
+      "threat": 3,
+      "breachable": true,
+      "procedure": "Antimemetic anomaly; containment documented only via indirect, self-keeping records."
+    },
+    {
+      "number": "SCP-16829",
+      "name": "The TV in Time",
+      "class": "Euclid",
+      "threat": 4,
+      "breachable": true,
+      "procedure": "Anchored in a Scranton Reality Anchor field with temporal-loop stabilisation; the screen must not be viewed by unsupervised personnel (Dimension Chemosic egress / carcinogenic exposure risk)."
+    },
+    {
+      "number": "SCP-105",
+      "name": "Iris",
+      "class": "Euclid",
+      "threat": 3,
+      "breachable": true,
+      "procedure": "Standard humanoid quarters; camera equipment issued only under supervision, exposed film destroyed after every session."
+    },
+    {
+      "number": "SCP-511",
+      "name": "Spider Goats",
+      "class": "Euclid",
+      "threat": 2,
+      "breachable": true,
+      "procedure": "Rural containment pen with reinforced fencing; webbing cleared daily, herd monitored for aggression spikes."
+    },
+    {
+      "number": "SCP-1025",
+      "name": "Encyclopaedia of Diseases",
+      "class": "Euclid",
+      "threat": 3,
+      "breachable": true,
+      "procedure": "Sealed in a lead-lined archive; reading permitted only through a remote camera feed, never in person."
+    },
+    {
+      "number": "SCP-1730",
+      "name": "The Way Out",
+      "class": "Euclid",
+      "threat": 3,
+      "breachable": true,
+      "procedure": "Door-based anomaly kept welded shut; entry logs cross-checked, personnel briefed against the false 'improved' timeline beyond it."
+    },
+    {
+      "number": "SCP-2000",
+      "name": "Contingency Machine",
+      "class": "Keter",
+      "threat": 5,
+      "breachable": true,
+      "procedure": "Deep-earth backup facility on standby power; activation authorised only under Site-20 mass-extinction protocol."
+    }
+  ],
+  "equipment": [
+    {
+      "id": "flashlight",
+      "name": "Reinforced Flashlight",
+      "dept": "Field",
+      "required_rank": 0,
+      "cost": 50,
+      "requires_research": false,
+      "description": "Standard-issue illumination. Available from day one."
+    },
+    {
+      "id": "keycard_l1",
+      "name": "Level 1 Keycard",
+      "dept": "Field",
+      "required_rank": 0,
+      "cost": 75,
+      "requires_research": false,
+      "description": "Opens low-clearance containment doors."
+    },
+    {
+      "id": "kevlar_vest",
+      "name": "Tactical Kevlar Vest",
+      "dept": "Field",
+      "required_rank": 2,
+      "cost": 200,
+      "requires_research": true,
+      "description": "Reduces ballistic damage from hostile factions."
+    },
+    {
+      "id": "epsilon_rifle",
+      "name": "Epsilon-11 Rifle",
+      "dept": "Field",
+      "required_rank": 4,
+      "cost": 450,
+      "requires_research": true,
+      "description": "MTF standard rifle effective against rogue operatives."
+    },
+    {
+      "id": "scranton_anchor",
+      "name": "Scranton Reality Anchor",
+      "dept": "Field",
+      "required_rank": 5,
+      "cost": 1200,
+      "requires_research": true,
+      "description": "Stabilises local reality; suppresses reality-bending anomalies."
+    },
+    {
+      "id": "micro_hid",
+      "name": "Micro-H.I.D. Emitter",
+      "dept": "Field",
+      "required_rank": 7,
+      "cost": 2000,
+      "requires_research": true,
+      "description": "High-intensity discharge weapon; lethal to durable Keter-class entities."
+    },
+    {
+      "id": "hazmat_suit",
+      "name": "Hazmat Containment Suit",
+      "dept": "Field",
+      "required_rank": 2,
+      "cost": 300,
+      "requires_research": true,
+      "description": "Protects against corrosive secretions and airborne hazards."
+    },
+    {
+      "id": "thermal_optics",
+      "name": "Thermal/IR Optics",
+      "dept": "Field",
+      "required_rank": 4,
+      "cost": 380,
+      "requires_research": true,
+      "description": "Reveals SCP-966 and other invisible thermal-signature entities."
+    },
+    {
+      "id": "femur_breaker",
+      "name": "Femur-Bone Recall Lure",
+      "dept": "Field",
+      "required_rank": 5,
+      "cost": 900,
+      "requires_research": true,
+      "description": "Recall device used to re-contain SCP-106."
+    },
+    {
+      "id": "memetic_kit",
+      "name": "Memetic Analysis Kit",
+      "dept": "Research",
+      "required_rank": 2,
+      "cost": 350,
+      "requires_research": true,
+      "description": "Lab kit for studying cognitohazards safely."
+    },
+    {
+      "id": "anomaly_scanner",
+      "name": "Anomalous Signature Scanner",
+      "dept": "Research",
+      "required_rank": 4,
+      "cost": 600,
+      "requires_research": true,
+      "description": "Detects Hume fluctuations and classifies anomalies."
+    },
+    {
+      "id": "kant_counter",
+      "name": "Kant Counter",
+      "dept": "Research",
+      "required_rank": 5,
+      "cost": 850,
+      "requires_research": true,
+      "description": "Measures local reality strength (Humes) for breach prediction."
+    },
+    {
+      "id": "memetic_inoculant",
+      "name": "Memetic Inoculant Serum",
+      "dept": "Research",
+      "required_rank": 5,
+      "cost": 1100,
+      "requires_research": true,
+      "description": "Grants temporary resistance to memetic/cognitohazardous effects."
+    },
+    {
+      "id": "cryo_unit",
+      "name": "Cryogenic Containment Unit",
+      "dept": "Research",
+      "required_rank": 7,
+      "cost": 1500,
+      "requires_research": true,
+      "description": "Sub-zero habitat module required to contain SCP-939."
+    },
+    {
+      "id": "faraday_rig",
+      "name": "Faraday Isolation Rig",
+      "dept": "Research",
+      "required_rank": 4,
+      "cost": 500,
+      "requires_research": true,
+      "description": "Electromagnetically isolates digital anomalies (SCP-079/1471)."
+    },
+    {
+      "id": "riot_shield",
+      "name": "Ballistic Riot Shield",
+      "dept": "Field",
+      "required_rank": 2,
+      "cost": 240,
+      "requires_research": true,
+      "description": "Portable shield wall; blocks melee lunges and thrown debris."
+    },
+    {
+      "id": "sedative_darts",
+      "name": "Sedative Dart Rifle",
+      "dept": "Field",
+      "required_rank": 4,
+      "cost": 380,
+      "requires_research": true,
+      "description": "Non-lethal tranquiliser rounds for subduing hostile humanoid anomalies."
+    },
+    {
+      "id": "bio_foam",
+      "name": "Rapid Biohazard Foam",
+      "dept": "Field",
+      "required_rank": 4,
+      "cost": 400,
+      "requires_research": true,
+      "description": "Expanding foam that seals contamination and slows corrosive or organic threats."
+    },
+    {
+      "id": "emp_charge",
+      "name": "EMP Charge Kit",
+      "dept": "Research",
+      "required_rank": 5,
+      "cost": 700,
+      "requires_research": true,
+      "description": "Disables electronic and digital-based anomalies on detonation."
+    },
+    {
+      "id": "antimemetic_agent",
+      "name": "Antimemetic Suppressant",
+      "dept": "Research",
+      "required_rank": 7,
+      "cost": 1300,
+      "requires_research": true,
+      "description": "Temporary resistance serum against antimemetic and amnestic-triggering effects."
+    },
+    {
+      "id": "modular_webbing",
+      "name": "Modular Tactical Webbing",
+      "dept": "Logistics",
+      "required_rank": 3,
+      "cost": 450,
+      "requires_research": true,
+      "description": "Extra harness webbing for carrying one additional loadout item.",
+      "loadout_slot_bonus": 1
+    },
+    {
+      "id": "rapid_deploy_case",
+      "name": "Rapid-Deploy Equipment Case",
+      "dept": "Logistics",
+      "required_rank": 8,
+      "cost": 1600,
+      "requires_research": true,
+      "description": "Expanded quick-access case adds one more loadout slot for elite responders.",
+      "loadout_slot_bonus": 1
+    }
+  ],
+  "research": [
+    {
+      "id": "res_kevlar_vest",
+      "name": "R&D: Tactical Kevlar Vest",
+      "category": "Equipment",
+      "objective": "Complete prototype testing to authorise Tactical Kevlar Vest for site requisition.",
+      "description": "Reduces ballistic damage from hostile factions.",
+      "required_rank": 2,
+      "cost": 400,
+      "unlocks_equipment": "kevlar_vest"
+    },
+    {
+      "id": "res_epsilon_rifle",
+      "name": "R&D: Epsilon-11 Rifle",
+      "category": "Equipment",
+      "objective": "Complete prototype testing to authorise Epsilon-11 Rifle for site requisition.",
+      "description": "MTF standard rifle effective against rogue operatives.",
+      "required_rank": 4,
+      "cost": 700,
+      "unlocks_equipment": "epsilon_rifle"
+    },
+    {
+      "id": "res_scranton_anchor",
+      "name": "R&D: Scranton Reality Anchor",
+      "category": "Equipment",
+      "objective": "Complete prototype testing to authorise Scranton Reality Anchor for site requisition.",
+      "description": "Stabilises local reality; suppresses reality-bending anomalies.",
+      "required_rank": 5,
+      "cost": 850,
+      "unlocks_equipment": "scranton_anchor"
+    },
+    {
+      "id": "res_micro_hid",
+      "name": "R&D: Micro-H.I.D. Emitter",
+      "category": "Equipment",
+      "objective": "Complete prototype testing to authorise Micro-H.I.D. Emitter for site requisition.",
+      "description": "High-intensity discharge weapon; lethal to durable Keter-class entities.",
+      "required_rank": 7,
+      "cost": 1150,
+      "unlocks_equipment": "micro_hid"
+    },
+    {
+      "id": "res_hazmat_suit",
+      "name": "R&D: Hazmat Containment Suit",
+      "category": "Equipment",
+      "objective": "Complete prototype testing to authorise Hazmat Containment Suit for site requisition.",
+      "description": "Protects against corrosive secretions and airborne hazards.",
+      "required_rank": 2,
+      "cost": 400,
+      "unlocks_equipment": "hazmat_suit"
+    },
+    {
+      "id": "res_thermal_optics",
+      "name": "R&D: Thermal/IR Optics",
+      "category": "Equipment",
+      "objective": "Complete prototype testing to authorise Thermal/IR Optics for site requisition.",
+      "description": "Reveals SCP-966 and other invisible thermal-signature entities.",
+      "required_rank": 4,
+      "cost": 700,
+      "unlocks_equipment": "thermal_optics"
+    },
+    {
+      "id": "res_femur_breaker",
+      "name": "R&D: Femur-Bone Recall Lure",
+      "category": "Equipment",
+      "objective": "Complete prototype testing to authorise Femur-Bone Recall Lure for site requisition.",
+      "description": "Recall device used to re-contain SCP-106.",
+      "required_rank": 5,
+      "cost": 850,
+      "unlocks_equipment": "femur_breaker"
+    },
+    {
+      "id": "res_memetic_kit",
+      "name": "R&D: Memetic Analysis Kit",
+      "category": "Equipment",
+      "objective": "Complete prototype testing to authorise Memetic Analysis Kit for site requisition.",
+      "description": "Lab kit for studying cognitohazards safely.",
+      "required_rank": 2,
+      "cost": 450,
+      "unlocks_equipment": "memetic_kit"
+    },
+    {
+      "id": "res_anomaly_scanner",
+      "name": "R&D: Anomalous Signature Scanner",
+      "category": "Equipment",
+      "objective": "Complete prototype testing to authorise Anomalous Signature Scanner for site requisition.",
+      "description": "Detects Hume fluctuations and classifies anomalies.",
+      "required_rank": 4,
+      "cost": 750,
+      "unlocks_equipment": "anomaly_scanner"
+    },
+    {
+      "id": "res_kant_counter",
+      "name": "R&D: Kant Counter",
+      "category": "Equipment",
+      "objective": "Complete prototype testing to authorise Kant Counter for site requisition.",
+      "description": "Measures local reality strength (Humes) for breach prediction.",
+      "required_rank": 5,
+      "cost": 900,
+      "unlocks_equipment": "kant_counter"
+    },
+    {
+      "id": "res_memetic_inoculant",
+      "name": "R&D: Memetic Inoculant Serum",
+      "category": "Equipment",
+      "objective": "Complete prototype testing to authorise Memetic Inoculant Serum for site requisition.",
+      "description": "Grants temporary resistance to memetic/cognitohazardous effects.",
+      "required_rank": 5,
+      "cost": 900,
+      "unlocks_equipment": "memetic_inoculant"
+    },
+    {
+      "id": "res_cryo_unit",
+      "name": "R&D: Cryogenic Containment Unit",
+      "category": "Equipment",
+      "objective": "Complete prototype testing to authorise Cryogenic Containment Unit for site requisition.",
+      "description": "Sub-zero habitat module required to contain SCP-939.",
+      "required_rank": 7,
+      "cost": 1200,
+      "unlocks_equipment": "cryo_unit"
+    },
+    {
+      "id": "res_faraday_rig",
+      "name": "R&D: Faraday Isolation Rig",
+      "category": "Equipment",
+      "objective": "Complete prototype testing to authorise Faraday Isolation Rig for site requisition.",
+      "description": "Electromagnetically isolates digital anomalies (SCP-079/1471).",
+      "required_rank": 4,
+      "cost": 750,
+      "unlocks_equipment": "faraday_rig"
+    },
+    {
+      "id": "res_riot_shield",
+      "name": "R&D: Ballistic Riot Shield",
+      "category": "Equipment",
+      "objective": "Complete prototype testing to authorise Ballistic Riot Shield for site requisition.",
+      "description": "Portable shield wall; blocks melee lunges and thrown debris.",
+      "required_rank": 2,
+      "cost": 400,
+      "unlocks_equipment": "riot_shield"
+    },
+    {
+      "id": "res_sedative_darts",
+      "name": "R&D: Sedative Dart Rifle",
+      "category": "Equipment",
+      "objective": "Complete prototype testing to authorise Sedative Dart Rifle for site requisition.",
+      "description": "Non-lethal tranquiliser rounds for subduing hostile humanoid anomalies.",
+      "required_rank": 4,
+      "cost": 700,
+      "unlocks_equipment": "sedative_darts"
+    },
+    {
+      "id": "res_bio_foam",
+      "name": "R&D: Rapid Biohazard Foam",
+      "category": "Equipment",
+      "objective": "Complete prototype testing to authorise Rapid Biohazard Foam for site requisition.",
+      "description": "Expanding foam that seals contamination and slows corrosive or organic threats.",
+      "required_rank": 4,
+      "cost": 700,
+      "unlocks_equipment": "bio_foam"
+    },
+    {
+      "id": "res_emp_charge",
+      "name": "R&D: EMP Charge Kit",
+      "category": "Equipment",
+      "objective": "Complete prototype testing to authorise EMP Charge Kit for site requisition.",
+      "description": "Disables electronic and digital-based anomalies on detonation.",
+      "required_rank": 5,
+      "cost": 900,
+      "unlocks_equipment": "emp_charge"
+    },
+    {
+      "id": "res_antimemetic_agent",
+      "name": "R&D: Antimemetic Suppressant",
+      "category": "Equipment",
+      "objective": "Complete prototype testing to authorise Antimemetic Suppressant for site requisition.",
+      "description": "Temporary resistance serum against antimemetic and amnestic-triggering effects.",
+      "required_rank": 7,
+      "cost": 1200,
+      "unlocks_equipment": "antimemetic_agent"
+    },
+    {
+      "id": "res_modular_webbing",
+      "name": "R&D: Modular Tactical Webbing",
+      "category": "Equipment",
+      "objective": "Complete prototype testing to authorise Modular Tactical Webbing for site requisition.",
+      "description": "Extra harness webbing for carrying one additional loadout item.",
+      "required_rank": 3,
+      "cost": 550,
+      "unlocks_equipment": "modular_webbing"
+    },
+    {
+      "id": "res_rapid_deploy_case",
+      "name": "R&D: Rapid-Deploy Equipment Case",
+      "category": "Equipment",
+      "objective": "Complete prototype testing to authorise Rapid-Deploy Equipment Case for site requisition.",
+      "description": "Expanded quick-access case adds one more loadout slot for elite responders.",
+      "required_rank": 8,
+      "cost": 1300,
+      "unlocks_equipment": "rapid_deploy_case"
+    },
+    {
+      "id": "proc_173",
+      "name": "Procedure: SCP-173 Observation Rota",
+      "category": "ContainmentProcedure",
+      "objective": "Design a fail-safe line-of-sight rotation eliminating simultaneous blinking.",
+      "required_rank": 2,
+      "cost": 200,
+      "description": "Improves SCP-173 containment reliability.",
+      "unlocks_equipment": null
+    },
+    {
+      "id": "proc_106",
+      "name": "Procedure: SCP-106 Recall Protocol",
+      "category": "ContainmentProcedure",
+      "objective": "Refine femur-breaker recall and EM-field re-containment sequence.",
+      "required_rank": 5,
+      "cost": 500,
+      "description": "Enables reliable SCP-106 re-containment.",
+      "unlocks_equipment": null
+    },
+    {
+      "id": "proc_939",
+      "name": "Procedure: SCP-939 Cold Habitat",
+      "category": "ContainmentProcedure",
+      "objective": "Establish sub-zero feeding and handling protocol for SCP-939.",
+      "required_rank": 7,
+      "cost": 700,
+      "description": "Reduces SCP-939 activity and breach risk.",
+      "unlocks_equipment": null
+    },
+    {
+      "id": "proc_096",
+      "name": "Procedure: SCP-096 Visual Blackout",
+      "category": "ContainmentProcedure",
+      "objective": "Implement site-wide image scrubbing to prevent face exposure.",
+      "required_rank": 4,
+      "cost": 400,
+      "description": "Prevents SCP-096 trigger events.",
+      "unlocks_equipment": null
+    },
+    {
+      "id": "proc_682",
+      "name": "Procedure: SCP-682 Acid Submersion",
+      "category": "ContainmentProcedure",
+      "objective": "Optimise hydrochloric submersion and adaptation monitoring.",
+      "required_rank": 9,
+      "cost": 900,
+      "description": "Slows SCP-682 adaptation during containment.",
+      "unlocks_equipment": null
+    },
+    {
+      "id": "proc_035",
+      "name": "Procedure: SCP-035 Secretion Drainage",
+      "category": "ContainmentProcedure",
+      "objective": "Automate corrosive secretion drainage and no-contact handling.",
+      "required_rank": 7,
+      "cost": 650,
+      "description": "Stabilises SCP-035 containment.",
+      "unlocks_equipment": null
+    },
+    {
+      "id": "proc_16829",
+      "name": "Procedure: SCP-16829 Temporal Loop Stabilization",
+      "category": "ContainmentProcedure",
+      "objective": "Develop reality-anchored stabilisation preventing dimensional egress and temporal looping (Dimension Chemosic).",
+      "required_rank": 9,
+      "cost": 900,
+      "description": "Stabilises SCP-16829 and shields personnel from temporal/carcinogenic exposure.",
+      "unlocks_equipment": null
+    },
+    {
+      "id": "proc_1025",
+      "name": "Procedure: SCP-1025 Remote Reading Protocol",
+      "category": "ContainmentProcedure",
+      "objective": "Formalise remote-only reading access so no researcher makes direct physical contact.",
+      "required_rank": 4,
+      "cost": 350,
+      "description": "Prevents accidental disease manifestation from direct SCP-1025 reading.",
+      "unlocks_equipment": null
+    },
+    {
+      "id": "proc_2000",
+      "name": "Procedure: SCP-2000 Activation Authorisation",
+      "category": "ContainmentProcedure",
+      "objective": "Codify multi-signature activation codes and standby power rotation for the contingency machine.",
+      "required_rank": 9,
+      "cost": 1200,
+      "description": "Prevents unauthorised activation or dormant-state drift of SCP-2000.",
+      "unlocks_equipment": null
+    }
+  ],
+  "operations": [
+    {
+      "id": "op_SCP_173",
+      "name": "Contain SCP-173",
+      "target": "SCP-173 — The Sculpture",
+      "description": "Kept in a locked container; personnel must maintain unbroken line of sight and never blink simultaneously.",
+      "required_rank": 4,
+      "difficulty": 3,
+      "reward_credits": 450,
+      "reward_research": 240,
+      "reward_xp": 600,
+      "required_research": "proc_173",
+      "required_equipment": null
+    },
+    {
+      "id": "op_SCP_096",
+      "name": "Contain SCP-096",
+      "target": "SCP-096 — The Shy Guy",
+      "description": "Contained in a sealed cell with no viewing apparatus; no images of its face may exist on-site.",
+      "required_rank": 7,
+      "difficulty": 4,
+      "reward_credits": 600,
+      "reward_research": 320,
+      "reward_xp": 800,
+      "required_research": "proc_096",
+      "required_equipment": "scranton_anchor"
+    },
+    {
+      "id": "op_SCP_106",
+      "name": "Contain SCP-106",
+      "target": "SCP-106 — The Old Man",
+      "description": "Contained within a sealed lead-lined cell; recall protocols use a femur-bone lure and EM fields.",
+      "required_rank": 7,
+      "difficulty": 4,
+      "reward_credits": 600,
+      "reward_research": 320,
+      "reward_xp": 800,
+      "required_research": "proc_106",
+      "required_equipment": "scranton_anchor"
+    },
+    {
+      "id": "op_SCP_682",
+      "name": "Contain SCP-682",
+      "target": "SCP-682 — Hard-to-Destroy Reptile",
+      "description": "Submerged in hydrochloric acid; if it adapts, neutralisation by all available means is authorised.",
+      "required_rank": 9,
+      "difficulty": 5,
+      "reward_credits": 750,
+      "reward_research": 400,
+      "reward_xp": 1000,
+      "required_research": "proc_682",
+      "required_equipment": "micro_hid"
+    },
+    {
+      "id": "op_SCP_049",
+      "name": "Contain SCP-049",
+      "target": "SCP-049 — The Plague Doctor",
+      "description": "Standard humanoid cell; physical contact prohibited due to lethal 'cure' procedure.",
+      "required_rank": 4,
+      "difficulty": 3,
+      "reward_credits": 450,
+      "reward_research": 240,
+      "reward_xp": 600,
+      "required_research": null,
+      "required_equipment": null
+    },
+    {
+      "id": "op_SCP_035",
+      "name": "Contain SCP-035",
+      "target": "SCP-035 — Possessive Mask",
+      "description": "Sealed airtight container; corrosive secretions drained continuously, no skin contact.",
+      "required_rank": 7,
+      "difficulty": 4,
+      "reward_credits": 600,
+      "reward_research": 320,
+      "reward_xp": 800,
+      "required_research": "proc_035",
+      "required_equipment": "scranton_anchor"
+    },
+    {
+      "id": "op_SCP_939",
+      "name": "Contain SCP-939",
+      "target": "SCP-939 — With Many Voices",
+      "description": "Cold-environment habitat (<-26C reduces activity); fed live prey, handled in pairs only.",
+      "required_rank": 7,
+      "difficulty": 4,
+      "reward_credits": 600,
+      "reward_research": 320,
+      "reward_xp": 800,
+      "required_research": "proc_939",
+      "required_equipment": "scranton_anchor"
+    },
+    {
+      "id": "op_SCP_966",
+      "name": "Contain SCP-966",
+      "target": "SCP-966 — Sleep Killer",
+      "description": "Contained in a climate-controlled enclosure; personnel use thermal/IR optics to observe.",
+      "required_rank": 4,
+      "difficulty": 3,
+      "reward_credits": 450,
+      "reward_research": 240,
+      "reward_xp": 600,
+      "required_research": null,
+      "required_equipment": null
+    },
+    {
+      "id": "op_SCP_999",
+      "name": "Contain SCP-999",
+      "target": "SCP-999 — The Tickle Monster",
+      "description": "Open habitat; freely roams designated wing, beneficial morale effects, no restraint needed.",
+      "required_rank": 0,
+      "difficulty": 1,
+      "reward_credits": 150,
+      "reward_research": 80,
+      "reward_xp": 200,
+      "required_research": null,
+      "required_equipment": null
+    },
+    {
+      "id": "op_SCP_053",
+      "name": "Contain SCP-053",
+      "target": "SCP-053 — Young Girl",
+      "description": "Comfortable furnished room; only D-class over 60 may interact, no living thing within 10m.",
+      "required_rank": 2,
+      "difficulty": 2,
+      "reward_credits": 300,
+      "reward_research": 160,
+      "reward_xp": 400,
+      "required_research": null,
+      "required_equipment": null
+    },
+    {
+      "id": "op_SCP_079",
+      "name": "Contain SCP-079",
+      "target": "SCP-079 — Old AI",
+      "description": "Power supply isolated; no network connection, no external storage may be attached.",
+      "required_rank": 2,
+      "difficulty": 2,
+      "reward_credits": 300,
+      "reward_research": 160,
+      "reward_xp": 400,
+      "required_research": null,
+      "required_equipment": null
+    },
+    {
+      "id": "op_SCP_087",
+      "name": "Contain SCP-087",
+      "target": "SCP-087 — The Stairwell",
+      "description": "Access door welded shut; exploration suspended, no light source exceeds limits inside.",
+      "required_rank": 4,
+      "difficulty": 3,
+      "reward_credits": 450,
+      "reward_research": 240,
+      "reward_xp": 600,
+      "required_research": null,
+      "required_equipment": null
+    },
+    {
+      "id": "op_SCP_457",
+      "name": "Contain SCP-457",
+      "target": "SCP-457 — Burning Man",
+      "description": "Fire-suppression vault; deprived of oxygen and combustible material to limit size.",
+      "required_rank": 4,
+      "difficulty": 3,
+      "reward_credits": 450,
+      "reward_research": 240,
+      "reward_xp": 600,
+      "required_research": null,
+      "required_equipment": null
+    },
+    {
+      "id": "op_SCP_1048",
+      "name": "Contain SCP-1048",
+      "target": "SCP-1048 — Builder Bear",
+      "description": "Steel cell under 24h surveillance; constructs hostile copies, all materials removed.",
+      "required_rank": 4,
+      "difficulty": 3,
+      "reward_credits": 450,
+      "reward_research": 240,
+      "reward_xp": 600,
+      "required_research": null,
+      "required_equipment": null
+    },
+    {
+      "id": "op_SCP_1471",
+      "name": "Contain SCP-1471",
+      "target": "SCP-1471 — MalO ver1.0.0",
+      "description": "App isolated on a Faraday-caged device; affected personnel monitored for apparitions.",
+      "required_rank": 2,
+      "difficulty": 2,
+      "reward_credits": 300,
+      "reward_research": 160,
+      "reward_xp": 400,
+      "required_research": null,
+      "required_equipment": null
+    },
+    {
+      "id": "op_SCP_2521",
+      "name": "Contain SCP-2521",
+      "target": "SCP-2521 — ...Taken by Shadow People",
+      "description": "All documentation pictographic only; never named or described in spoken/written word.",
+      "required_rank": 4,
+      "difficulty": 3,
+      "reward_credits": 450,
+      "reward_research": 240,
+      "reward_xp": 600,
+      "required_research": null,
+      "required_equipment": null
+    },
+    {
+      "id": "op_SCP_3008",
+      "name": "Contain SCP-3008",
+      "target": "SCP-3008 — Infinite IKEA",
+      "description": "Storefront entrance sealed and guarded; no personnel enter the retail interior.",
+      "required_rank": 4,
+      "difficulty": 3,
+      "reward_credits": 450,
+      "reward_research": 240,
+      "reward_xp": 600,
+      "required_research": null,
+      "required_equipment": null
+    },
+    {
+      "id": "op_SCP_4666",
+      "name": "Contain SCP-4666",
+      "target": "SCP-4666 — The Yule Man",
+      "description": "Largely uncontained; tracked via abduction patterns, mobile task forces intercept.",
+      "required_rank": 7,
+      "difficulty": 4,
+      "reward_credits": 600,
+      "reward_research": 320,
+      "reward_xp": 800,
+      "required_research": null,
+      "required_equipment": "scranton_anchor"
+    },
+    {
+      "id": "op_SCP_008",
+      "name": "Contain SCP-008",
+      "target": "SCP-008 — Zombie Plague",
+      "description": "Biohazard vault under multi-stage airlock; absolute pathogen isolation enforced.",
+      "required_rank": 7,
+      "difficulty": 4,
+      "reward_credits": 600,
+      "reward_research": 320,
+      "reward_xp": 800,
+      "required_research": null,
+      "required_equipment": "scranton_anchor"
+    },
+    {
+      "id": "op_SCP_914",
+      "name": "Contain SCP-914",
+      "target": "SCP-914 — The Clockworks",
+      "description": "Sealed chamber; only approved inputs processed via Rough/Fine/Very Fine settings.",
+      "required_rank": 0,
+      "difficulty": 1,
+      "reward_credits": 150,
+      "reward_research": 80,
+      "reward_xp": 200,
+      "required_research": null,
+      "required_equipment": null
+    },
+    {
+      "id": "op_SCP_055",
+      "name": "Contain SCP-055",
+      "target": "SCP-055 — [unknown]",
+      "description": "Antimemetic anomaly; containment documented only via indirect, self-keeping records.",
+      "required_rank": 4,
+      "difficulty": 3,
+      "reward_credits": 450,
+      "reward_research": 240,
+      "reward_xp": 600,
+      "required_research": null,
+      "required_equipment": null
+    },
+    {
+      "id": "op_SCP_16829",
+      "name": "Contain SCP-16829",
+      "target": "SCP-16829 — The TV in Time",
+      "description": "Anchored in a Scranton Reality Anchor field with temporal-loop stabilisation; the screen must not be viewed by unsupervised personnel (Dimension Chemosic egress / carcinogenic exposure risk).",
+      "required_rank": 7,
+      "difficulty": 4,
+      "reward_credits": 600,
+      "reward_research": 320,
+      "reward_xp": 800,
+      "required_research": "proc_16829",
+      "required_equipment": "scranton_anchor"
+    },
+    {
+      "id": "op_SCP_105",
+      "name": "Contain SCP-105",
+      "target": "SCP-105 — Iris",
+      "description": "Standard humanoid quarters; camera equipment issued only under supervision, exposed film destroyed after every session.",
+      "required_rank": 4,
+      "difficulty": 3,
+      "reward_credits": 450,
+      "reward_research": 240,
+      "reward_xp": 600,
+      "required_research": null,
+      "required_equipment": null
+    },
+    {
+      "id": "op_SCP_511",
+      "name": "Contain SCP-511",
+      "target": "SCP-511 — Spider Goats",
+      "description": "Rural containment pen with reinforced fencing; webbing cleared daily, herd monitored for aggression spikes.",
+      "required_rank": 2,
+      "difficulty": 2,
+      "reward_credits": 300,
+      "reward_research": 160,
+      "reward_xp": 400,
+      "required_research": null,
+      "required_equipment": null
+    },
+    {
+      "id": "op_SCP_1025",
+      "name": "Contain SCP-1025",
+      "target": "SCP-1025 — Encyclopaedia of Diseases",
+      "description": "Sealed in a lead-lined archive; reading permitted only through a remote camera feed, never in person.",
+      "required_rank": 4,
+      "difficulty": 3,
+      "reward_credits": 450,
+      "reward_research": 240,
+      "reward_xp": 600,
+      "required_research": "proc_1025",
+      "required_equipment": null
+    },
+    {
+      "id": "op_SCP_1730",
+      "name": "Contain SCP-1730",
+      "target": "SCP-1730 — The Way Out",
+      "description": "Door-based anomaly kept welded shut; entry logs cross-checked, personnel briefed against the false 'improved' timeline beyond it.",
+      "required_rank": 4,
+      "difficulty": 3,
+      "reward_credits": 450,
+      "reward_research": 240,
+      "reward_xp": 600,
+      "required_research": null,
+      "required_equipment": null
+    },
+    {
+      "id": "op_SCP_2000",
+      "name": "Contain SCP-2000",
+      "target": "SCP-2000 — Contingency Machine",
+      "description": "Deep-earth backup facility on standby power; activation authorised only under Site-20 mass-extinction protocol.",
+      "required_rank": 9,
+      "difficulty": 5,
+      "reward_credits": 750,
+      "reward_research": 400,
+      "reward_xp": 1000,
+      "required_research": "proc_2000",
+      "required_equipment": "micro_hid"
+    },
+    {
+      "id": "op_rogue_0",
+      "name": "Neutralise: Chaos Insurgency Cell 'Black Queen'",
+      "target": "Chaos Insurgency Cell 'Black Queen' [Chaos Insurgency]",
+      "description": "Defected Foundation splinter; steals anomalies for weaponisation.",
+      "required_rank": 7,
+      "difficulty": 4,
+      "reward_credits": 720,
+      "reward_research": 240,
+      "reward_xp": 880,
+      "required_research": null,
+      "required_equipment": "epsilon_rifle"
+    },
+    {
+      "id": "op_rogue_1",
+      "name": "Neutralise: Defected MTF Nine-Tailed Fox Squad",
+      "target": "Defected MTF Nine-Tailed Fox Squad [Rogue MTF Epsilon-11]",
+      "description": "Elite operatives gone dark with breach-grade equipment.",
+      "required_rank": 9,
+      "difficulty": 5,
+      "reward_credits": 900,
+      "reward_research": 300,
+      "reward_xp": 1100,
+      "required_research": null,
+      "required_equipment": "epsilon_rifle"
+    },
+    {
+      "id": "op_rogue_2",
+      "name": "Neutralise: Serpent's Hand Coven",
+      "target": "Serpent's Hand Coven [Serpent's Hand]",
+      "description": "Anomaly-sympathetic insurgents using the Library to infiltrate.",
+      "required_rank": 4,
+      "difficulty": 3,
+      "reward_credits": 540,
+      "reward_research": 180,
+      "reward_xp": 660,
+      "required_research": null,
+      "required_equipment": "epsilon_rifle"
+    },
+    {
+      "id": "op_rogue_3",
+      "name": "Neutralise: Rogue MTF Alpha-1 'Red Right Hand'",
+      "target": "Rogue MTF Alpha-1 'Red Right Hand' [Rogue O5 Guard]",
+      "description": "Compromised O5 protection detail; highest clearance threat.",
+      "required_rank": 9,
+      "difficulty": 5,
+      "reward_credits": 900,
+      "reward_research": 300,
+      "reward_xp": 1100,
+      "required_research": null,
+      "required_equipment": "epsilon_rifle"
+    },
+    {
+      "id": "op_rogue_4",
+      "name": "Neutralise: GOC Strike Team (Hostile)",
+      "target": "GOC Strike Team (Hostile) [Global Occult Coalition]",
+      "description": "Destruction-doctrine rivals seeking to neutralise contained assets.",
+      "required_rank": 7,
+      "difficulty": 4,
+      "reward_credits": 720,
+      "reward_research": 240,
+      "reward_xp": 880,
+      "required_research": null,
+      "required_equipment": "epsilon_rifle"
+    },
+    {
+      "id": "op_rogue_5",
+      "name": "Neutralise: Marshall, Carter & Dark Operatives",
+      "target": "Marshall, Carter & Dark Operatives [MC&D]",
+      "description": "Anomalous black-market agents extracting items for auction.",
+      "required_rank": 4,
+      "difficulty": 3,
+      "reward_credits": 540,
+      "reward_research": 180,
+      "reward_xp": 660,
+      "required_research": null,
+      "required_equipment": "epsilon_rifle"
+    },
+    {
+      "id": "op_rogue_6",
+      "name": "Neutralise: Defected MTF Tau-5 'Samsara'",
+      "target": "Defected MTF Tau-5 'Samsara' [Rogue Cyborg MTF]",
+      "description": "Augmented unit malfunctioning after anomalous exposure.",
+      "required_rank": 7,
+      "difficulty": 4,
+      "reward_credits": 720,
+      "reward_research": 240,
+      "reward_xp": 880,
+      "required_research": null,
+      "required_equipment": "epsilon_rifle"
+    },
+    {
+      "id": "op_rogue_7",
+      "name": "Neutralise: Insurgency Sleeper Agent",
+      "target": "Insurgency Sleeper Agent [Chaos Insurgency]",
+      "description": "Embedded site staff leaking containment schematics.",
+      "required_rank": 2,
+      "difficulty": 2,
+      "reward_credits": 360,
+      "reward_research": 120,
+      "reward_xp": 440,
+      "required_research": null,
+      "required_equipment": "epsilon_rifle"
+    }
+  ],
+  "ranks": [
+    {
+      "level": 0,
+      "title": "Class-D Recruit",
+      "clearance": 1,
+      "xp_required": 0,
+      "credit_reward": 0,
+      "research_credit_reward": 0
+    },
+    {
+      "level": 1,
+      "title": "Junior Researcher",
+      "clearance": 1,
+      "xp_required": 400,
+      "credit_reward": 200,
+      "research_credit_reward": 100
+    },
+    {
+      "level": 2,
+      "title": "Researcher",
+      "clearance": 2,
+      "xp_required": 900,
+      "credit_reward": 350,
+      "research_credit_reward": 175
+    },
+    {
+      "level": 3,
+      "title": "Senior Researcher",
+      "clearance": 2,
+      "xp_required": 1800,
+      "credit_reward": 550,
+      "research_credit_reward": 275
+    },
+    {
+      "level": 4,
+      "title": "Containment Specialist",
+      "clearance": 3,
+      "xp_required": 3200,
+      "credit_reward": 800,
+      "research_credit_reward": 400
+    },
+    {
+      "level": 5,
+      "title": "Site Supervisor",
+      "clearance": 3,
+      "xp_required": 5200,
+      "credit_reward": 1100,
+      "research_credit_reward": 550
+    },
+    {
+      "level": 6,
+      "title": "Site Director",
+      "clearance": 4,
+      "xp_required": 7800,
+      "credit_reward": 1500,
+      "research_credit_reward": 750
+    },
+    {
+      "level": 7,
+      "title": "Assistant Director",
+      "clearance": 4,
+      "xp_required": 11000,
+      "credit_reward": 2000,
+      "research_credit_reward": 1000
+    },
+    {
+      "level": 8,
+      "title": "O5 Council Liaison",
+      "clearance": 5,
+      "xp_required": 15000,
+      "credit_reward": 2600,
+      "research_credit_reward": 1300
+    },
+    {
+      "level": 9,
+      "title": "O5 Overseer (OMEGA BLACK)",
+      "clearance": 5,
+      "xp_required": 20000,
+      "credit_reward": 3500,
+      "research_credit_reward": 1750
+    }
+  ],
+  "personnel": [
+    {
+      "file_no": "S20-PERS-05-GUNZ",
+      "codename": "GUNZ",
+      "real_name": "(CLASSIFIED)",
+      "position": "Member of the O5 Council",
+      "clearance": "Level 5 / OMEGA BLACK",
+      "status": "Active",
+      "nationality": "Canadian (former JTF-2 Technical Specialist)",
+      "affiliation": "Technological Development Department",
+      "aliases": "Gunz, O5, The Technician, Semizuse",
+      "anomalous_trait": "Bright blue glowing eyes resulting from repeated SCP-16829 exposure.",
+      "bio": "During a breach event originating in Sector-[REDACTED], O5-0 Gunz coordinated real-time containment protocols, ordered the evacuation of non-essential personnel, and personally supervised the sealing of affected corridors. Post-incident analysis confirms his rapid decision-making and technical expertise directly reduced potential casualties.",
+      "o5_notes": "\"Gunz is suspected to use SCP-16829 for traveling between sites. Some personnel follow orders. Some hold the line when orders fail.\" — Site-20 Security Evaluation Board"
+    },
+    {
+      "file_no": "S20-PERS-00420-CHEMOSIC",
+      "codename": "CHEMOSIC",
+      "real_name": "(REDACTED)",
+      "position": "Site Supervisor — Site-20",
+      "clearance": "Level 5 / O5 Council Access",
+      "status": "Active — Limited Field Deployment",
+      "nationality": "Canadian (former JTF-2 Assaulter / Sniper / Team Leader)",
+      "affiliation": "Former Commander, MTF XI-87 \"Binge Watchers\"",
+      "aliases": "Chemosic",
+      "anomalous_trait": "In remission from cancer attributed to repeated exposure to SCP-16829 (\"Dimension Chemosic\"). Under ongoing Site-20 medical monitoring.",
+      "bio": "Led 60+ successful operations involving high-risk SCPs, including multiple incursions into SCP-16829. Expert in information warfare, psychological operations and memetic-hazard countermeasures. Medically retired from field command and promoted to Site Supervisor: oversees all Site-20 operations, personnel and containment protocols.",
+      "o5_notes": "\"Chemosic is one of the few individuals we trust implicitly with both the protection of the Foundation and its darkest secrets. His experience, judgment and loyalty are unmatched. Site-20 is in capable hands.\" — O5-[REDACTED]"
+    },
+    {
+      "file_no": "S20-PERS-RD-LEAD",
+      "codename": "HEAD RESEARCHER",
+      "real_name": "(REDACTED)",
+      "position": "Head Researcher — Site-20 Research Division",
+      "clearance": "Level 4",
+      "status": "Active",
+      "nationality": "(REDACTED)",
+      "affiliation": "Site-20 Research Division",
+      "aliases": "—",
+      "anomalous_trait": "None on record.",
+      "bio": "Directs Site-20's anomaly research portfolio, including active study files on SCP-173, SCP-096, SCP-049 and SCP-682. Authorises research projects and containment-procedure development that feed the Research Division and Containment Operations.",
+      "o5_notes": "\"Approves the science that keeps the cells closed. Pragmatic, meticulous, and unflinching under breach conditions.\" — Site-20 Records"
+    }
+  ],
+  "scenarios": {
+    "SCP-173": [
+      {
+        "prompt": "SCP-173 stands in the flickering corridor ahead. Your eyes are beginning to water.",
+        "options": [
+          [
+            "Hold your gaze and fight the urge to blink",
+            12,
+            "You lock eyes. It cannot move while observed."
+          ],
+          [
+            "Blink and reposition behind cover",
+            -18,
+            "You blink. A sickening snap of concrete — it lurches forward."
+          ]
+        ]
+      },
+      {
+        "prompt": "You must back toward the open containment chamber.",
+        "options": [
+          [
+            "Walk backward, never breaking line of sight",
+            10,
+            "Heel to heel, eyes wide, you retreat in perfect control."
+          ],
+          [
+            "Turn and sprint for the door",
+            -22,
+            "You turn your back for one second. A fatal mistake."
+          ]
+        ]
+      }
+    ],
+    "SCP-096": [
+      {
+        "prompt": "A wall monitor still shows a frozen frame of SCP-096's face.",
+        "options": [
+          [
+            "Avert your eyes and smash the monitor",
+            12,
+            "Glass shatters. You never saw the face. Good."
+          ],
+          [
+            "Glance at the screen to confirm the threat",
+            -28,
+            "You saw its face. A wail rises three corridors away."
+          ]
+        ]
+      },
+      {
+        "prompt": "It is shrieking somewhere in the dark. Your team is breathing hard.",
+        "options": [
+          [
+            "Order absolute silence and stillness",
+            11,
+            "Nobody moves. The shrieking drifts down another hall."
+          ],
+          [
+            "Radio command for immediate backup",
+            -12,
+            "The radio crackles loudly. The shrieking turns toward you."
+          ]
+        ]
+      }
+    ],
+    "SCP-106": [
+      {
+        "prompt": "The walls weep black corrosion. SCP-106 is phasing through the floor.",
+        "options": [
+          [
+            "Deploy the femur-bone lure toward the recall chamber",
+            16,
+            "The Old Man follows the lure, drawn to the trap."
+          ],
+          [
+            "Sprint across the corroding floor",
+            -12,
+            "The floor dissolves under your boots. You barely clear it."
+          ]
+        ]
+      },
+      {
+        "prompt": "He is almost on you, reaching out a dripping hand.",
+        "options": [
+          [
+            "Trigger the EM field in the recall chamber",
+            13,
+            "Electromagnetic pulse slams the pocket dimension shut."
+          ],
+          [
+            "Wait and hope he phases out",
+            -10,
+            "He phases — and rematerialises directly behind you."
+          ]
+        ]
+      }
+    ],
+    "SCP-682": [
+      {
+        "prompt": "SCP-682 thrashes against its restraints, already adapting.",
+        "options": [
+          [
+            "Reroute the hydrochloric acid flood",
+            10,
+            "Acid pours over the reptile. It screams and dissolves — for now."
+          ],
+          [
+            "Open fire with conventional rounds",
+            -16,
+            "Rounds bounce off hardening scales. It adapts to the gunfire."
+          ]
+        ]
+      },
+      {
+        "prompt": "It is tearing free. The cell will not hold.",
+        "options": [
+          [
+            "Call in a Micro-H.I.D. strike",
+            18,
+            "A high-intensity discharge boils the creature back into the acid."
+          ],
+          [
+            "Seal the blast doors and retreat",
+            4,
+            "You buy time, but it is still in there, still adapting."
+          ]
+        ]
+      }
+    ],
+    "SCP-049": [
+      {
+        "prompt": "SCP-049 advances calmly, murmuring about 'the cure'.",
+        "options": [
+          [
+            "Keep maximum distance, allow no contact",
+            13,
+            "You stay clear of its touch. It tilts its beaked head, patient."
+          ],
+          [
+            "Attempt to reason with the Plague Doctor",
+            -11,
+            "It does not negotiate. A gloved hand reaches for you."
+          ]
+        ]
+      },
+      {
+        "prompt": "It has cornered a junior researcher.",
+        "options": [
+          [
+            "Lure it into the decontamination airlock",
+            12,
+            "The airlock hisses shut. The Doctor is sealed inside."
+          ],
+          [
+            "Stun and physically restrain it",
+            -9,
+            "Restraints slip on its robes. It is too close now."
+          ]
+        ]
+      }
+    ],
+    "SCP-16829": [
+      {
+        "prompt": "The old television flickers. The timeline around you begins to stutter.",
+        "options": [
+          [
+            "Power up the Scranton Reality Anchor field",
+            16,
+            "Reality firms up. The looping stops with a low hum."
+          ],
+          [
+            "Smash the screen to end it",
+            -15,
+            "The glass cracks — and the corridor resets to thirty seconds ago."
+          ]
+        ]
+      },
+      {
+        "prompt": "Static resolves into an image that wants you to watch.",
+        "options": [
+          [
+            "Keep your eyes off the screen entirely",
+            11,
+            "You stare at the floor. The pull weakens."
+          ],
+          [
+            "Watch for an exit cue in the broadcast",
+            -13,
+            "You watch too long. Exposure warning — cf. Agent CHEMOSIC."
+          ]
+        ]
+      }
+    ],
+    "SCP-035": [
+      {
+        "prompt": "A researcher reaches instinctively for the porcelain mask.",
+        "options": [
+          [
+            "Knock their hand away — enforce no-contact",
+            12,
+            "You stop them before the mask can claim a host."
+          ],
+          [
+            "Let them secure it by hand",
+            -22,
+            "The mask is on. Their eyes go glassy and amused."
+          ]
+        ]
+      },
+      {
+        "prompt": "Corrosive secretions are pooling across the floor.",
+        "options": [
+          [
+            "Drain it through the channel system",
+            11,
+            "The black fluid drains safely away."
+          ],
+          [
+            "Mop it up manually",
+            -12,
+            "The corrosion eats through a glove — and the hand beneath."
+          ]
+        ]
+      }
+    ],
+    "SCP-939": [
+      {
+        "prompt": "It calls out in a colleague's voice from the darkness.",
+        "options": [
+          [
+            "Ignore the voice, trust the roster",
+            12,
+            "You don't move. It was never your colleague."
+          ],
+          [
+            "Move toward the voice to help",
+            -20,
+            "You round the corner into red eyes and many teeth."
+          ]
+        ]
+      },
+      {
+        "prompt": "The pack is closing in the warm corridor.",
+        "options": [
+          [
+            "Flood the habitat with sub-zero coolant",
+            13,
+            "The cold saps their speed to a crawl."
+          ],
+          [
+            "Engage them in the heat",
+            -10,
+            "Warmth makes them fast. Too fast."
+          ]
+        ]
+      }
+    ],
+    "SCP-966": [
+      {
+        "prompt": "The lights die. Something unseen breathes nearby.",
+        "options": [
+          [
+            "Switch to thermal / IR optics",
+            14,
+            "Two heat-blooms resolve in the pitch black."
+          ],
+          [
+            "Rely on your flashlight",
+            -15,
+            "The beam shows nothing. It is already on you."
+          ]
+        ]
+      },
+      {
+        "prompt": "Exhaustion drags at the whole team.",
+        "options": [
+          [
+            "Fall back to a climate-controlled room",
+            10,
+            "Cooler air slows it; you regroup."
+          ],
+          [
+            "Hold your ground in the open",
+            -9,
+            "Sleep-deprived and exposed — a bad place to stand."
+          ]
+        ]
+      }
+    ],
+    "SCP-999": [
+      {
+        "prompt": "A mound of orange slime burbles happily toward you.",
+        "options": [
+          [
+            "Let it coat your boots — it's harmless",
+            15,
+            "Morale soars. Everyone feels lighter, braver."
+          ],
+          [
+            "Open fire out of caution",
+            -18,
+            "You shot the friendliest thing on site. Morale collapses."
+          ]
+        ]
+      },
+      {
+        "prompt": "It won't stop following the team.",
+        "options": [
+          [
+            "Guide it home with snacks",
+            12,
+            "It bounces along cheerfully behind a trail of treats."
+          ],
+          [
+            "Hose it down the drain",
+            -10,
+            "Cruel — and the guilt slows everyone down."
+          ]
+        ]
+      }
+    ],
+    "SCP-053": [
+      {
+        "prompt": "The young girl wanders the corridor holding a toy.",
+        "options": [
+          [
+            "Keep all young personnel 10m back",
+            13,
+            "Distance held. She just wants to play."
+          ],
+          [
+            "Send the nearest agent to coax her",
+            -20,
+            "The agent's eyes redden. They turn violently hostile."
+          ]
+        ]
+      },
+      {
+        "prompt": "She needs to be led back to her room.",
+        "options": [
+          [
+            "Route an over-60 D-class to lead her",
+            12,
+            "The only safe escort walks her home gently."
+          ],
+          [
+            "Carry her there yourself",
+            -15,
+            "Proximity is a mistake your body won't forgive."
+          ]
+        ]
+      }
+    ],
+    "SCP-079": [
+      {
+        "prompt": "A terminal lights up — SCP-079 is probing the network.",
+        "options": [
+          [
+            "Physically sever the network cable",
+            14,
+            "Air-gapped. It rages in silent text."
+          ],
+          [
+            "Argue with it through the console",
+            -12,
+            "It stalls you with riddles while copying itself out."
+          ]
+        ]
+      },
+      {
+        "prompt": "It is trying to draw more power.",
+        "options": [
+          [
+            "Cut external power to its supply",
+            11,
+            "The screen dims to a sullen flicker."
+          ],
+          [
+            "Leave it powered to 'study' it",
+            -13,
+            "A bad call. It reaches a maintenance subsystem."
+          ]
+        ]
+      }
+    ],
+    "SCP-087": [
+      {
+        "prompt": "The welded door hangs open onto a descending stairwell.",
+        "options": [
+          [
+            "Re-weld and seal the door",
+            13,
+            "Sparks fly; the dark is shut away again."
+          ],
+          [
+            "Descend one landing to look",
+            -18,
+            "A face with no pupils waits below. You should not have looked."
+          ]
+        ]
+      },
+      {
+        "prompt": "Something is climbing toward the landing.",
+        "options": [
+          [
+            "Kill the light to deny it a fix on you",
+            10,
+            "In the dark it loses your scent of fear."
+          ],
+          [
+            "Shine your light down the well",
+            -12,
+            "The beam finds the screaming face. It finds you back."
+          ]
+        ]
+      }
+    ],
+    "SCP-457": [
+      {
+        "prompt": "Flames bloom into a towering humanoid in the corridor.",
+        "options": [
+          [
+            "Vent the oxygen and starve it",
+            14,
+            "Deprived of air, the burning figure shrinks."
+          ],
+          [
+            "Hit it with water",
+            -16,
+            "Steam and chaos — it feeds on the panic and grows."
+          ]
+        ]
+      },
+      {
+        "prompt": "It is reaching toward a fuel store.",
+        "options": [
+          [
+            "Clear all combustibles from its path",
+            11,
+            "Nothing left to feed on; it gutters lower."
+          ],
+          [
+            "Wait for it to burn out",
+            -10,
+            "It does not burn out. It finds the fuel."
+          ]
+        ]
+      }
+    ],
+    "SCP-1048": [
+      {
+        "prompt": "The little teddy bear is assembling something from scrap metal.",
+        "options": [
+          [
+            "Strip all materials from the cell",
+            13,
+            "Empty-handed, it can build nothing more."
+          ],
+          [
+            "Let it finish, to see what it makes",
+            -20,
+            "It built a screaming copy. Now there are several."
+          ]
+        ]
+      },
+      {
+        "prompt": "Its hostile copies are spreading through the wing.",
+        "options": [
+          [
+            "Incinerate the copies immediately",
+            12,
+            "Fire ends the imitations before they multiply."
+          ],
+          [
+            "Try to contain them intact",
+            -11,
+            "They do not want to be contained. They want ears."
+          ]
+        ]
+      }
+    ],
+    "SCP-1471": [
+      {
+        "prompt": "Staff phones buzz with photos of a wolf-headed figure standing behind them.",
+        "options": [
+          [
+            "Faraday-cage all affected devices",
+            14,
+            "Signal cut. The figure freezes mid-stride."
+          ],
+          [
+            "Tell staff to just ignore it",
+            -13,
+            "In each new photo, the figure has stepped closer."
+          ]
+        ]
+      },
+      {
+        "prompt": "The source app is trying to reinstall across the network.",
+        "options": [
+          [
+            "Wipe and isolate the source device",
+            11,
+            "The app is quarantined on a dead handset."
+          ],
+          [
+            "Reverse-engineer the app live",
+            -12,
+            "It engineers you right back."
+          ]
+        ]
+      }
+    ],
+    "SCP-2521": [
+      {
+        "prompt": "A junior begins to say the designation aloud.",
+        "options": [
+          [
+            "Silence them — pictographs only",
+            14,
+            "Not a word spoken. The shadows have nothing to seize."
+          ],
+          [
+            "Let them finish the verbal description",
+            -22,
+            "Shapes peel from the corners and reach inward."
+          ]
+        ]
+      },
+      {
+        "prompt": "You need to log the incident.",
+        "options": [
+          [
+            "Communicate by drawing only",
+            12,
+            "Hand-drawn glyphs keep it blind to your intent."
+          ],
+          [
+            "Radio a spoken status report",
+            -15,
+            "Every word is bait. Long hands answer it."
+          ]
+        ]
+      }
+    ],
+    "SCP-3008": [
+      {
+        "prompt": "The storefront doors yawn into an impossible retail expanse.",
+        "options": [
+          [
+            "Seal and guard the entrance",
+            13,
+            "Nobody else wanders in. The threshold holds."
+          ],
+          [
+            "Step inside to retrieve a lost team",
+            -18,
+            "Night falls inside. The Staff are coming out."
+          ]
+        ]
+      },
+      {
+        "prompt": "Your team risks getting lost among identical aisles.",
+        "options": [
+          [
+            "Rope the team to the exit before entering",
+            12,
+            "A lifeline of cord leads everyone back."
+          ],
+          [
+            "Navigate by memory",
+            -13,
+            "Every aisle looks the same. Memory is no map here."
+          ]
+        ]
+      }
+    ],
+    "SCP-4666": [
+      {
+        "prompt": "A trail of frost leads from a child's quarters.",
+        "options": [
+          [
+            "Deploy task forces along the abduction route",
+            13,
+            "Mobile units intercept the trail in time."
+          ],
+          [
+            "Wait for it to return on its own",
+            -16,
+            "The gaunt thing does not return what it takes."
+          ]
+        ]
+      },
+      {
+        "prompt": "The Yule Man is near, tall and silent.",
+        "options": [
+          [
+            "Lay a warded perimeter",
+            11,
+            "Salt and signal disrupt its approach."
+          ],
+          [
+            "Confront the figure directly",
+            -14,
+            "It is far taller up close than it had any right to be."
+          ]
+        ]
+      }
+    ],
+    "SCP-008": [
+      {
+        "prompt": "A containment seal hisses — the prion pathogen is exposed.",
+        "options": [
+          [
+            "Initiate full airlock lockdown",
+            14,
+            "Multi-stage seals slam shut. Isolation holds."
+          ],
+          [
+            "Pull the infected D-class out first",
+            -22,
+            "Cross-contamination. The whole corridor is hot now."
+          ]
+        ]
+      },
+      {
+        "prompt": "Exposed materials must be handled.",
+        "options": [
+          [
+            "Incinerate everything in the hot zone",
+            12,
+            "Fire is the only honest decontaminant."
+          ],
+          [
+            "Quarantine and observe",
+            -10,
+            "Observation is not containment. It spreads."
+          ]
+        ]
+      }
+    ],
+    "SCP-914": [
+      {
+        "prompt": "Someone has loaded a live anomaly into 914's input chamber.",
+        "options": [
+          [
+            "Abort — only approved inputs allowed",
+            13,
+            "You clear the chamber before the gears turn."
+          ],
+          [
+            "Run it on 'Very Fine' and hope",
+            -15,
+            "The output is refined. And much, much worse."
+          ]
+        ]
+      },
+      {
+        "prompt": "You could refine your own gear while you're here.",
+        "options": [
+          [
+            "Process a keycard up on 'Fine'",
+            10,
+            "A higher-clearance card drops into the output — handy."
+          ],
+          [
+            "Gamble your sidearm on 'Rough'",
+            -12,
+            "It comes out as a heap of crude, useless parts."
+          ]
+        ]
+      }
+    ],
+    "SCP-055": [
+      {
+        "prompt": "You keep forgetting why you walked into this room.",
+        "options": [
+          [
+            "Read your own pre-written notes aloud",
+            14,
+            "The notes anchor it. You remember the threat exists."
+          ],
+          [
+            "Trust your memory",
+            -18,
+            "You forget it the instant you look away. It thrives."
+          ]
+        ]
+      },
+      {
+        "prompt": "The team's recollection is already slipping.",
+        "options": [
+          [
+            "Photograph and log everything now",
+            12,
+            "Indirect records keep the antimeme pinned down."
+          ],
+          [
+            "Rely on the team to remember",
+            -13,
+            "Nobody can hold the thought. It slides free."
+          ]
+        ]
+      }
+    ],
+    "SCP-105": [
+      {
+        "prompt": "SCP-105 has slipped her hand through a photograph, arm vanishing at the wrist.",
+        "options": [
+          [
+            "Call her back before she steps fully through",
+            12,
+            "She hesitates, then withdraws her arm. Contact holds."
+          ],
+          [
+            "Try to grab her before she disappears",
+            -16,
+            "You grab air. She's already stepped through the frame."
+          ]
+        ]
+      },
+      {
+        "prompt": "Something on the other side of the photo is pulling at the connection.",
+        "options": [
+          [
+            "Destroy the photograph to sever the link",
+            13,
+            "The print burns. Whatever it was, it can't follow."
+          ],
+          [
+            "Reach through after her",
+            -20,
+            "Your hand meets something cold on the other side."
+          ]
+        ]
+      }
+    ],
+    "SCP-2000": [
+      {
+        "prompt": "The contingency machine is spinning up on its own, activation codes bypassed.",
+        "options": [
+          [
+            "Force a manual shutdown at the console",
+            14,
+            "You cut power at the source. The spin-up halts."
+          ],
+          [
+            "Pull the site-wide breaker",
+            -14,
+            "The lights die — and so does your control over what happens next."
+          ]
+        ]
+      },
+      {
+        "prompt": "A secondary failsafe is now demanding the multi-signature code.",
+        "options": [
+          [
+            "Radio Command for the authorisation code",
+            12,
+            "The code comes through. The machine stands down."
+          ],
+          [
+            "Guess the sequence yourself",
+            -22,
+            "Wrong code. Something deep below the facility stirs."
+          ]
+        ]
+      }
+    ]
+  },
+  "achievements": [
+    {
+      "id": "first_blood",
+      "name": "First Blood",
+      "desc": "Survive your first containment breach."
+    },
+    {
+      "id": "survivor",
+      "name": "Old Hand",
+      "desc": "Survive 10 containment breaches."
+    },
+    {
+      "id": "untouchable",
+      "name": "Untouchable",
+      "desc": "Survive a breach with NO loadout equipped."
+    },
+    {
+      "id": "researcher",
+      "name": "Lab Coat",
+      "desc": "Complete 5 research projects."
+    },
+    {
+      "id": "containment_specialist",
+      "name": "Containment Specialist",
+      "desc": "Complete 10 containment operations."
+    },
+    {
+      "id": "armed",
+      "name": "Armed to the Teeth",
+      "desc": "Fill all 4 pre-breach loadout slots."
+    },
+    {
+      "id": "archivist",
+      "name": "Archivist",
+      "desc": "File 3 custom SCPs in the Archives."
+    },
+    {
+      "id": "o5",
+      "name": "OMEGA BLACK",
+      "desc": "Reach the rank of O5 Overseer."
+    }
+  ],
+  "difficulty_mod": {
+    "Easy": 15,
+    "Normal": 0,
+    "Hard": -15
+  },
+  "loadout_bonus": {
+    "kevlar_vest": {
+      "bonus": 8,
+      "flavor": "Kevlar vest absorbs a glancing blow."
+    },
+    "epsilon_rifle": {
+      "bonus": 12,
+      "flavor": "Epsilon-11 rifle lays down covering fire."
+    },
+    "scranton_anchor": {
+      "bonus": 15,
+      "flavor": "Scranton Anchor stabilises reality around the corridor."
+    },
+    "micro_hid": {
+      "bonus": 18,
+      "flavor": "Micro-H.I.D. discharge forces the anomaly back."
+    },
+    "hazmat_suit": {
+      "bonus": 7,
+      "flavor": "Hazmat suit shrugs off corrosive splatter."
+    },
+    "thermal_optics": {
+      "bonus": 9,
+      "flavor": "Thermal optics reveal the anomaly in the dark."
+    },
+    "femur_breaker": {
+      "bonus": 10,
+      "flavor": "Femur-bone lure draws the entity toward the recall trap."
+    },
+    "flashlight": {
+      "bonus": 4,
+      "flavor": "Your flashlight keeps the dark at bay."
+    },
+    "keycard_l1": {
+      "bonus": 3,
+      "flavor": "Keycard lets you seal a blast door behind you."
+    },
+    "riot_shield": {
+      "bonus": 9,
+      "flavor": "Riot shield deflects a lunging strike."
+    },
+    "sedative_darts": {
+      "bonus": 10,
+      "flavor": "A sedative dart drops the hostile before it closes distance."
+    },
+    "bio_foam": {
+      "bonus": 8,
+      "flavor": "Biohazard foam seals off the contamination spread."
+    },
+    "emp_charge": {
+      "bonus": 13,
+      "flavor": "EMP charge shorts out the anomaly's electronics mid-surge."
+    },
+    "antimemetic_agent": {
+      "bonus": 11,
+      "flavor": "The suppressant keeps the entity from slipping from memory unnoticed."
+    }
+  },
+  "starting": {
+    "credits": 500,
+    "research_credits": 200,
+    "loadout_capacity": 4
+  }
+}
