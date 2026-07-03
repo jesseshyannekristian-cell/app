@@ -66,8 +66,7 @@ export default function Store({ navigation }) {
             </Card>
           ))}
         </View>
-      ))}
+     ))}
     </Screen>
   );
-}
 
