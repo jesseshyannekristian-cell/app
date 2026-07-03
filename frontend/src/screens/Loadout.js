@@ -9,6 +9,7 @@ const ARMORY_TABS = [
   { label: 'Store', route: 'Store' },
   { label: 'Research', route: 'Research' },
   { label: 'Loadout', route: 'Loadout' },
+  { label: 'Squad', route: 'Squad' },
 ];
 
 export default function Loadout({ navigation }) {
