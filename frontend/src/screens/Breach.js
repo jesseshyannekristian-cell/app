@@ -4,7 +4,7 @@ import { Feather } from '@expo/vector-icons';
 import { Screen, Card, Btn, Badge, Meter, SectionTabs } from '../ui';
 import { C, F } from '../theme';
 import { useGame } from '../store';
-import { breachAssess, recordBreach, checkAchievements } from '../logic';
+import { breachAssess, recordBreach, resolveCasualties, checkAchievements } from '../logic';
 import { sfx } from '../sound';
 
 const ENC_TABS = [
@@ -57,12 +57,14 @@ export default function Breach({ navigation }) {
     let n = recordBreach(boot, state, survived, survived ? 1 : 0);
     if (!survived && state.ironman) {
       n = { ...require('../logic').DEFAULT_STATE, difficulty: state.difficulty, ironman: true };
-      setState(n); setOutcome({ survived: false, wiped: true }); setPhase('result'); return;
+      setState(n); setOutcome({ survived: false, wiped: true, lost: [] }); setPhase('result'); return;
     }
+    const { state: afterCasualties, lost } = resolveCasualties(boot, n, survived);
+    n = afterCasualties;
     const ctx = { breach_win_no_loadout: survived && state.loadout.length === 0 };
     const { unlocked } = checkAchievements(boot, n, ctx);
     n = { ...n, unlocked_achievements: unlocked };
-    setState(n); setOutcome({ survived, wiped: false }); setPhase('result');
+    setState(n); setOutcome({ survived, wiped: false, lost }); setPhase('result');
   };
 
   return (
@@ -143,6 +145,14 @@ export default function Breach({ navigation }) {
                   : `${target.number} overwhelmed the team. You barely reach evac.`}
             </Text>
           </Card>
+          {outcome.lost && outcome.lost.length > 0 ? (
+            <Card title="Casualties" accent={C.red}>
+              {outcome.lost.map((opId) => {
+                const op = (boot.squad_roster || []).find((o) => o.id === opId);
+                return <Text key={opId} style={[F.small, { color: C.red }]}>◦ {op ? op.codename : opId} — Killed in action.</Text>;
+              })}
+            </Card>
+          ) : null}
           <Btn testID="breach-again" label="Back To Anomaly List" onPress={() => setPhase('select')} />
         </>
       )}
@@ -197,4 +207,8 @@ function MiniGame({ chance, setChance, onDone }) {
 
 const mg = StyleSheet.create({
   track: { height: 28, backgroundColor: C.bg, borderWidth: 1, borderColor: C.border, borderRadius: 6, marginTop: 12, overflow: 'hidden' },
-  zone: { position: 'absolute', top: 0, bottom: 0, backgroundColor:
+  zone: { position: 'absolute', top: 0, bottom: 0, backgroundColor: 'rgba(61,255,133,0.22)', borderLeftWidth: 1, borderRightWidth: 1, borderColor: C.green },
+  marker: { position: 'absolute', top: 0, bottom: 0, width: 4, backgroundColor: C.amber, marginLeft: -2 },
+});
+     
+   
