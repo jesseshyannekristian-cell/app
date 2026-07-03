@@ -7,6 +7,7 @@ export const DEFAULT_STATE = {
   completed_research: [], owned_equipment: [], completed_ops: [], loadout: [],
   breaches_survived: 0, breaches_failed: 0, scps_recontained: 0,
   unlocked_achievements: [], custom_scps: [],
+  squad: [], assigned_squad: [], casualties: [],
 };
 
 export const find = (arr, key, val) => arr.find((x) => x[key] === val);
@@ -81,6 +82,56 @@ export function tryToggleLoadout(boot, s, equipId, capacity = 4) {
   return { ok: true, msg: 'Added to loadout.', state: { ...s, loadout: [...s.loadout, equipId] } };
 }
 
+export function tryRecruit(boot, s, opId) {
+  const op = find(boot.squad_roster, 'id', opId);
+  if (!op) return { ok: false, msg: 'Unknown operative.' };
+  if (s.squad.includes(opId)) return { ok: false, msg: 'Already recruited.' };
+  if (s.casualties.includes(opId)) return { ok: false, msg: `${op.codename} is KIA and cannot be re-recruited.` };
+  if (s.rank_level < op.required_rank) return { ok: false, msg: `Requires rank ${op.required_rank}.` };
+  if (s.credits < op.recruit_cost) return { ok: false, msg: 'Not enough Credits.' };
+  const n = { ...s, credits: s.credits - op.recruit_cost, squad: [...s.squad, opId] };
+  return { ok: true, msg: `Recruited: ${op.codename}`, state: n };
+}
+
+export function squadCapacity(boot) {
+  return boot.starting.squad_capacity || 2;
+}
+
+export function tryAssignSquad(boot, s, opId) {
+  if (!s.squad.includes(opId)) return { ok: false, msg: 'This operative is not on your roster.' };
+  if (s.assigned_squad.includes(opId)) {
+    return { ok: true, msg: 'Stood down.', state: { ...s, assigned_squad: s.assigned_squad.filter((x) => x !== opId) } };
+  }
+  const cap = squadCapacity(boot);
+  if (s.assigned_squad.length >= cap) return { ok: false, msg: `Squad team full (${cap} slots).` };
+  return { ok: true, msg: 'Assigned to next breach.', state: { ...s, assigned_squad: [...s.assigned_squad, opId] } };
+}
+
+// Resolves squad casualties after a breach. Called once, after the outcome is known.
+// Assigned operatives on a failed breach each face independent KIA risk; on a
+// survived breach nobody is lost. Iron-man wipes already reset the whole state
+// elsewhere, so this only runs for a normal failure/survival.
+export function resolveCasualties(boot, s, survived) {
+  if (survived || s.assigned_squad.length === 0) {
+    return { state: s, lost: [] };
+  }
+  const lost = [];
+  const survivors = [];
+  for (const opId of s.assigned_squad) {
+    const op = find(boot.squad_roster, 'id', opId);
+    const risk = op ? op.kia_risk : 0.2;
+    if (Math.random() < risk) lost.push(opId); else survivors.push(opId);
+  }
+  if (lost.length === 0) return { state: s, lost: [] };
+  const n = {
+    ...s,
+    squad: s.squad.filter((id) => !lost.includes(id)),
+    assigned_squad: survivors,
+    casualties: [...s.casualties, ...lost],
+  };
+  return { state: n, lost };
+}
+
 export function tryRunOp(boot, s, opId) {
   const op = find(boot.operations, 'id', opId);
   if (!op) return { ok: false, msg: 'Unknown operation.' };
@@ -121,11 +172,16 @@ export function breachAssess(boot, s, threat, targetNumber = null) {
       }
     }
   }
+  let squadBonus = 0;
+  for (const opId of s.assigned_squad) {
+    const op = find(boot.squad_roster, 'id', opId);
+    if (op) { squadBonus += op.breach_bonus; lines.push(`+${op.breach_bonus}% ${op.codename} (${op.role})`); }
+  }
   const base = 60 - threat * 8;
   const rankBonus = s.rank_level * 5;
   const diffMod = boot.difficulty_mod[s.difficulty] || 0;
-  const chance = clamp(base + rankBonus + loadoutBonus + procBonus + diffMod, 10, 95);
-  return { base, rankBonus, loadoutBonus, procBonus, diffMod, chance, lines };
+  const chance = clamp(base + rankBonus + loadoutBonus + procBonus + squadBonus + diffMod, 10, 95);
+  return { base, rankBonus, loadoutBonus, procBonus, squadBonus, diffMod, chance, lines };
 }
 
 export function recordBreach(boot, s, survived, recontained = 0) {
