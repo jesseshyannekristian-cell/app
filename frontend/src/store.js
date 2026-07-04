@@ -25,11 +25,6 @@ function writeLocalSave(s) {
 }
 
 export function GameProvider({ children }) {
-  // Bundled static config renders instantly — no blocking on the network.
-  // Initial player state: hydrate synchronously from the browser's own storage
-  // (this device's real save), falling back to a fresh save only if none exists.
-  // This is the primary, always-available save path — it does not depend on
-  // any backend or database being deployed.
   const [boot, setBoot] = useState(bundledBoot);
   const [state, setState] = useState(() => readLocalSave() || DEFAULT_STATE);
   const [synced, setSynced] = useState(false);
@@ -37,6 +32,48 @@ export function GameProvider({ children }) {
   const id = useRef(deviceId());
   const saveTimer = useRef(null);
 
-  // Retry helper for cold-start / proxy timing: 3 tries, exponential backoff (1s, 2s, 4s).
   const withRetry = async (fn, tries = 3) => {
     let lastErr;
+    for (let i = 0; i < tries; i++) {
+      try { return await fn(); }
+      catch (e) { lastErr = e; if (i < tries - 1) await new Promise((r) => setTimeout(r, 1000 * 2 ** i)); }
+    }
+    throw lastErr;
+  };
+
+  const load = async () => {
+    try { setBoot(await withRetry(getBootstrap)); } catch (e) {}
+    try {
+      const s = await withRetry(() => getState(id.current));
+      if (s && !s.new) {
+        const clean = { ...DEFAULT_STATE, ...s };
+        delete clean.device_id; delete clean.new;
+        setState(clean);
+      }
+    } catch (e) {}
+    setSynced(true);
+  };
+
+  useEffect(() => { load(); }, []);
+
+  useEffect(() => {
+    writeLocalSave(state);
+    if (!synced) return;
+    if (saveTimer.current) clearTimeout(saveTimer.current);
+    saveTimer.current = setTimeout(() => { putState(id.current, state); }, 600);
+  }, [state, synced]);
+
+  const notify = (msg, ok = true) => { setToast({ msg, ok, t: Date.now() }); };
+
+  const apply = (result) => {
+    if (result.state) setState(result.state);
+    if (result.msg) notify(result.msg, result.ok);
+    return result;
+  };
+
+  return (
+    <Ctx.Provider value={{ boot, state, setState, synced, toast, notify, apply, reload: load, deviceId: id.current }}>
+      {children}
+    </Ctx.Provider>
+  );
+}
