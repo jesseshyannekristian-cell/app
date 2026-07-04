@@ -146,10 +146,10 @@ export default function Breach({ navigation }) {
             </Text>
           </Card>
           {outcome.lost && outcome.lost.length > 0 ? (
-            <Card title="Casualties" accent={C.red}>
+            <Card title="Task Force Losses" accent={C.red}>
               {outcome.lost.map((opId) => {
                 const op = (boot.squad_roster || []).find((o) => o.id === opId);
-                return <Text key={opId} style={[F.small, { color: C.red }]}>◦ {op ? op.codename : opId} — Killed in action.</Text>;
+                return <Text key={opId} style={[F.small, { color: C.red }]}>◦ {op ? op.codename : opId} — Decommissioned after heavy losses.</Text>;
               })}
             </Card>
           ) : null}
@@ -210,5 +210,3 @@ const mg = StyleSheet.create({
   zone: { position: 'absolute', top: 0, bottom: 0, backgroundColor: 'rgba(61,255,133,0.22)', borderLeftWidth: 1, borderRightWidth: 1, borderColor: C.green },
   marker: { position: 'absolute', top: 0, bottom: 0, width: 4, backgroundColor: C.amber, marginLeft: -2 },
 });
-     
-   
