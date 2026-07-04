@@ -1,33 +1,42 @@
-import React from 'react';
-import { View, Text } from 'react-native';
-import { Screen, Card, Btn, Badge, SectionTabs } from '../ui';
-import { C, F } from '../theme';
-import { useGame } from '../store';
-import { tryBuy, isEquipResearched, checkAchievements } from '../logic';
+import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
+import { getBootstrap, getState, putState, deviceId } from './api';
+import { DEFAULT_STATE } from './logic';
+import bundledBoot from './bootstrapData.json';
 
-const ARMORY_TABS = [
-  { label: 'Store', route: 'Store' },
-  { label: 'Research', route: 'Research' },
-  { label: 'Loadout', route: 'Loadout' },
-  { label: 'MTF', route: 'Squad' },
-];
+const Ctx = createContext(null);
+export const useGame = () => useContext(Ctx);
 
-const DEPT_ORDER = ['Field', 'Research', 'Logistics'];
-const DEPT_ACCENT = { Field: C.amber, Research: C.cyan, Logistics: C.green };
+const LOCAL_SAVE_KEY = 'scp_save_v1';
 
-export default function Store({ navigation }) {
-  const { boot, state, setState, apply } = useGame();
-  const buy = (id) => {
-    const r = tryBuy(boot, state, id);
-    apply(r);
-    if (r.ok) {
-      const { unlocked } = checkAchievements(boot, r.state);
-      if (unlocked.length !== r.state.unlocked_achievements.length) setState({ ...r.state, unlocked_achievements: unlocked });
-    }
-  };
-  const statusFor = (e) => {
-    if (state.owned_equipment.includes(e.id)) return <Badge text="Owned" color={C.green} />;
-    if (e.requires_research && !isEquipResearched(boot, state, e.id)) return <Badge text="Research Req'd" color={C.amber} />;
-    if (state.rank_level < e.required_rank) return <Badge text={`Rank ${e.required_rank}`} color={C.red} />;
-    if (state.credits < e.cost) return <Badge text="Need CR" color={C.amber} />;
-    return <Badge text="Available" color={C.cyan} />;
+function readLocalSave() {
+  try {
+    if (typeof localStorage === 'undefined') return null;
+    const raw = localStorage.getItem(LOCAL_SAVE_KEY);
+    if (!raw) return null;
+    return { ...DEFAULT_STATE, ...JSON.parse(raw) };
+  } catch (e) { return null; }
+}
+
+function writeLocalSave(s) {
+  try {
+    if (typeof localStorage === 'undefined') return;
+    localStorage.setItem(LOCAL_SAVE_KEY, JSON.stringify(s));
+  } catch (e) { /* storage full / unavailable — ignore, in-memory state still works this session */ }
+}
+
+export function GameProvider({ children }) {
+  // Bundled static config renders instantly — no blocking on the network.
+  // Initial player state: hydrate synchronously from the browser's own storage
+  // (this device's real save), falling back to a fresh save only if none exists.
+  // This is the primary, always-available save path — it does not depend on
+  // any backend or database being deployed.
+  const [boot, setBoot] = useState(bundledBoot);
+  const [state, setState] = useState(() => readLocalSave() || DEFAULT_STATE);
+  const [synced, setSynced] = useState(false);
+  const [toast, setToast] = useState(null);
+  const id = useRef(deviceId());
+  const saveTimer = useRef(null);
+
+  // Retry helper for cold-start / proxy timing: 3 tries, exponential backoff (1s, 2s, 4s).
+  const withRetry = async (fn, tries = 3) => {
+    let lastErr;
