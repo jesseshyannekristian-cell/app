@@ -12,6 +12,7 @@ import Research from './src/screens/Research';
 import Store from './src/screens/Store';
 import Operations from './src/screens/Operations';
 import Loadout from './src/screens/Loadout';
+import Squad from './src/screens/Squad';
 import Breach from './src/screens/Breach';
 import Archives from './src/screens/Archives';
 import Achievements from './src/screens/Achievements';
@@ -36,6 +37,7 @@ const linking = {
       Store: 'store',
       Operations: 'operations',
       Loadout: 'loadout',
+      Squad: 'squad',
       Breach: 'breach',
       Archives: 'archives',
       Achievements: 'achievements',
@@ -58,6 +60,7 @@ export default function App() {
             <Stack.Screen name="Store" component={Store} />
             <Stack.Screen name="Operations" component={Operations} />
             <Stack.Screen name="Loadout" component={Loadout} />
+            <Stack.Screen name="Squad" component={Squad} />
             <Stack.Screen name="Breach" component={Breach} />
             <Stack.Screen name="Archives" component={Archives} />
             <Stack.Screen name="Achievements" component={Achievements} />
