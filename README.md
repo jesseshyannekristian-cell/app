@@ -1,11 +1,22 @@
-# FOUNDATION — SCP Site Overseer (Terminal Edition)
+# FOUNDATION — SCP Site Overseer
 
 A standalone, text-based **SCP Foundation management game** played entirely in your terminal.
 You are the Overseer of **Site-20**: research and requisition anomalous-containment equipment,
 dispatch containment teams, survive live breaches, manage staff dossiers, and file your own
 custom SCPs — all driven by a two-currency economy and a rank-progression ladder.
 
-> This is a pure-Python CLI app. No game engine, no 3D assets, no art pipeline required.
+The repository includes a UE5 C++ first-person shooter starter and the original Python CLI.
+The shooter currently has a first-person character, movement, jumping, and hitscan fire. It is
+a gameplay scaffold; it does not yet include levels, weapon models, animations, or HUD assets.
+
+## Unreal Engine 5
+
+Open `FoundationSiteOverseer.uproject` in Unreal Engine 5. The default character supports WASD
+movement, mouse look, Space to jump, and left-click hitscan fire. Build the
+`FoundationSiteOverseer` Editor target from the generated IDE project files.
+
+The Unreal game uses the C++ source under `Source/` and settings under `Config/`. The original
+Python game remains available with `python -m game.main`; its save data is not shared with Unreal.
 
 ---
 

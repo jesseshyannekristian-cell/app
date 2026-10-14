@@ -80,3 +80,15 @@ memory/test_credentials.md
 
 # Mobile development
 android-sdk/
+
+# Unreal Engine
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+.vs/
+*.sln
+*.suo
+*.VC.db
+*.opensdf
+*.sdf
